@@ -9,29 +9,77 @@
 ## Passo a Passo
 
 ### Criação da Maquina virtual
-
+ <br/>
+    <br/>
+Vamos começar com a criação de uma máquina virtual utilizando o Virtualbox. 
+Para adicionar uma máquina nova a partir de uma ISO previamente descarregada, clicamos em "New".  
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/371b4728-a7cc-48fd-9b1b-72ab5378b7dd" height="50%" width="50%"/>
+  <br/>
+  Machine -> New
+  <br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/371b4728-a7cc-48fd-9b1b-72ab5378b7dd" height="80%" width="80%"/>
     <br/>
     <br/>
-  <img src="https://github.com/user-attachments/assets/1fc6b161-515b-43e1-b585-5c50e073c211" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/f3f9b919-3dcd-41b2-8bbc-60e28c61e927" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/c3cadb82-1964-46eb-acf7-0b593280ff53" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/cefccaaa-a482-4882-b614-8a3884f5ee10" height="50%" width="50%"/>
+  <p/>
+    
+De seguida damos o nome a máquina, escolhemos a pasta para onde serão guardados todos os ficheiros que são criados durante a criação da máquina, tal como o disco virtual, e indicamos o ficheiro ISO que vamos usar para a criação. Clique `Next`  
+
+
+**Nota:** Selecionei a opção `Skip unattended installation` porque é do meu interesse proceder a instalação manual do sistema operativo. 
+<br/>
+    <br/>
+
+<p align="center">
+  <br/>
+  Seleção do Sistema Operativo
+  <br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/1fc6b161-515b-43e1-b585-5c50e073c211" height="60%" width="60%"/>
+<p/> 
+  <br/>
+  <br/>
+
+Nas janelas seguintes escolhi as especificações de Hardware da máquina virtual. Para este projeto **50GB** de disco, **4GB** de RAM e **4** CPUs são suficientes.  
+
+
+<p align="center">
+  <br/>
+  Tamanho do Disco
+  <br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/f3f9b919-3dcd-41b2-8bbc-60e28c61e927" height="60%" width="60%"/>
+  <br/>
+  <br/>
+<p/> 
+  
+  Na janela de **Hardware** Selecionei a opção **EFI**, mais em baixo explicarei esta opção bem como Secure Boot que irei selecionar e porquê.
+  <br/>
+  <br/>
+<p align="center">
+  Hardware
+  <br/><br/>
+  <img src="https://github.com/user-attachments/assets/c3cadb82-1964-46eb-acf7-0b593280ff53" height="60%" width="60%"/>
+  <br/><br/>
+  Resumo final das opções selecionadas.
+  <br/><br/>
+  <img src="https://github.com/user-attachments/assets/cefccaaa-a482-4882-b614-8a3884f5ee10" height="60%" width="60%"/>
 <p/>  
 <br/>
 <br/>
   
 ### Settings
+Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a partir da ISO previamente montada, existem algumas opções e configurações que irei selecionar.  
+É possivel aceder as configurações da maquina clicando em `Settings`com a máquina selecionada. 
 <p align="center">
   <br/>
-  <img src="https://github.com/user-attachments/assets/2886d5c6-f69b-4b6f-be79-d0985594675b" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/e6696933-611d-4390-8009-c886d3f96af8" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/857746a6-d3b0-4ce5-bbc9-8cf7a41933d1" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/0033b34b-f3dd-4085-8ef8-1b1cc047768a" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/fa3c3a84-4bf2-4982-bf92-65237cf9ba0a" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/2886d5c6-f69b-4b6f-be79-d0985594675b" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/e6696933-611d-4390-8009-c886d3f96af8" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/857746a6-d3b0-4ce5-bbc9-8cf7a41933d1" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/0033b34b-f3dd-4085-8ef8-1b1cc047768a" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/fa3c3a84-4bf2-4982-bf92-65237cf9ba0a" height="60%" width="60%"/>
 <p/> 
 <br/>
 <br/>
