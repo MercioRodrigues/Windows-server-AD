@@ -76,6 +76,9 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
 <p align="center">
   <br/>
   <img src="https://github.com/user-attachments/assets/2886d5c6-f69b-4b6f-be79-d0985594675b" height="60%" width="60%"/>
+<p/> 
+  <br/> <br/>
+ Dentro do Menu `Settings` activei duas opções que irão aumentar a performance e a segurança da maquina. 
   <img src="https://github.com/user-attachments/assets/e6696933-611d-4390-8009-c886d3f96af8" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/857746a6-d3b0-4ce5-bbc9-8cf7a41933d1" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/0033b34b-f3dd-4085-8ef8-1b1cc047768a" height="60%" width="60%"/>
