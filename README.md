@@ -72,26 +72,61 @@ Nas janelas seguintes escolhi as especificações de Hardware da máquina virtua
   
 ### Settings
 Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a partir da ISO previamente montada, existem algumas opções e configurações que irei selecionar.  
-É possivel aceder as configurações da maquina clicando em `Settings`com a máquina selecionada. 
+É possível aceder as configurações da maquina clicando em `Settings`com a máquina selecionada. 
 <p align="center">
   <br/>
   <img src="https://github.com/user-attachments/assets/2886d5c6-f69b-4b6f-be79-d0985594675b" height="60%" width="60%"/>
 <p/> 
   <br/> <br/>
  Dentro do Menu `Settings` activei duas opções que irão aumentar a performance e a segurança da maquina. 
+
+ **EFI (Extensible Firmware Interface):** É uma interface de firmware que substitui a BIOS tradicional, oferecendo um boot mais rápido, suporte para discos grandes (GPT) e recursos avançados de segurança e compatibilidade.
+
+**Secure Boot:** É uma funcionalidade do EFI/UEFI que impede a execução de software não assinado durante a inicialização do sistema, ajudando a proteger contra malware e rootkits ao garantir que apenas código confiável seja carregado.
+ 
+ <br/> <br/>
+ <p align="center">
   <img src="https://github.com/user-attachments/assets/e6696933-611d-4390-8009-c886d3f96af8" height="60%" width="60%"/>
+  <br/> <br/>
+ <p/> 
+ Na aba processador, ativei a opção `PAE/NX`
+  
+ **PAE (Physical Address Extension):** Permite que processadores de 32 bits acessem mais de 4 GB de RAM, estendendo o endereçamento para até 64 GB. 
+
+**O NX (No eXecute)** protege contra ataques que tentam executar código malicioso em áreas de memória que deveriam conter apenas dados. Os principais tipos de ataques que ele mitiga incluem:
+- **Buffer Overflow com Execução de Código** – Um atacante pode tentar sobrescrever áreas da memória com código malicioso e executá-lo. O NX impede essa execução em regiões de dados, como a pilha (stack) e o monte (heap).
+
+- **Return-to-libc** – Em vez de injetar código, o atacante tenta reutilizar funções legítimas da biblioteca C para executar comandos maliciosos. Embora o NX não impeça diretamente esse ataque, ele força os atacantes a usar técnicas mais avançadas, como ROP (Return-Oriented Programming).
+
+- **Ataques de Shellcode** – O NX evita que código arbitrário injetado na memória seja executado, dificultando a execução de shellcodes maliciosos.
+<br/> <br/>
+
+
+<p align="center">  
+  <br/> <br/>
   <img src="https://github.com/user-attachments/assets/857746a6-d3b0-4ce5-bbc9-8cf7a41933d1" height="60%" width="60%"/>
+<p/>
+ <br/> <br/>
+ 
+ #### Configuração de placa de rede
+
+ De seguida configurei dois adaptadores de rede, 1 ligado a rede externa, em NAT, e outro ligado a rede interna. 
+ <br/> <br/>
+ <p align="center"> 
   <img src="https://github.com/user-attachments/assets/0033b34b-f3dd-4085-8ef8-1b1cc047768a" height="60%" width="60%"/>
+   <br/> <br/>
   <img src="https://github.com/user-attachments/assets/fa3c3a84-4bf2-4982-bf92-65237cf9ba0a" height="60%" width="60%"/>
 <p/> 
 <br/>
 <br/>
   
 ### Iniciar a Maquina e instalação do SO  
+De seguida iniciamos a máquina, procedendo para a instalação do sistema operativo. Basta seguir os passos que mostra nas imagens.  
+    <br/> <br/>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/9dbb0776-27b6-4a15-8d3d-f544cf8371c7" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/ec85779a-212d-4894-8c35-cdea23cf0acb" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/67e74701-6f8c-4621-b6ec-1863da8f2e35" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/c0d27ba3-4884-4dae-92d1-a32a18909c2c" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/c5f56a00-a933-4768-877f-c443914d3289" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/3f64bd6e-5b4b-46ad-aedd-bb8fe6dfe09e" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/510c6116-9d86-4bdc-af6c-1b6a49605afc" height="50%" width="50%"/>
@@ -101,13 +136,20 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
   
 ### Configuração da Rede
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/d334ac62-5249-4754-882e-7fd4335abfa9" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/de2832ad-4dea-4518-b413-da5ea09a319c" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/98644629-e075-4d17-ae6d-b640a9e5c9d6" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/2a4584ec-7609-4f2a-8842-08f767db9b1e" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/8bd19136-3846-46d5-bacb-1327d4605fce" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/652dcc53-b215-47f3-8d47-119c6ee73c19" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/7e8bfadd-e265-4789-aa5d-97768cc85479" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/98644629-e075-4d17-ae6d-b640a9e5c9d6" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/de2832ad-4dea-4518-b413-da5ea09a319c" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/d334ac62-5249-4754-882e-7fd4335abfa9" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="50%" width="50%"/>
+ 
+  
+
+ 
+ 
+
+  
 <p/>
 
