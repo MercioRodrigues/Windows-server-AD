@@ -134,18 +134,29 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 <br/>
 <br/>
   
-### Configuração da Rede
+### Configuração do Servidor
+
+Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No meu caso dei nome ao Servidor Marcio e o sufixo DNS pilao.pt que irá ser o nome da minha rede.
+<br/>
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/98644629-e075-4d17-ae6d-b640a9e5c9d6" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/9028201a-3669-43c1-8c15-f86ddcb06c56" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/2a4584ec-7609-4f2a-8842-08f767db9b1e" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/8bd19136-3846-46d5-bacb-1327d4605fce" height="50%" width="50%"/>
+ <p/>
+<br/>
+ <br/>
+ De seguida é necessário reiniciar a máquina para as alterações serem aplicadas. 
+ <br/>
+ <br/>
+ <p align="center"> 
   <img src="https://github.com/user-attachments/assets/652dcc53-b215-47f3-8d47-119c6ee73c19" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/de2832ad-4dea-4518-b413-da5ea09a319c" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/d334ac62-5249-4754-882e-7fd4335abfa9" height="50%" width="50%"/>
   <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="50%" width="50%"/>
  
   
+
 
  
  
