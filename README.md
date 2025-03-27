@@ -4,6 +4,8 @@ Em construção!!!!.......
 
 ## Índice
 [Passo a Passo](#Passo-a-Passo)
+- [Criação e configuração da Maquina Virtual](#Criação-da-Maquina-virtual)
+- [Iniciar a Maquina e instalação do SO](#Iniciar-a-Maquina-e-instalação-do-SO)
 
 
 
