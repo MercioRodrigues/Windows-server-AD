@@ -135,12 +135,12 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
 De seguida iniciamos a máquina, procedendo para a instalação do sistema operativo. Basta seguir os passos que mostra nas imagens.  
     <br/> <br/>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9dbb0776-27b6-4a15-8d3d-f544cf8371c7" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/ec85779a-212d-4894-8c35-cdea23cf0acb" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/c0d27ba3-4884-4dae-92d1-a32a18909c2c" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/c5f56a00-a933-4768-877f-c443914d3289" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/3f64bd6e-5b4b-46ad-aedd-bb8fe6dfe09e" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/510c6116-9d86-4bdc-af6c-1b6a49605afc" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/9dbb0776-27b6-4a15-8d3d-f544cf8371c7" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/ec85779a-212d-4894-8c35-cdea23cf0acb" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/c0d27ba3-4884-4dae-92d1-a32a18909c2c" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/c5f56a00-a933-4768-877f-c443914d3289" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/3f64bd6e-5b4b-46ad-aedd-bb8fe6dfe09e" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/510c6116-9d86-4bdc-af6c-1b6a49605afc" height="60%" width="60%"/>
 <p/> 
 <br/>
 <br/>
@@ -150,10 +150,10 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No meu caso dei nome ao Servidor Marcio e o sufixo DNS pilao.pt que irá ser o nome da minha rede.
 <br/>
 <p align="center">  
-  <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/9028201a-3669-43c1-8c15-f86ddcb06c56" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/2a4584ec-7609-4f2a-8842-08f767db9b1e" height="50%" width="50%"/>
-  <img src="https://github.com/user-attachments/assets/8bd19136-3846-46d5-bacb-1327d4605fce" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/9028201a-3669-43c1-8c15-f86ddcb06c56" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/2a4584ec-7609-4f2a-8842-08f767db9b1e" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/8bd19136-3846-46d5-bacb-1327d4605fce" height="60%" width="60%"/>
  <p/>
 <br/>
  <br/>
@@ -167,8 +167,8 @@ Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No
   Para melhor identificar qual o adaptador que ira ser configurado de seguida mudei o nome dos adaptadores para externo e interno tal como mostra nas imagens.
   <br/><br/>
   <p align="center"> 
-   <img src="https://github.com/user-attachments/assets/d334ac62-5249-4754-882e-7fd4335abfa9" height="50%" width="50%"/>
-   <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="50%" width="50%"/>
+   <img src="https://github.com/user-attachments/assets/d334ac62-5249-4754-882e-7fd4335abfa9" height="60%" width="60%"/>
+   <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="60%" width="60%"/>
   <p/>
    <br/><br/>
  
@@ -178,16 +178,16 @@ De seguida irei atribuir um IP fixo a minha rede interna configurando o adaptado
 Clicando em “Properties” e de seguida escolhendo a opção IPV4 e clicando em “Properties”, abrirá a janela seguinte onde introduzi o IP que desejo e a subnet mask da rede, isto significa que as máquinas que fizerem parte da rede interna e estiverem ligadas a este servidor irão ser atribuídos IPs com base neste mask. 
 <p align="center"> 
  <br/><br/>
- <img src="https://github.com/user-attachments/assets/84ca6b0e-9a06-449d-8b76-cf9b34997ba9" height="50%" width="50%"/>
+ <img src="https://github.com/user-attachments/assets/84ca6b0e-9a06-449d-8b76-cf9b34997ba9" height="60%" width="60%"/>
  <br/><br/>
- <img src="https://github.com/user-attachments/assets/3d9873f8-c0f0-4bc3-845b-70ef52b650d5" height="50%" width="50%"/>
+ <img src="https://github.com/user-attachments/assets/3d9873f8-c0f0-4bc3-845b-70ef52b650d5" height="60%" width="60%"/>
 <p/>
  <br/><br/>
 Para finalizar clicando em “advanced” irei atribuir a prioridade 1 para que este adaptador tenha a maior prioridade de ligação na máquina.
 Na adaptador externo coloquei metric 20. 
  <br/><br/>
  <p align="center"> 
- <img src="https://github.com/user-attachments/assets/d9fd26ab-a4e0-42e4-9110-12053403afe8" height="50%" width="50%"/>
+ <img src="https://github.com/user-attachments/assets/d9fd26ab-a4e0-42e4-9110-12053403afe8" height="60%" width="60%"/>
 <p/>
  <br/><br/>
 Testando a configuração usando o comando ´ping´ vejo que o IP esta a responder. 
@@ -197,19 +197,29 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
  <p align="center"> 
   Ping
   <br/><br/>
- <img src="https://github.com/user-attachments/assets/462c4022-e8fc-4a6c-ba0d-ef4a301c1d37" height="50%" width="50%"/>
+ <img src="https://github.com/user-attachments/assets/462c4022-e8fc-4a6c-ba0d-ef4a301c1d37" height="60%" width="60%"/>
   <br/><br/>
   Ipconfig
   <br/><br/>
- <img src="https://github.com/user-attachments/assets/35d06919-f349-4198-bc08-d8cc5ebd2e73" height="50%" width="50%"/>
+ <img src="https://github.com/user-attachments/assets/35d06919-f349-4198-bc08-d8cc5ebd2e73" height="60%" width="60%"/>
 <p/>
 
 
 ### Instalação Active Directory
+ <br/><br/>
+ <p align="center"> 
+  <img src="https://github.com/user-attachments/assets/d3231b47-bb78-4821-9793-44d581ac0b1c" height="60%" width="60%"/>  
+   <img src="https://github.com/user-attachments/assets/d96248e3-eac4-45e9-bf10-8b417aa99751" height="60%" width="60%"/> 
+   <img src="https://github.com/user-attachments/assets/b3fe96f3-d332-4b2e-a8c9-c3f9b1a93862" height="60%" width="60%"/>  
+   <img src="https://github.com/user-attachments/assets/d29de415-9c80-4d11-b6bd-ed5764458c2f" height="60%" width="60%"/>  
+   <img src="https://github.com/user-attachments/assets/507e8ffc-9504-43e8-8806-3722a1c5dfe7" height="60%" width="60%"/>  
+   <img src="https://github.com/user-attachments/assets/be410ffe-0438-467a-9cd4-3f883438cf03" height="60%" width="60%"/>  
+<p/>
 
 
 
-  
+
+
 
 
  
