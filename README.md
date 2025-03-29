@@ -10,6 +10,7 @@ Em construção!!!!.......
   
   - [Instalação Active Directory](#Instalação-Active-Directory)
   - [Configuração do DNS](#Configuração-do-DNS)
+  - [Configuração do DHCP](#Configuração-do-DHCP)
 
 
 
@@ -162,7 +163,7 @@ Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No
  <br/>
  <br/>
  <p align="center"> 
-  <img src="https://github.com/user-attachments/assets/652dcc53-b215-47f3-8d47-119c6ee73c19" height="50%" width="50%"/>
+  <img src="https://github.com/user-attachments/assets/652dcc53-b215-47f3-8d47-119c6ee73c19" height="60%" width="60%"/>
 <p/>
  
   Para melhor identificar qual o adaptador que ira ser configurado de seguida mudei o nome dos adaptadores para externo e interno tal como mostra nas imagens.
@@ -246,19 +247,31 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
   <img src="https://github.com/user-attachments/assets/d4847689-e6fc-427b-9c37-7a2b08fe5bf8" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/bedc2545-dc2f-46e1-aaf0-ec9e0b6b8904" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/c20210f3-8284-4ca7-ab43-4ecbb99501f1" height="60%" width="60%"/>
-
-  
 <p/>
 
+#### Configuração do DHCP
+<br/><br/> 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/0ebf926e-4869-4dc5-9a84-02c3c8c6d360" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/e17c0f0c-7c7c-4b08-99f4-92647358bec3" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/7bea8be6-e939-4521-8309-4fdd63297cbd" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/82c2167d-b7fa-4593-9689-5d7cb1041aba" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/f342e044-630b-45a8-98bc-bbb5690ecfc9" height="60%" width="60%"/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/a67ea8c5-34b0-4d08-8256-479b764dfb1e" height="20%" width="20%"/>
+  <img src="https://github.com/user-attachments/assets/5e000412-cc24-45c4-b853-83bfbd3af3d4" height="30%" width="30%"/>
+  <img src="https://github.com/user-attachments/assets/df3bf7d5-8659-4781-b26f-7c98c650126d" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/d47c4685-e650-490f-a76c-e1504e12df0a" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/13f07384-d1c3-4cd6-aa00-7dacc3737023" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/a00331c2-3aa1-4764-8358-e633ebff442f" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/e675859c-d81c-43ef-af29-9b5a5cfe30c7" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/31d40dbe-32bc-4faf-8c6d-2411a8110955" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/d91a2530-38d8-464f-8004-43e23ce92cb8" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/9033d5ee-436e-4016-9be7-bf4d3d89fb7a" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/6c4cb917-438a-4014-a671-dbd85461d1f6" height="60%" width="60%"/>
+  <p/>
 
 
-
-
-
-
- 
- 
-
-  
 
 
