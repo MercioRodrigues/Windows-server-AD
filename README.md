@@ -254,7 +254,7 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
     <br/><br/>
 <p/>
 
-Quando um servidor tem o AD DS instalado é promovido a **Controlador de Domínio (DC)**, ele assume o papel de gerenciar a autenticação e autorização na rede.
+Quando um servidor tem o AD DS instalado pode ser promovido a **Controlador de Domínio (DC)**, ele assume o papel de gerenciar a autenticação e autorização na rede.
 <br/>
 <br/>
 **O que acontece ao instalar o AD DS?**
