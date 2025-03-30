@@ -4,8 +4,11 @@ Em construção!!!!.......
 
 ## Índice
 [Diagrama da Rede](#Diagrama-da-Rede)
+
 [Objectivo do Projecto](#Objectivo-do-Projecto)
+
 [Competências Adquiridas](#Competências-Adquiridas)
+
 [Passo a Passo](#Passo-a-Passo)
 - [Criação e configuração da Maquina Virtual](#Criação-da-Maquina-virtual)
 - [Iniciar a Maquina e instalação do SO](#Iniciar-a-Maquina-e-instalação-do-SO)
