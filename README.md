@@ -8,9 +8,9 @@ Em construção!!!!.......
 - [Iniciar a Maquina e instalação do SO](#Iniciar-a-Maquina-e-instalação-do-SO)
 - [Configuração do Servidor](#Configuração-do-Servidor)
   
-  - [Instalação Active Directory](#Instalação-Active-Directory)
-  - [Configuração do DNS](#Configuração-do-DNS)
-  - [Configuração do DHCP](#Configuração-do-DHCP)
+  - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
+  - [Instalação e Configuração DNS](#Configuração-do-DNS)
+  - [Instalação e Configuração DHCP](#Configuração-do-DHCP)
 
 
 
