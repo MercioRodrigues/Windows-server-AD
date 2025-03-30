@@ -9,7 +9,7 @@ Em construção!!!!.......
 - [Configuração do Servidor](#Configuração-do-Servidor)
   
   - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
-  - [Instalação e Configuração DNS](#Configuração-do-DNS)
+  - [Configuração DNS](#Configuração-do-DNS)
   - [Instalação e Configuração DHCP](#Configuração-do-DHCP)
 
 
