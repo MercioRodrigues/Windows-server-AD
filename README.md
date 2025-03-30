@@ -208,20 +208,79 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
 
 
 ### Instalação Active Directory
+ De seguida instalei Active Directory no servidor.
  <br/><br/>
+ **Active Directory:** É um serviço da Microsoft usado para gerenciar identidades e recursos em redes corporativas. Ele é amplamente utilizado em empresas para autenticação, autorização e gerenciamento de usuários, computadores e outros dispositivos dentro de um ambiente Windows.
+ <br/><br/>
+**Componentes do Active Directory**
+ <br/><br/>
+**Domain Controller (DC)** 🏢 – Servidor que gerencia o AD e autentica os usuários. O servidor que estou a configurar.
+
+**Domínio** 🌍 – Um grupo de computadores, usuários e dispositivos gerenciados por um controlador de domínio.
+
+**Floresta (Forest)** 🌳 – Um ou mais domínios que compartilham a mesma estrutura de AD.
+
+**OU (Unidade Organizacional)** 📂 – Subdivisões dentro do domínio para organizar usuários, grupos e dispositivos.
+ <br/><br/>
+ No canto superior direito da janela do "Server Manager" clicamos em `Manage`e depois `Add Roles and Features`.
+<br/><br/>
  <p align="center"> 
-  <img src="https://github.com/user-attachments/assets/d3231b47-bb78-4821-9793-44d581ac0b1c" height="60%" width="60%"/>  
+  <img src="https://github.com/user-attachments/assets/d3231b47-bb78-4821-9793-44d581ac0b1c" height="60%" width="60%"/> 
+    <br/><br/>
   <img src="https://github.com/user-attachments/assets/d96248e3-eac4-45e9-bf10-8b417aa99751" height="60%" width="60%"/> 
-  <img src="https://github.com/user-attachments/assets/b3fe96f3-d332-4b2e-a8c9-c3f9b1a93862" height="60%" width="60%"/>  
+    <br/><br/>
+<p/>      
+  
+  Clicando "Next" ate chegar a esta janela onde escolhemos o servidor que irá funcionar como **Controlador de Dominio**
+<p align="center">  
+<br/><br/>
+  <img src="https://github.com/user-attachments/assets/b3fe96f3-d332-4b2e-a8c9-c3f9b1a93862" height="60%" width="60%"/>
+ <p/> 
+   <br/><br/>
+  
+   Na janela seguinte então escolhemos que queremos instalar `Active Directory Domain Service`.
+   
+<br/><br/>
+ <p align="center">
   <img src="https://github.com/user-attachments/assets/d29de415-9c80-4d11-b6bd-ed5764458c2f" height="60%" width="60%"/>  
-  <img src="https://github.com/user-attachments/assets/507e8ffc-9504-43e8-8806-3722a1c5dfe7" height="60%" width="60%"/>  
-  <img src="https://github.com/user-attachments/assets/be410ffe-0438-467a-9cd4-3f883438cf03" height="60%" width="60%"/>  
+ <p/>
+ <br/><br/>
+ CLicando sempre em "Next" finalizamos a instalação.
+  <br/><br/>
+ <p align="center">
+   <img src="https://github.com/user-attachments/assets/507e8ffc-9504-43e8-8806-3722a1c5dfe7" height="60%" width="60%"/> 
+    <br/><br/>
+  <img src="https://github.com/user-attachments/assets/be410ffe-0438-467a-9cd4-3f883438cf03" height="60%" width="60%"/> 
+    <br/><br/>
 <p/>
 
+Quando um servidor tem o AD DS instalado é promovido a **Controlador de Domínio (DC)**, ele assume o papel de gerenciar a autenticação e autorização na rede.
+<br/>
+O que acontece ao instalar o AD DS?
+
+**O Servidor pode se tornar um Controlador de Domínio** 🌍
+  - Ele armazenará e gerenciará a Base de Dados do Active Directory.
+  - Fará a autenticação dos usuários e computadores na rede.
+
+**Criação de um Domínio ou Adição a um Domínio Existente** 🏢
+  - Pode criar um novo domínio ou integrar-se a um domínio já existente.
+  - Exemplo: Se criar um domínio chamado `pilao.pt`, todos os usuários e computadores pertencentes à rede usarão esse domínio.
+
+**Gerenciamento de Políticas e Permissões** 🔐
+  - Através do Group Policy (GPO), poderá definir regras para todos os computadores e usuários.
+  - Exemplo: Impedir que os usuários alterem configurações do sistema ou definir senhas complexas.
+
+**Criação da Estrutura de Diretórios do AD** 📂
+  - O AD DS organiza os recursos em Unidades Organizacionais (OU’s) para facilitar a administração.
+  - Exemplo: Separar funcionários por departamentos (RH, TI, Financeiro).
+<br/><br/>  
 #### Configuração do Domain Server
  <br/><br/>
    <p align="center">
    <img src="https://github.com/user-attachments/assets/a8c9e2fd-d15b-4a36-9f0c-df7df9288eb9" height="60%" width="60%"/>
+ <p/>
+ <br/><br/>
+    
    <img src="https://github.com/user-attachments/assets/a43b00c7-a3c3-4b09-89bb-4c4fb3052b50" height="60%" width="60%"/>
    <img src="https://github.com/user-attachments/assets/a43b00c7-a3c3-4b09-89bb-4c4fb3052b50" height="60%" width="60%"/>
    <img src="https://github.com/user-attachments/assets/6a393e22-b8ce-40e7-89fc-17c8ca113165" height="60%" width="60%"/>
