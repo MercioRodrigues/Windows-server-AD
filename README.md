@@ -251,7 +251,7 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
   <img src="https://github.com/user-attachments/assets/d29de415-9c80-4d11-b6bd-ed5764458c2f" height="60%" width="60%"/>  
  <p/>
  <br/><br/>
- CLicando sempre em "Next" finalizamos a instalação.
+ Clicando sempre em "Next" finalizamos a instalação.
   <br/><br/>
  <p align="center">
    <img src="https://github.com/user-attachments/assets/507e8ffc-9504-43e8-8806-3722a1c5dfe7" height="60%" width="60%"/> 
