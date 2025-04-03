@@ -289,19 +289,23 @@ No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessári
    <img src="https://github.com/user-attachments/assets/a8c9e2fd-d15b-4a36-9f0c-df7df9288eb9" height="60%" width="60%"/>
  <p/>
  <br/><br/>
-   O nosso objectivo é adicionar uma "forest" nova.
+   
+   O nosso objectivo é adicionar uma **"forest"** nova.
    <br/><br/>
 <p align="center">
    <img src="https://github.com/user-attachments/assets/a43b00c7-a3c3-4b09-89bb-4c4fb3052b50" height="60%" width="60%"/>
 <p/>
   <br/><br/>
-  No ecrã seguinte escolhemos as capacidades do Domain Controller e escolhemos a password do modo DSRM, que é o modo de restauração do AD, caso seja necessário manutenção e recuperação da base de dados do AD. 
+  
+  No ecrã seguinte escolhemos as capacidades do Domain Controller e escolhemos a password do modo **DSRM**, que é o modo de restauração do AD, caso seja necessário manutenção e recuperação da base de dados do AD. 
   <br/><br/>
   <p align="center">
     <img src="https://github.com/user-attachments/assets/6a393e22-b8ce-40e7-89fc-17c8ca113165" height="60%" width="60%"/>
     <br/><br/>
  <p/>
-   Nos ecrãs seguintes basta seguir as imagens e carregando em `next` até chegar a última janela onde clicamos em instalar.
+   
+   Nos ecrãs seguintes basta seguir as imagens e carregando em **"Next"** até chegar a última janela onde clicamos em instalar.
+   
    <br/><br/>
    <p align="center">
     <img src="https://github.com/user-attachments/assets/9755f87a-a125-4474-825c-c5369a46dc6e" height="60%" width="60%"/>
