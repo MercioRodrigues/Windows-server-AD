@@ -319,14 +319,67 @@ No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessári
    
 #### Configuração do DNS   
 <br/><br/> 
+O Active Directory depende do DNS para localizar controladores de domínio e autenticar usuários.
+<br/>
+Uma resolução de nomes correta garante a estabilidade da rede, permitindo que clientes encontrem serviços facilmente.
+<br/>
+Configurações incorretas de DNS podem causar falhas de login, problemas na replicação do AD e dificuldades na comunicação da rede.
+<br/><br/> 
+
+Por defeito a Forward Lookup Zone foi criada automaticamente a quando da instalação do AD DS, agora vamos configurar a **Reverse Lookup Zone**
+<br/>
+A **Reverse Lookup Zone** tem como principal objetivo permitir que o **DNS** traduza **endereços IP em nomes de domínio**, funcionando de forma oposta à **Forward Lookup Zone**, que traduz **nomes de domínio em endereços IP**.
+<br/><br/>
+Não é obrigatório criar uma **Reverse Lookup Zone**, mas é altamente recomendado para redes empresariais, especialmente se o servidor DNS for usado para serviços internos e autenticação de rede.
+<br/><br/> 
+
+No Server Manager, clicamos em Tools e selecionamos DNS para abrir o DNS Manager.
+
+No painel esquerdo, clicamos com o botão direito em Reverse Lookup Zones e selecionamos New Zone.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ff537070-47dd-4c8c-8a0b-ce2637bb0d7b" height="20%" width="20%"/>
   <img src="https://github.com/user-attachments/assets/7dd22b88-298a-46ef-80f7-d6046a35d835" height="60%" width="60%"/>
+  <br/><br/> 
   <img src="https://github.com/user-attachments/assets/e3cc732b-9c50-4726-9f5d-d491cea76ac1" height="60%" width="60%"/>
+  <br/><br/> 
+ <p/>
+   
+  Selecionamos **Primary Zone**, marquei `Store the zone in Active Directory (AD)` e depois em "Next".
+  
+  Selecionar **Primary Zone** significa que este servidor DNS será responsável por manter e gerenciar a zona de forma principal. Isso quer dizer que:
+  - Ele armazenará os registros DNS da zona.
+  - Será o servidor autorizado para resolver consultas dentro dessa zona.
+<br/><br/>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/9c476774-c407-4324-9d86-548c560a326c" height="60%" width="60%"/>
+  <br/><br/>
+<p/> 
+  
+  Escolhemos opção, `To all DNS servers running on domain controllers in this domain: pilao.pt` clicamos em "next"
+  
+  <br/>
+  Esta opção replica a zona de DNS apenas para os servidores DNS que estão em execução em controladores de domínio dentro do domínio "pilao.pt". Isso significa que apenas os controladores de domínio que pertencem ao domínio      "pilao.pt" e que estão executando o serviço DNS terão uma cópia desta zona.
+  
+ <br/><br/>
+ <p align="center"> 
   <img src="https://github.com/user-attachments/assets/e7fbc716-6213-461d-9876-fe0d00415c87" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/cc26a3c2-c55c-4620-9265-477225ccb31a" height="60%" width="60%"/>
+  <br/><br/>
+<p/>
+  
+  Inseri a parte da rede do endereço IP da rede interna (por exemplo, para a minha `192.168.1.0/24`, inseri `192.168.1`) e cliquei em Next.
+  
+<br/><br/>
+<p align="center"> 
   <img src="https://github.com/user-attachments/assets/2bac9f17-28b5-449f-8ca4-d8a85e0a1469" height="60%" width="60%"/>
+<p/>
+   <br/><br/>
+  
+  Selecionei `Allow only secure dynamic updates`, clicando de seguida em Next, depois em Finish.
+  
+   <br/><br/>
+<p align="center">   
   <img src="https://github.com/user-attachments/assets/4b707c6a-ed56-4ec7-836c-d525ef4c1634" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/28ea3fc6-9a10-4188-b4e3-b152804d79fe" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/85656f97-9f88-4dfe-b8f3-b7be883bf7bc" height="60%" width="60%"/>
