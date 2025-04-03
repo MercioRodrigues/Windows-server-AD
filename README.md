@@ -281,18 +281,35 @@ Quando um servidor tem o AD DS instalado pode ser promovido a **Controlador de D
   - O AD DS organiza os recursos em Unidades Organizacionais (OU’s) para facilitar a administração.
   - Exemplo: Separar funcionários por departamentos (RH, TI, Financeiro).
 <br/><br/>  
-#### Configuração do Domain Server
+#### Configuração do Domain Service
  <br/><br/>
+No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessário configurar o Domain service. Clicando em `more` abre um wizard.
+
    <p align="center">
    <img src="https://github.com/user-attachments/assets/a8c9e2fd-d15b-4a36-9f0c-df7df9288eb9" height="60%" width="60%"/>
  <p/>
  <br/><br/>
+   O nosso objectivo é adicionar uma "forest" nova.
+   <br/><br/>
 <p align="center">
    <img src="https://github.com/user-attachments/assets/a43b00c7-a3c3-4b09-89bb-4c4fb3052b50" height="60%" width="60%"/>
-   <img src="https://github.com/user-attachments/assets/6a393e22-b8ce-40e7-89fc-17c8ca113165" height="60%" width="60%"/>
-   <img src="https://github.com/user-attachments/assets/9755f87a-a125-4474-825c-c5369a46dc6e" height="60%" width="60%"/>
-   <img src="https://github.com/user-attachments/assets/2a4460f4-74c9-4fcd-88fa-b6524db0f4ef" height="60%" width="60%"/>
-   <img src="https://github.com/user-attachments/assets/51d9df26-b9a0-4fbf-89e9-096e7da9e689" height="60%" width="60%"/>
+<p/>
+  <br/><br/>
+  No ecrã seguinte escolhemos as capacidades do Domain Controller e escolhemos a password do modo DSRM, que é o modo de restauração do AD, caso seja necessário manutenção e recuperação da base de dados do AD. 
+  <br/><br/>
+  <p align="center">
+    <img src="https://github.com/user-attachments/assets/6a393e22-b8ce-40e7-89fc-17c8ca113165" height="60%" width="60%"/>
+    <br/><br/>
+ <p/>
+   Nos ecrãs seguintes basta seguir as imagens e carregando em `next` até chegar a última janela onde clicamos em instalar.
+   <br/><br/>
+   <p align="center">
+    <img src="https://github.com/user-attachments/assets/9755f87a-a125-4474-825c-c5369a46dc6e" height="60%" width="60%"/>
+    <br/><br/>
+    <img src="https://github.com/user-attachments/assets/2a4460f4-74c9-4fcd-88fa-b6524db0f4ef" height="60%" width="60%"/>
+    <br/><br/>
+    <img src="https://github.com/user-attachments/assets/51d9df26-b9a0-4fbf-89e9-096e7da9e689" height="60%" width="60%"/>
+    <br/><br/>
   <br/><br/>
  <p/>
    
