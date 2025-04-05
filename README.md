@@ -405,7 +405,7 @@ Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos 
   <br/><br/>
 <p/>
 
-#### Instalação e Configuração do DHCP
+#### 🧭 Instalação e Configuração do DHCP
 <br/><br/> 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
