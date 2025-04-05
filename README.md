@@ -16,6 +16,7 @@ Em construção!!!!.......
   - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
   - [Configuração DNS](#Configuração-do-DNS)
   - [Instalação e Configuração DHCP](#-Instalação-e-Configuração-do-DHCP)
+  - [NIC Teaming](#NIC-Teaming)
 
 
 ## Diagrama da Rede
@@ -556,6 +557,20 @@ Selecionamos **Yes, I want to activate this scope now** e clicamos em **"Next"**
 <p/>  
 <br/><br/>
   <p/>
+
+### NIC Teaming
+<br/><br/>
+ <img src="https://github.com/user-attachments/assets/3371843c-9507-45e9-a5b8-0d0e5d35c504" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/fcb14b21-b292-492b-8906-3621231b000b" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/07923bdb-dcd7-48f9-bea3-370fb34f0d68" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/79d620d7-f3f6-4251-bf26-bd6f4149155b" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/031b302e-ed4a-41fa-bf1b-bbe5bdc7cf36" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/2e95ad5f-2dcd-4992-91df-969c3bdbb3e3" height="60%" width="60%"/><br/><br/>
+ <img src="https://github.com/user-attachments/assets/abb5a15a-80f5-42b3-8b43-be13f1eb7390" height="60%" width="60%"/><br/><br/>
+
+
+
+https://github.com/user-attachments/assets/a772a4ac-ba11-4fae-91bb-d7ed52a07f98
 
 
 
