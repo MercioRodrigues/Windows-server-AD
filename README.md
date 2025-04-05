@@ -421,6 +421,8 @@ Isto abre o Add Roles and Features Wizard, o assistente que nos permite instalar
 Ao instalar esta role, permitimos que o servidor atribua endereços IP automaticamente aos dispositivos da rede, bem como outras configurações como gateway e DNS.
 <p/>
 <p align="center">
+  <br/><br/> 
+   <img src="https://github.com/user-attachments/assets/c4374bd4-e1de-40db-8229-0fbd1e43ee8e" height="60%" width="60%"/>
   <br/><br/>  
   <img src="https://github.com/user-attachments/assets/0ebf926e-4869-4dc5-9a84-02c3c8c6d360" height="60%" width="60%"/>
   <br/><br/>
@@ -454,6 +456,7 @@ Ao instalar esta role, permitimos que o servidor atribua endereços IP automatic
   <img src="https://github.com/user-attachments/assets/6c4cb917-438a-4014-a671-dbd85461d1f6" height="60%" width="60%"/>
   <br/><br/>
   <p/>
+
 
 
 
