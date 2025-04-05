@@ -560,17 +560,61 @@ Selecionamos **Yes, I want to activate this scope now** e clicamos em **"Next"**
 
 ### NIC Teaming
 <br/><br/>
+O **NIC Teaming** permite combinar duas ou mais placas de rede físicas numa única interface lógica, garantindo redundância **(failover)** e/ou maior performance **(load balancing)**. Configurei a redundância para garantir que, se uma das interfaces falhar, a outra mantém a ligação de rede ativa.
+<br/><br/>
+Primeiro é necessário acrescentar mais 2 placas de rede a nossa máquina virtual, 1 placa externa (NAT) e outra interna.
 <p align="center">
  <img src="https://github.com/user-attachments/assets/3371843c-9507-45e9-a5b8-0d0e5d35c504" height="60%" width="60%"/><br/><br/>
  <img src="https://github.com/user-attachments/assets/fcb14b21-b292-492b-8906-3621231b000b" height="60%" width="60%"/><br/><br/>
- <img src="https://github.com/user-attachments/assets/07923bdb-dcd7-48f9-bea3-370fb34f0d68" height="60%" width="60%"/><br/><br/>
+<p/> 
+Mudei os nomes das placas para ser mais fácil indentifica-las  
+<br/><br/>  
+<p align="center">  
+ <img src="https://github.com/user-attachments/assets/07923bdb-dcd7-48f9-bea3-370fb34f0d68" height="80%" width="80%"/><br/><br/>
+ <p/>
+   
+Abrimos o **Server Manager** e no menu lateral direito clicamos em **Local Server**.
+
+Na secção **NIC Teaming**, clicamos na palavra `Disabled` para abrir a consola de gestão.
+
+<br/><br/>  
+<p align="center"> 
  <img src="https://github.com/user-attachments/assets/79d620d7-f3f6-4251-bf26-bd6f4149155b" height="60%" width="60%"/><br/><br/>
+<p/>
+
+  Na janela de NIC Teaming, clicamos em cima de uma das placas que queremos que forme a Teaming e escolhemos a opção `New Team`.
+  
+<br/><br/>  
+<p align="center"> 
  <img src="https://github.com/user-attachments/assets/031b302e-ed4a-41fa-bf1b-bbe5bdc7cf36" height="60%" width="60%"/><br/><br/>
+<p/>
+
+Damos um nome ao nosso Team e selecionamos as duas interfaces de rede físicas que queremos incluir.<br/><br/> 
+
+Clicamos em `Additional properties` para configurar:
+
+- **Teaming mode:** Escolhemos Switch Independent (não depende de configuração no switch)
+
+- **Load balancing mode:** Escolhemos Address Hash ou Dynamic. No caso de estarmos a usar VirtualBox usamos Address Hash.
+
+- **Standby adapter:** deixamos em branco se quisermos que ambas as interfaces estejam ativas, ou escolhemos uma como reserva (standby)
+
+Clicamos em **OK** para criar o Team.
+  
+<br/><br/>  
+<p align="center">    
  <img src="https://github.com/user-attachments/assets/2e95ad5f-2dcd-4992-91df-969c3bdbb3e3" height="60%" width="60%"/><br/><br/>
- <img src="https://github.com/user-attachments/assets/abb5a15a-80f5-42b3-8b43-be13f1eb7390" height="60%" width="60%"/><br/><br/>
-  <p/>
+<p/>
 
+Após alguns segundos, o novo adaptador lógico é criado e aparece na lista de interfaces. 
 
+<br/><br/>  
+<p align="center">  
+  <img src="https://github.com/user-attachments/assets/abb5a15a-80f5-42b3-8b43-be13f1eb7390" height="60%" width="60%"/><br/><br/>
+<p/>
+
+No pequeno Video em baixo, demonstro o NIC Teaming em ação quando um dos adaptadores falha. É possível verificar que o acesso a internet não é interrompido
+<br/><br/>
 
 https://github.com/user-attachments/assets/85e7c3b5-6a67-44a9-9fb2-a75299de3740
 
