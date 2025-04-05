@@ -229,6 +229,7 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
 **OU (Unidade Organizacional)** 📂 – Subdivisões dentro do domínio para organizar usuários, grupos e dispositivos.
  <br/><br/>
  No canto superior direito da janela do "Server Manager" clicamos em `Manage`e depois `Add Roles and Features`.
+ Isto abre o Add Roles and Features Wizard, o assistente que nos permite instalar novos serviços no servidor.
 <br/><br/>
  <p align="center"> 
   <img src="https://github.com/user-attachments/assets/d3231b47-bb78-4821-9793-44d581ac0b1c" height="60%" width="60%"/> 
@@ -407,25 +408,51 @@ Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos 
 
 ### 🧭 Instalação e Configuração do DHCP
 <br/><br/> 
+Para começar a instalação do serviço DHCP, abrimos o Server Manager, clicamos em Manage no canto superior direito e escolhemos a opção Add Roles and Features.
+<br/><br/>
+Isto abre o Add Roles and Features Wizard, o assistente que nos permite instalar novos serviços no servidor.
+<br/><br/>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
+<br/><br/>  
+
+  Seguimos os passos do assistente até chegarmos à secção **Select server roles**. Aqui, selecionamos a opção DHCP Server e clicamos em "Next" para continuar.
+<br/>  
+Ao instalar esta role, permitimos que o servidor atribua endereços IP automaticamente aos dispositivos da rede, bem como outras configurações como gateway e DNS.
+<p/>
+<p align="center">
+  <br/><br/>  
   <img src="https://github.com/user-attachments/assets/0ebf926e-4869-4dc5-9a84-02c3c8c6d360" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/e17c0f0c-7c7c-4b08-99f4-92647358bec3" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/7bea8be6-e939-4521-8309-4fdd63297cbd" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/82c2167d-b7fa-4593-9689-5d7cb1041aba" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/f342e044-630b-45a8-98bc-bbb5690ecfc9" height="60%" width="60%"/>
-  <br/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/a67ea8c5-34b0-4d08-8256-479b764dfb1e" height="20%" width="20%"/>
   <img src="https://github.com/user-attachments/assets/5e000412-cc24-45c4-b853-83bfbd3af3d4" height="30%" width="30%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/df3bf7d5-8659-4781-b26f-7c98c650126d" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/d47c4685-e650-490f-a76c-e1504e12df0a" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/13f07384-d1c3-4cd6-aa00-7dacc3737023" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/a00331c2-3aa1-4764-8358-e633ebff442f" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/e675859c-d81c-43ef-af29-9b5a5cfe30c7" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/31d40dbe-32bc-4faf-8c6d-2411a8110955" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/d91a2530-38d8-464f-8004-43e23ce92cb8" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/9033d5ee-436e-4016-9be7-bf4d3d89fb7a" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/6c4cb917-438a-4014-a671-dbd85461d1f6" height="60%" width="60%"/>
+  <br/><br/>
   <p/>
 
 
