@@ -416,9 +416,11 @@ Isto abre o Add Roles and Features Wizard, o assistente que nos permite instalar
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
 <br/><br/>  
 
-  Seguimos os passos do assistente até chegarmos à secção **Select server roles**. Aqui, selecionamos a opção DHCP Server e clicamos em "Next" para continuar.
+Seguimos os passos do assistente até chegarmos à secção **Select server roles**. Aqui, selecionamos a opção **DHCP Server** e clicamos em "Next" para continuar.
 <br/>  
 Ao instalar esta role, permitimos que o servidor atribua endereços IP automaticamente aos dispositivos da rede, bem como outras configurações como gateway e DNS.
+<br/>
+Continuamos a clicar "Next" e por Fim "Install"
 <p/>
 <p align="center">
   <br/><br/> 
@@ -426,35 +428,128 @@ Ao instalar esta role, permitimos que o servidor atribua endereços IP automatic
   <br/><br/>  
   <img src="https://github.com/user-attachments/assets/0ebf926e-4869-4dc5-9a84-02c3c8c6d360" height="60%" width="60%"/>
   <br/><br/>
+<p/> 
+<p align="center">
+  
+  Após a instalação da role, no **Server Manager**, surge um aviso no canto superior indicando que a role **DHCP** precisa de ser configurada. Clicamos em **Complete DHCP configuration** para iniciar o assistente de pós-instalação.
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/e17c0f0c-7c7c-4b08-99f4-92647358bec3" height="60%" width="60%"/>
   <br/><br/>
   <img src="https://github.com/user-attachments/assets/7bea8be6-e939-4521-8309-4fdd63297cbd" height="60%" width="60%"/>
   <br/><br/>
+<p/>
+
+Durante a configuração, o assistente pede para autorizarmos o servidor DHCP no domínio. Esta autorização é necessária para garantir que apenas servidores confiáveis atribuem endereços IP na rede.
+
+Confirmamos o **nome do domínio** e a **conta de utilizador** (normalmente já preenchida) e clicamos em Commit para concluir.
+<p align="center">
+<br/><br/>
   <img src="https://github.com/user-attachments/assets/82c2167d-b7fa-4593-9689-5d7cb1041aba" height="60%" width="60%"/>
   <br/><br/>
+<p/>  
+Se tudo estiver correto, vemos uma mensagem a indicar que a configuração foi concluída com sucesso. O servidor DHCP está agora autorizado e pronto para que criemos escopos de IP e comecemos a atribuir configurações aos clientes da rede.
+<br/><br/>
+  
+Clicamos em **"Close"** para terminar.
+<p align="center">
+<br/><br/>
   <img src="https://github.com/user-attachments/assets/f342e044-630b-45a8-98bc-bbb5690ecfc9" height="60%" width="60%"/>
   <br/><br/>
+<p/> 
+
+#### 📦 Criar Escopo DHCP  
+
+No **Server Manager**, clicamos em **Tools** e depois em **DHCP** para abrir a consola de gestão do serviço DHCP.<br/><br/>
+
+Na estrutura à esquerda, expandimos o servidor e clicamos com o botão direito em IPv4. A seguir, escolhemos a opção `New Scope`.<br/><br/>
+
+Iniciamos assim o **New Scope Wizard**, que nos vai guiar na criação do escopo de endereços IP.
+<br/><br/>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/a67ea8c5-34b0-4d08-8256-479b764dfb1e" height="20%" width="20%"/>
   <img src="https://github.com/user-attachments/assets/5e000412-cc24-45c4-b853-83bfbd3af3d4" height="30%" width="30%"/>
   <br/><br/>
+<p/>
+  
+No primeiro passo do assistente, atribuímos um nome descritivo ao escopo. Por exemplo: `Aulas`.<br/><br/>
+
+Este nome serve apenas para organização interna, não afeta o funcionamento da rede.<br/><br/>
+
+Clicamos em **"Next"** para continuar. <br/><br/> 
+
+<p align="center">
   <img src="https://github.com/user-attachments/assets/df3bf7d5-8659-4781-b26f-7c98c650126d" height="60%" width="60%"/>
+<p/> 
   <br/><br/>
+Neste passo, indicamos o intervalo de endereços IP que o DHCP irá distribuir na rede.
+<br/><br/>
+Este intervalo define os IPs disponíveis para dispositivos nesta rede específica.
+  <br/><br/>
+<p align="center">  
   <img src="https://github.com/user-attachments/assets/d47c4685-e650-490f-a76c-e1504e12df0a" height="60%" width="60%"/>
+<p/>
   <br/><br/>
+Podemos agora definir IPs dentro do intervalo que não queremos que sejam atribuídos automaticamente — por exemplo, IPs reservados para impressoras, servidores, ou outros dispositivos fixos.<br/><br/>
+
+Se não tivermos exclusões, deixamos em branco e clicamos em **"Next"**.
+  <br/><br/>
+<p align="center">  
   <img src="https://github.com/user-attachments/assets/13f07384-d1c3-4cd6-aa00-7dacc3737023" height="60%" width="60%"/>
+<p/>  
   <br/><br/>
+Aqui definimos o tempo que um endereço IP permanece atribuído a um dispositivo antes de ser libertado.<br/><br/>
+
+Por padrão, o valor é de **8 dias**. Podemos ajustá-lo conforme as necessidades da rede.
+  <br/><br/>
+<p align="center">  
   <img src="https://github.com/user-attachments/assets/a00331c2-3aa1-4764-8358-e633ebff442f" height="60%" width="60%"/>
+<p/>  
   <br/><br/>
+O assistente pergunta se queremos configurar as opções adicionais agora, como:
+
+- Default Gateway
+
+- DNS Servers
+
+- Domain Name
+
+Escolhemos **Yes, I want to configure these options now** e clicamos em **"Next"**.
+  <br/><br/>
+<p align="center">  
   <img src="https://github.com/user-attachments/assets/e675859c-d81c-43ef-af29-9b5a5cfe30c7" height="60%" width="60%"/>
+<p/>  
   <br/><br/>
+Aqui indicamos o endereço IP do nosso servidor (ou gateway) da rede, normalmente o dispositivo que faz a ligação à Internet. <br/><br/>
+
+Exemplo no nosso cenário: `192.168.1.200` <br/><br/>
+
+Clicamos em **Add**, confirmamos o IP na lista e depois em **Next**. 
+  <br/><br/>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/31d40dbe-32bc-4faf-8c6d-2411a8110955" height="60%" width="60%"/>
+<p/>
   <br/><br/>
+Adicionamos o IP do nosso servidor DNS (normalmente o próprio servidor Windows que está a correr o DHCP e Active Directory).
+
+- **Parent domain:** preenchido automaticamente (`pilao.pt`)
+
+- **IP address:** adicionamos o IP do nosso servidor, `192.168.1.200`
+<br/><br/>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/d91a2530-38d8-464f-8004-43e23ce92cb8" height="60%" width="60%"/>
+ <p/>  
   <br/><br/>
+Se não utilizarmos WINS na rede (Dispositivos com SO antigos), que é o nosso caso, deixamos em branco e clicamos em **Next**.
+  <br/><br/>
+  <br/>
+O assistente pergunta se queremos ativar o escopo imediatamente.<br/><br/>
+
+Selecionamos **Yes, I want to activate this scope now** e clicamos em **"Next"** e finalizamos a configuração do DHCP.
+<br/><br/>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/9033d5ee-436e-4016-9be7-bf4d3d89fb7a" height="60%" width="60%"/>
-  <br/><br/>
-  <img src="https://github.com/user-attachments/assets/6c4cb917-438a-4014-a671-dbd85461d1f6" height="60%" width="60%"/>
-  <br/><br/>
+<p/>  
+<br/><br/>
   <p/>
 
 
