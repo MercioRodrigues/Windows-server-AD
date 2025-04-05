@@ -15,7 +15,7 @@ Em construção!!!!.......
   
   - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
   - [Configuração DNS](#Configuração-do-DNS)
-  - [Instalação e Configuração DHCP](#Configuração-do-DHCP)
+  - [Instalação e Configuração DHCP](#Instalação-Configuração-do-DHCP)
 
 
 ## Diagrama da Rede
@@ -381,14 +381,31 @@ No painel esquerdo, clicamos com o botão direito em Reverse Lookup Zones e sele
    <br/><br/>
 <p align="center">   
   <img src="https://github.com/user-attachments/assets/4b707c6a-ed56-4ec7-836c-d525ef4c1634" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/28ea3fc6-9a10-4188-b4e3-b152804d79fe" height="60%" width="60%"/>
+  <br/><br/>
+ <p/>
+   
+Para concluir a configuração do **Reverse Lookup**, tenho de indicar a "quem" perguntar pelo nome do domínio associado a um Ip.
+<br/>
+Para isso é necessário criar um novo `Pointer` e indicar que quero que o meu servidor seja aquele que faz essa conversão, para isso indico o seu IP e o seu **hostname**.
+<br/><br/>
+<p align="center"> 
   <img src="https://github.com/user-attachments/assets/85656f97-9f88-4dfe-b8f3-b7be883bf7bc" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/d4847689-e6fc-427b-9c37-7a2b08fe5bf8" height="60%" width="60%"/>
+  <br/><br/>
   <img src="https://github.com/user-attachments/assets/bedc2545-dc2f-46e1-aaf0-ec9e0b6b8904" height="60%" width="60%"/>
+  <br/><br/>
+<p/>
+Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos que o servidor está corretamente converter ip em nome e nome em ip  
+  <br/><br/>
+<p align="center"> 
   <img src="https://github.com/user-attachments/assets/c20210f3-8284-4ca7-ab43-4ecbb99501f1" height="60%" width="60%"/>
+  <br/><br/>
 <p/>
 
-#### Configuração do DHCP
+#### Instalação e Configuração do DHCP
 <br/><br/> 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
