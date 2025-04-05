@@ -15,7 +15,7 @@ Em construção!!!!.......
   
   - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
   - [Configuração DNS](#Configuração-do-DNS)
-  - [Instalação e Configuração DHCP](#Instalação-Configuração-do-DHCP)
+  - [Instalação e Configuração DHCP](#Instalação-e-Configuração-do-DHCP)
 
 
 ## Diagrama da Rede
