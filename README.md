@@ -570,7 +570,7 @@ Selecionamos **Yes, I want to activate this scope now** e clicamos em **"Next"**
 
 
 
-https://github.com/user-attachments/assets/a772a4ac-ba11-4fae-91bb-d7ed52a07f98
+
 
 
 
