@@ -317,7 +317,7 @@ No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessári
   <br/><br/>
  <p/>
    
-#### Configuração do DNS   
+### Configuração do DNS   
 <br/><br/> 
 O Active Directory depende do DNS para localizar controladores de domínio e autenticar usuários.
 <br/>
@@ -405,7 +405,7 @@ Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos 
   <br/><br/>
 <p/>
 
-#### 🧭 Instalação e Configuração do DHCP
+### 🧭 Instalação e Configuração do DHCP
 <br/><br/> 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
