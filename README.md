@@ -431,7 +431,9 @@ Continuamos a clicar **"Next"** e por fim **"Install"**
 <p/> 
 
 <br/>
+
 Após a instalação da role, no **Server Manager**, surge um aviso no canto superior indicando que a role **DHCP** precisa de ser configurada. Clicamos em **Complete DHCP configuration** para iniciar o assistente de pós-instalação.
+
 <br/><br/>
 <br/>
 <p align="center">
@@ -541,6 +543,7 @@ Adicionamos o IP do nosso servidor DNS (normalmente o próprio servidor Windows 
   <img src="https://github.com/user-attachments/assets/d91a2530-38d8-464f-8004-43e23ce92cb8" height="60%" width="60%"/>
  <p/>  
   <br/><br/>
+   
 Se não utilizarmos WINS na rede (Dispositivos com SO antigos), que é o nosso caso, deixamos em branco e clicamos em **Next**.
   <br/><br/>
   <br/>
