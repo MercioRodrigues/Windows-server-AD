@@ -345,7 +345,7 @@ No painel esquerdo, clicamos com o botão direito em Reverse Lookup Zones e sele
   <br/><br/> 
  <p/>
    
-  Selecionamos **Primary Zone**, marquei `Store the zone in Active Directory (AD)` e depois em "Next".
+  Selecionamos **Primary Zone**, marquei `Store the zone in Active Directory (AD)` e depois em **"Next"**.
   
   Selecionar **Primary Zone** significa que este servidor DNS será responsável por manter e gerenciar a zona de forma principal. Isso quer dizer que:
   - Ele armazenará os registros DNS da zona.
@@ -416,11 +416,11 @@ Isto abre o Add Roles and Features Wizard, o assistente que nos permite instalar
   <img src="https://github.com/user-attachments/assets/79948978-a2bc-4681-8cd6-11839f2ae972" height="60%" width="60%"/>
 <br/><br/>  
 
-Seguimos os passos do assistente até chegarmos à secção **Select server roles**. Aqui, selecionamos a opção **DHCP Server** e clicamos em "Next" para continuar.
+Seguimos os passos do assistente até chegarmos à secção **Select server roles**. Aqui, selecionamos a opção **DHCP Server** e clicamos em **"Next"** para continuar.
 <br/>  
 Ao instalar esta role, permitimos que o servidor atribua endereços IP automaticamente aos dispositivos da rede, bem como outras configurações como gateway e DNS.
 <br/>
-Continuamos a clicar "Next" e por Fim "Install"
+Continuamos a clicar **"Next"** e por fim **"Install"**
 <p/>
 <p align="center">
   <br/><br/> 
@@ -429,10 +429,12 @@ Continuamos a clicar "Next" e por Fim "Install"
   <img src="https://github.com/user-attachments/assets/0ebf926e-4869-4dc5-9a84-02c3c8c6d360" height="60%" width="60%"/>
   <br/><br/>
 <p/> 
+
+<br/>
+Após a instalação da role, no **Server Manager**, surge um aviso no canto superior indicando que a role **DHCP** precisa de ser configurada. Clicamos em **Complete DHCP configuration** para iniciar o assistente de pós-instalação.
+<br/><br/>
+<br/>
 <p align="center">
-  
-  Após a instalação da role, no **Server Manager**, surge um aviso no canto superior indicando que a role **DHCP** precisa de ser configurada. Clicamos em **Complete DHCP configuration** para iniciar o assistente de pós-instalação.
-  <br/><br/>
   <img src="https://github.com/user-attachments/assets/e17c0f0c-7c7c-4b08-99f4-92647358bec3" height="60%" width="60%"/>
   <br/><br/>
   <img src="https://github.com/user-attachments/assets/7bea8be6-e939-4521-8309-4fdd63297cbd" height="60%" width="60%"/>
