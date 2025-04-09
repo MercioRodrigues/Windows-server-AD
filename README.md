@@ -620,7 +620,7 @@ https://github.com/user-attachments/assets/85e7c3b5-6a67-44a9-9fb2-a75299de3740
 
 <br/><br/>
 
-O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redundância contra falhas.
+O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redundância contra falhas. Para efeitos de simplificação não irei mostrar com imagens como fazer visto ser o mesmo que fiz em cima com os adaptadores externos. 
 
 
 
