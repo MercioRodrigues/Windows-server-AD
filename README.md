@@ -43,8 +43,7 @@ Para adicionar uma máquina nova a partir de uma ISO previamente descarregada, c
 
 
 <p align="center">
-  <br/>
-  Machine -> New
+ 
   <br/>
   <br/>
   <img src="https://github.com/user-attachments/assets/371b4728-a7cc-48fd-9b1b-72ab5378b7dd" height="80%" width="80%"/>
@@ -60,9 +59,7 @@ De seguida damos o nome a máquina, escolhemos a pasta para onde serão guardado
     <br/>
 
 <p align="center">
-  <br/>
-  Seleção do Sistema Operativo
-  <br/>
+   <br/>
   <br/>
   <img src="https://github.com/user-attachments/assets/1fc6b161-515b-43e1-b585-5c50e073c211" height="60%" width="60%"/>
 <p/> 
@@ -73,9 +70,7 @@ Nas janelas seguintes escolhi as especificações de Hardware da máquina virtua
 
 
 <p align="center">
-  <br/>
-  Tamanho do Disco
-  <br/>
+   <br/>
   <br/>
   <img src="https://github.com/user-attachments/assets/f3f9b919-3dcd-41b2-8bbc-60e28c61e927" height="60%" width="60%"/>
   <br/>
@@ -83,14 +78,10 @@ Nas janelas seguintes escolhi as especificações de Hardware da máquina virtua
 <p/> 
   
   Na janela de **Hardware** Selecionei a opção **EFI**, mais em baixo explicarei esta opção bem como Secure Boot que irei selecionar e porquê.
-  <br/>
-  <br/>
+
 <p align="center">
-  Hardware
-  <br/><br/>
+<br/><br/>
   <img src="https://github.com/user-attachments/assets/c3cadb82-1964-46eb-acf7-0b593280ff53" height="60%" width="60%"/>
-  <br/><br/>
-  Resumo final das opções selecionadas.
   <br/><br/>
   <img src="https://github.com/user-attachments/assets/cefccaaa-a482-4882-b614-8a3884f5ee10" height="60%" width="60%"/>
 <p/>  
@@ -105,6 +96,7 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
   <img src="https://github.com/user-attachments/assets/2886d5c6-f69b-4b6f-be79-d0985594675b" height="60%" width="60%"/>
 <p/> 
   <br/> <br/>
+  
  Dentro do Menu `Settings` activei duas opções que irão aumentar a performance e a segurança da maquina. 
 
  **EFI (Extensible Firmware Interface):** É uma interface de firmware que substitui a BIOS tradicional, oferecendo um boot mais rápido, suporte para discos grandes (GPT) e recursos avançados de segurança e compatibilidade.
