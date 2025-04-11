@@ -142,7 +142,7 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
 <br/>
  <p align="center">
 <p align="center">
-  <a href="#Índice" style="font-size: 20px;">Início</a>
+  <a href="#Índice" style="font-size: 50px;">Início</a>
  </p>
  
 ### Iniciar a Maquina e instalação do SO  
