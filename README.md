@@ -167,7 +167,7 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 <br/>
 <br/>
 <p align="center">
-  <a href="#indice">
+  <a href="#Índice">
     <span>
       <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
       <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
@@ -201,7 +201,7 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 <br/><br/>
 
 <p align="center">
-  <a href="#indice">
+  <a href="#Índice">
     <span>
       <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
       <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
@@ -251,6 +251,16 @@ Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No
 <br/>
 <br/>
 
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
  
  #### Atribuição de IP da rede interna.
 De seguida irei atribuir um IP fixo a minha rede interna configurando o adaptador ao qual chamei “interno”. 
@@ -284,6 +294,17 @@ Usando o comando ´ipconfig´ vejo as definições dos meus adaptadores de rede.
  <img src="https://github.com/user-attachments/assets/35d06919-f349-4198-bc08-d8cc5ebd2e73" height="60%" width="60%"/>
 <p/>
 
+  <br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
 ### Instalação Active Directory
  De seguida instalei Active Directory no servidor.
@@ -389,6 +410,17 @@ No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessári
     <br/><br/>
   <br/><br/>
  <p/>
+
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
    
 ### Configuração do DNS   
 <br/><br/> 
@@ -477,6 +509,18 @@ Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos 
   <img src="https://github.com/user-attachments/assets/c20210f3-8284-4ca7-ab43-4ecbb99501f1" height="60%" width="60%"/>
   <br/><br/>
 <p/>
+
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
+
 
 ### 🧭 Instalação e Configuração do DHCP
 <br/><br/> 
@@ -629,6 +673,18 @@ Selecionamos **Yes, I want to activate this scope now** e clicamos em **"Next"**
 <br/><br/>
   <p/>
 
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
+
+
 ### NIC Teaming
 <br/><br/>
 O **NIC Teaming** permite combinar duas ou mais placas de rede físicas numa única interface lógica, garantindo redundância **(failover)** e/ou maior performance **(load balancing)**. Configurei a redundância para garantir que, se uma das interfaces falhar, a outra mantém a ligação de rede ativa.
@@ -693,7 +749,17 @@ https://github.com/user-attachments/assets/85e7c3b5-6a67-44a9-9fb2-a75299de3740
 
 O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redundância contra falhas. Para efeitos de simplificação não irei mostrar com imagens como fazer visto ser o mesmo que fiz em cima com os adaptadores externos. 
 
-
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
 
 
