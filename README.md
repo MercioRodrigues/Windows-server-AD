@@ -22,7 +22,13 @@ Em construção!!!!.......
 
 ## Diagrama da Rede
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/26b1c7e3-a83e-4676-b7d7-92dcb07bcf9a" width="700"/>
+</p>
+
 ## Objectivo do Projecto
+
+
 
 
 ### Competências Adquiridas
