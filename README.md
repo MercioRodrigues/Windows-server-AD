@@ -157,6 +157,7 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 
 ### Configuração de um RAID
 <br/><br/>
+<p align="center">  
 <img src="https://github.com/user-attachments/assets/5e293f1a-040b-44e5-b3bf-f46d3a56f059" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/351d9381-47ba-4a83-bec1-0e605a22acec" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/c38e12b9-107b-44f5-9e2f-34c488f3e62b" height="60%" width="60%"/><br/><br/>
@@ -173,7 +174,8 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 <img src="https://github.com/user-attachments/assets/cd284cd7-d01a-4870-ae7b-5bcc21becdf4" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/7ac1e68b-f5de-4ae7-bea1-19cc1b0c76eb" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/b72fdd18-e166-4650-903b-1d899c9db030" height="60%" width="60%"/><br/><br/>
-
+<p/>
+<br/><br/>
   
 ### Configuração do Servidor
 
