@@ -19,6 +19,8 @@ Em construção!!!!.......
   - [Instalação e Configuração DHCP](#-Instalação-e-Configuração-do-DHCP)
   - [NIC Teaming](#NIC-Teaming)
 
+<br/>
+  <br/>
 
 ## Diagrama da Rede
 
