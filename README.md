@@ -140,7 +140,11 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
 <p/> 
 <br/>
 <br/>
-  
+ <p align="center">
+<p align="center">
+  <a href="#Índice" style="font-size: 20px;">Início</a>
+ </p>
+ 
 ### Iniciar a Maquina e instalação do SO  
 De seguida iniciamos a máquina, procedendo para a instalação do sistema operativo. Basta seguir os passos que mostra nas imagens.  
     <br/> <br/>
