@@ -140,10 +140,18 @@ Antes de Iniciar a máquina e proceder a instalação do Windows Server 2019 a p
 <p/> 
 <br/>
 <br/>
- <p align="center">
+  
 <p align="center">
-  <a href="#Índice" style="font-size: 50px;">Início</a>
- </p>
+  <a href="#indice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+
+<br/>
+<br/>
  
 ### Iniciar a Maquina e instalação do SO  
 De seguida iniciamos a máquina, procedendo para a instalação do sistema operativo. Basta seguir os passos que mostra nas imagens.  
@@ -156,6 +164,17 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
   <img src="https://github.com/user-attachments/assets/3f64bd6e-5b4b-46ad-aedd-bb8fe6dfe09e" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/510c6116-9d86-4bdc-af6c-1b6a49605afc" height="60%" width="60%"/>
 <p/> 
+<br/>
+<br/>
+<p align="center">
+  <a href="#indice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+
 <br/>
 <br/>
 
@@ -180,6 +199,18 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 <img src="https://github.com/user-attachments/assets/b72fdd18-e166-4650-903b-1d899c9db030" height="60%" width="60%"/><br/><br/>
 <p/>
 <br/><br/>
+
+<p align="center">
+  <a href="#indice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+
+<br/>
+<br/>
   
 ### Configuração do Servidor
 
@@ -207,6 +238,19 @@ Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No
    <img src="https://github.com/user-attachments/assets/8683d05b-cd24-4288-ab65-dfc0afb72a0c" height="60%" width="60%"/>
   <p/>
    <br/><br/>
+
+<p align="center">
+  <a href="#indice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+
+<br/>
+<br/>
+
  
  #### Atribuição de IP da rede interna.
 De seguida irei atribuir um IP fixo a minha rede interna configurando o adaptador ao qual chamei “interno”. 
