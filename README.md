@@ -208,9 +208,9 @@ Clicamos no ícone com um **mais (⊕)** e escolhemos **Add SCSI Controller**. E
 <img src="https://github.com/user-attachments/assets/5e293f1a-040b-44e5-b3bf-f46d3a56f059" height="60%" width="60%"/><br/><br/>
 <p/>
   
-Com o **SCSI Controller** selecionado, clicamos novamente em **Add Hard Disk**, e escolhemos **Create new disk**.
+Com o **SCSI Controller** selecionado, clicamos em **Add Hard Disk**, e escolhemos **Create new disk**.
 
-Repetimos este processo para adicionar **pelo menos três discos virtuais**, com o mesmo tamanho (ex: 10 GB cada), que serão usados para o RAID 5.
+Repetimos este processo para adicionar **pelo menos três discos virtuais**, com o mesmo tamanho, que serão usados para o RAID 5.
 
 Selecionamos o tipo de disco como **VDI**, armazenamento **dynamically allocated** e atribuímos um nome claro para cada um (ex: `disk1.vdi`, `disk2.vdi`, etc).
 <br/><br/>
@@ -230,24 +230,89 @@ Agora podemos **Confirmamos as alterações**. Após adicionar todos os discos, 
   
 #### 🔧 RAID por Software
 
-Neste projeto, utilizamos o **RAID por software** através do **Disk Management** do Windows Server. Esta abordagem é prática e sem custos adicionais, ideal para laboratórios e ambientes com recursos limitados. Em contextos mais críticos ou com grandes volumes de dados, recomenda-se o uso de **RAID por hardware**, com uma controladora dedicada.
+>Neste projeto, utilizamos o **RAID por software** através do **Disk Management** do Windows Server. Esta abordagem é prática e sem custos adicionais, ideal para laboratórios e ambientes com recursos limitados. Em contextos mais críticos ou com grandes volumes de dados, recomenda-se o uso de **RAID por hardware**, com uma controladora dedicada.
+
+<br/><br/>
+No **Server Manager**, clicamos em **Tools** e depois em **Computer Management**. No painel da esquerda, selecionamos **Disk Management** para vermos os discos disponíveis.<br/>
+Outra maneira de abrir o Disk Management directamente é usando o **Run** do Windows e escrever `diskmgmt.msc`.
 <br/><br/>
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/bb6dae46-70e1-4a24-9b45-83bcb9fbb603" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+Se os discos ainda estiverem marcados como **Not Initialized**, clicamos com o botão direito em cima de cada um e escolhemos primeiro, **Online**, e depois, **Initialize Disk**. Selecionamos a opção **GPT (GUID Partition Table)** e clicamos em **OK**.
+<br/><br/>
+<br/><br/>
+ 
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/0733e75a-149b-48e5-a2b7-e8eb03a70095" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/7d9943f7-4ee4-4364-9cea-13a04fcfb450" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/67bd7e88-145f-4165-aa04-8829c99ae0b3" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+  
+Clicamos com o botão direito sobre um dos discos não alocados e clicamos em **Convert to Dynamic Disk...**, selecionamos os discos que vamos usar para o RAID e clicamos em **OK**.
+<br/><br/>
+<br/><br/>
+
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/e5318114-950b-4248-954e-22875be3fd88" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/a9d61723-8e47-4a86-a621-cab5f8227c86" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+  
+ Clicamos com o botão direito sobre um dos discos não alocados e selecionamos **New RAID-5 Volume...** para iniciar o assistente de criação do volume RAID. 
+<br/><br/>
+<br/><br/>
+<p align="center">  
 <img src="https://github.com/user-attachments/assets/b6d1ffd5-d92e-4c99-bea7-9e1dbcd5ff64" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+  
+O assistente pede que escolhamos os discos que farão parte do RAID. Selecionamos pelo menos **três discos**, no meu caso vamos usar **4**, clicamos em **Add**, e depois em **Next**.
+<br/><br/>
+<br/><br/>
+
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/033c4265-7e84-43b8-ab4c-3aa0c752ebce" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>  
+
+Escolhemos a letra de unidade para o novo volume (por exemplo, **E:**) e clicamos em **Next**.
+<br/><br/>
+<br/><br/>
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/cd284cd7-d01a-4870-ae7b-5bcc21becdf4" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+  
+Definimos as opções de formatação:
+
+- **File system**: NTFS  
+- **Allocation unit size**: Default  
+- **Volume label**: um nome identificativo, por exemplo, `RAID5`  
+- Ativamos **Perform a quick format** e clicamos em **Next**.
+<br/><br/>
+<br/><br/>
+
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/7ac1e68b-f5de-4ae7-bea1-19cc1b0c76eb" height="60%" width="60%"/><br/><br/>
+<p/>
+<br/><br/>
+  
+O volume RAID 5 será criado e começará o processo de formatação e sincronização automática. <br/><br/>
+<br/><br/>
+
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/b72fdd18-e166-4650-903b-1d899c9db030" height="60%" width="60%"/><br/><br/>
 <p/>
 <br/><br/>
+  
+RAID 5 é ideal para servidores que precisam de **alta disponibilidade** e **proteção contra falha de disco**, sem sacrificar muito espaço. No entanto, é sempre importante manter **backups regulares**, pois o RAID não substitui uma boa política de cópias de segurança.
 
+<br/><br/>
+<br/><br/>
 <p align="center">
   <a href="#Índice">
     <span>
