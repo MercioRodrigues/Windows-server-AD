@@ -181,12 +181,59 @@ De seguida iniciamos a máquina, procedendo para a instalação do sistema opera
 
 ### Configuração de um RAID
 <br/><br/>
+
+Antes de iniciarmos a configuração do servidor, preparamos os discos com **RAID 5** para garantir **redundância** de dados e melhor eficiência.
+<br/><br/>
+#### 🔍 O que é RAID 5?
+<br/><br/>
+O **RAID 5** (Redundant Array of Independent Disks – nível 5) é uma tecnologia que permite combinar **múltiplos discos físicos** numa só unidade lógica, com foco em **tolerância a falhas** e **boa performance de leitura**.
+<br/><br/>
+Este tipo de RAID distribui os dados e a **informação de paridade** (um tipo de código de recuperação) entre todos os discos. Em caso de falha de **um disco**, os dados continuam acessíveis e podem ser reconstruídos automaticamente.
+<br/><br/>
+Para RAID 5, é necessário um mínimo de **três discos**. Por exemplo, com 3 discos de 1 TB, teremos aproximadamente **2 TB úteis**, com o espaço restante usado para a paridade. Esta foi a escolha para este laboratório para não consumir muito espaço da minha máquina pessoal.
+<br/><br/>
+> ⚠️ **Atenção**: RAID 5 não substitui um bom sistema de **backups** — é uma camada de proteção contra falhas de hardware, mas não contra apagamentos acidentais, ransomware, etc.
+
+---
+<br/><br/>
+<br/><br/>
+
+Antes de configurar o RAID 5 no Windows Server, precisamos adicionar os discos virtuais na máquina, através da VirtualBox.
+Abrimos as **Definições (Settings)** da máquina virtual, e no menu lateral escolhemos **Storage**.
+<br/><br/>
+Clicamos no ícone com um **mais (⊕)** e escolhemos **Add SCSI Controller**. Este controlador permitirá ligar discos adicionais com suporte para RAID.
+<br/><br/>
+
 <p align="center">  
 <img src="https://github.com/user-attachments/assets/5e293f1a-040b-44e5-b3bf-f46d3a56f059" height="60%" width="60%"/><br/><br/>
+<p/>
+  
+Com o **SCSI Controller** selecionado, clicamos novamente em **Add Hard Disk**, e escolhemos **Create new disk**.
+
+Repetimos este processo para adicionar **pelo menos três discos virtuais**, com o mesmo tamanho (ex: 10 GB cada), que serão usados para o RAID 5.
+
+Selecionamos o tipo de disco como **VDI**, armazenamento **dynamically allocated** e atribuímos um nome claro para cada um (ex: `disk1.vdi`, `disk2.vdi`, etc).
+<br/><br/>
+
+<p align="center">    
 <img src="https://github.com/user-attachments/assets/351d9381-47ba-4a83-bec1-0e605a22acec" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/c38e12b9-107b-44f5-9e2f-34c488f3e62b" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/5c3c4824-a2d6-43e0-8b50-c01d5a5d2031" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/fac7a11e-1681-46db-bb13-75c27ec8273b" height="60%" width="60%"/><br/><br/>
+<p/>
+
+Agora podemos **Confirmamos as alterações**. Após adicionar todos os discos, clicamos em **OK** para guardar as definições da máquina virtual. Agora, ao iniciar o Windows Server, os novos discos estarão disponíveis no **Disk Management**, prontos para criação do volume RAID 5.
+
+<br/><br/>  
+<p align="center"> 
+  <img src="https://github.com/user-attachments/assets/fac7a11e-1681-46db-bb13-75c27ec8273b" height="60%" width="60%"/><br/><br/>
+<p/>
+  
+#### 🔧 RAID por Software
+
+Neste projeto, utilizamos o **RAID por software** através do **Disk Management** do Windows Server. Esta abordagem é prática e sem custos adicionais, ideal para laboratórios e ambientes com recursos limitados. Em contextos mais críticos ou com grandes volumes de dados, recomenda-se o uso de **RAID por hardware**, com uma controladora dedicada.
+<br/><br/>
+
+<p align="center">
 <img src="https://github.com/user-attachments/assets/bb6dae46-70e1-4a24-9b45-83bcb9fbb603" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/0733e75a-149b-48e5-a2b7-e8eb03a70095" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/7d9943f7-4ee4-4364-9cea-13a04fcfb450" height="60%" width="60%"/><br/><br/>
