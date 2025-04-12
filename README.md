@@ -353,33 +353,15 @@ Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No
   <p/>
    <br/><br/>
 
-<p align="center">
-  <a href="#indice">
-    <span>
-      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
-      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
-    </span>
-  </a>
-</p>
 
-<br/>
-<br/>
-
-<p align="center">
-  <a href="#Índice">
-    <span>
-      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
-      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
-    </span>
-  </a>
-</p>
 <br/>
 <br/>
  
  #### Atribuição de IP da rede interna.
 De seguida irei atribuir um IP fixo a minha rede interna configurando o adaptador ao qual chamei “interno”. 
 <br/><br/>
-Clicando em “Properties” e de seguida escolhendo a opção IPV4 e clicando em “Properties”, abrirá a janela seguinte onde introduzi o IP que desejo e a subnet mask da rede, isto significa que as máquinas que fizerem parte da rede interna e estiverem ligadas a este servidor irão ser atribuídos IPs com base neste mask. 
+Botão direito em cima do adaptador e em **Properties** e de seguida escolhendo a opção IPV4 e clicando em **Properties** como mostra na imagem, abrirá a janela seguinte onde introduzi o IP que desejo e a subnet mask da rede, isto significa que as máquinas que fizerem parte da rede interna e estiverem ligadas a este servidor irão ser atribuídos IPs com base neste mask. 
+
 <p align="center"> 
  <br/><br/>
  <img src="https://github.com/user-attachments/assets/84ca6b0e-9a06-449d-8b76-cf9b34997ba9" height="60%" width="60%"/>
