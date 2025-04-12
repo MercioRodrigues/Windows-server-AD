@@ -878,3 +878,6 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 ## Active Directory
 
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/57150789-b265-48f3-b632-1510c5d65178" height="80%" width="80%"/><br/><br/>
+</p>
