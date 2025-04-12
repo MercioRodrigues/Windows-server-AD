@@ -241,6 +241,7 @@ Outra maneira de abrir o Disk Management directamente é usando o **Run** do Win
 <img src="https://github.com/user-attachments/assets/bb6dae46-70e1-4a24-9b45-83bcb9fbb603" height="60%" width="60%"/><br/><br/>
 <p/>
 <br/><br/>
+  
 Se os discos ainda estiverem marcados como **Not Initialized**, clicamos com o botão direito em cima de cada um e escolhemos primeiro, **Online**, e depois, **Initialize Disk**. Selecionamos a opção **GPT (GUID Partition Table)** e clicamos em **OK**.
 <br/><br/>
 <br/><br/>
