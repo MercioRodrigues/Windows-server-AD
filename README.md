@@ -293,7 +293,7 @@ Definimos as opções de formatação:
 - **File system**: NTFS  
 - **Allocation unit size**: Default  
 - **Volume label**: um nome identificativo, por exemplo, `RAID5`  
-- Ativamos **Perform a quick format** e clicamos em **Next**.
+  
 <br/><br/>
 <br/><br/>
 
