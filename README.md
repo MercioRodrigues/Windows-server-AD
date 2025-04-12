@@ -881,3 +881,25 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 <p align="center">
   <img src="https://github.com/user-attachments/assets/57150789-b265-48f3-b632-1510c5d65178" height="80%" width="80%"/><br/><br/>
 </p>
+
+<img src="https://github.com/user-attachments/assets/d12f3729-2277-4d4c-a0f4-2e914017c18f" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/83a7bda1-1618-4120-a468-023d36577f6d" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/afcb152b-880c-4f20-b872-5a1b2366c75e" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/8bf7a81c-8d2b-4cab-8a56-6e2f9dec9ed9" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/1fe93617-0e4d-4929-a2ea-cee472a78fcc" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/57d87f94-0613-46f7-a2f6-6f59f338b032" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/7bfee67f-ba6d-4fce-b5eb-13ad5077d18f" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/0ad69514-52b4-4922-a585-0e23601d1ae8" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/8115c190-3268-44ce-bb3e-93927c4ae97d" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/cf2e9ec6-8729-4430-8d30-d72b0785b368" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/7f021329-1f52-4c31-b0dc-c82a7a8c8972" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/a2f9eb20-e7ca-4ee1-b2b6-686e3ce1f953" height="60%" width="60%"/><br/><br/>
+
+
+
+
+
+
+
+
+
