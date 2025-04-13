@@ -1014,10 +1014,11 @@ Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` 
 
 <br/><br/>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/cf2e9ec6-8729-4430-8d30-d72b0785b368" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/41ecb2de-20ac-4cb5-985c-4cd6b1407958" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/7f021329-1f52-4c31-b0dc-c82a7a8c8972" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/a2f9eb20-e7ca-4ee1-b2b6-686e3ce1f953" height="60%" width="60%"/><br/><br/>
 </p>
+
 
 
 
