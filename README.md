@@ -886,7 +886,7 @@ Esta ferramenta permite-nos gerir utilizadores, grupos, computadores e OUs no do
   <img src="https://github.com/user-attachments/assets/d12f3729-2277-4d4c-a0f4-2e914017c18f" height="60%" width="60%"/><br/><br/>
 </p>
 
-**Criamos as OUs principais**
+**Criação as OUs principais**
 
 As **Organizational Units (OUs)** são como pastas virtuais que nos ajudam a organizar os objetos do domínio por localização, departamento ou função.
 
@@ -922,7 +922,7 @@ Em baixo demonstro a criação da OU de `Cinel_Lisboa`, o processo para a criaç
   <img src="https://github.com/user-attachments/assets/afcb152b-880c-4f20-b872-5a1b2366c75e" height="60%" width="60%"/><br/><br/>
 </p>
 
-**Criamos os grupos de segurança dentro da OU IT**
+**Criação os grupos de segurança dentro da OU IT**
 
 Os grupos permitem atribuir permissões de forma coletiva, facilitando a administração. Criamos dois grupos para o departamento de IT com diferentes níveis de responsabilidade.
 
@@ -978,7 +978,7 @@ Estes grupos podem depois ser usados para aplicar GPOs, permissões de pastas ou
 </p>
 <br/><br/>
 
-**Criamos o utilizador João Silva**
+**Criação do utilizador João Silva**
 
 Agora adicionamos um utilizador fictício ao domínio. Este utilizador representa um colaborador da equipa de IT em Lisboa.
 
@@ -1007,7 +1007,7 @@ Esta opção obriga o utilizador a definir uma nova password no primeiro login, 
 
 
 
-**Adicionamos o utilizador ao grupo IT_Analysts**
+**Adicionar o utilizador ao grupo IT_Analysts**
 
 Para associar o utilizador às permissões e políticas atribuídas ao grupo `IT_Analysts`, adicionamo-lo ao grupo.
 
