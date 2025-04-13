@@ -859,20 +859,161 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 
 ## Active Directory
 
+Nesta secção vamos simular um cenário de administração de domínio com Active Directory. Iremos criar uma hierarquia organizada de **Organizational Units (OUs)**, **grupos** e **utilizadores**, conforme representado no diagrama abaixo. Este tipo de estrutura permite uma gestão mais eficiente, aplicação de políticas direcionadas (GPOs) e controlo de permissões de forma granular.
+
+Nesta simulação e para efeitos apenas demonstrativos a mesma inclui:
+
+- Criação de 2 OUs representando as delegacoes da empresa em Lisboa e Porto.
+- Criação de 3 OUs dentro da delegacao de Lisboa, `IT` `HR` e `Finance`
+- Criação de grupos dentro da OU **IT**
+- Criação de um utilizador pertencente ao grupo `IT_analysts`
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/57150789-b265-48f3-b632-1510c5d65178" height="80%" width="80%"/><br/><br/>
 </p>
+
+Primeiro, acedemos ao **Server Manager**, clicamos em **Tools** e selecionamos **Active Directory Users and Computers**.  
+Esta ferramenta permite-nos gerir utilizadores, grupos, computadores e OUs no domínio.
+
+<br/><br/>
+
 <p align="center">
-<img src="https://github.com/user-attachments/assets/d12f3729-2277-4d4c-a0f4-2e914017c18f" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/83a7bda1-1618-4120-a468-023d36577f6d" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/afcb152b-880c-4f20-b872-5a1b2366c75e" height="60%" width="60%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/d12f3729-2277-4d4c-a0f4-2e914017c18f" height="60%" width="60%"/><br/><br/>
+</p>
+
+**Criamos as OUs principais**
+
+As **Organizational Units (OUs)** são como pastas virtuais que nos ajudam a organizar os objetos do domínio por localização, departamento ou função.
+
+🔹 Clicamos com o botão direito sobre o domínio `pilao.pt` →  
+**New** → **Organizational Unit**
+
+Criamos:
+- `Cinel_Lisboa`
+- `Cinel_Porto`
+
+Estas OUs representam as duas localizações da organização.
+<br/><br/>
+
+Dentro da OU `Cinel_Lisboa`, criamos sub-OUs para representar os departamentos desta localização.
+
+🔹 Clicamos com o botão direito sobre `Cinel_Lisboa` →  **New** → **Organizational Unit**
+
+**Adicionamos:**
+- `IT`
+- `HR`
+- `Finance`
+
+Isto permite-nos organizar os utilizadores e grupos por departamento, e aplicar GPOs específicas quando necessário.
+
+<br/><br/>
+
+Em baixo demonstro a criação da OU de `Cinel_Lisboa`, o processo para a criação das outras OUs é semelhante.
+<br/><br/>
+
+
+<p align="center">  
+  <img src="https://github.com/user-attachments/assets/83a7bda1-1618-4120-a468-023d36577f6d" height="60%" width="60%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/afcb152b-880c-4f20-b872-5a1b2366c75e" height="60%" width="60%"/><br/><br/>
+</p>
+
+**Criamos os grupos de segurança dentro da OU IT**
+
+Os grupos permitem atribuir permissões de forma coletiva, facilitando a administração. Criamos dois grupos para o departamento de IT com diferentes níveis de responsabilidade.
+
+🔹 Dentro da OU `IT`, clicamos com o botão direito →  **New** → **Group**
+
+Criamos:
+- `IT_Admins` → grupo de administradores técnicos
+- `IT_Analysts` → grupo de analistas ou utilizadores técnicos
+
+Usamos:
+- **Group scope**: Global  
+- **Group type**: Security
+
+Estes grupos podem depois ser usados para aplicar GPOs, permissões de pastas ou políticas de segurança.
+<br/><br/>
+<br/><br/>
+
+> ℹ️ **Nota: Diferença entre Group Scope e Group Type**
+>
+> Ao criar grupos no Active Directory, é importante compreender estas duas opções:
+>
+> ### 🔍 **Group Scope: Global**
+>
+> - Permite adicionar utilizadores, computadores e outros grupos **do mesmo domínio**.
+> - Pode ser usado para aplicar permissões **em qualquer domínio da floresta**.
+> - Ideal para cenários onde todos os membros pertencem ao mesmo domínio.
+>
+> **Exemplo:** Criamos o grupo `IT_Analysts` em `pilao.pt`. Mesmo que os membros sejam todos deste domínio, podemos usar este grupo para aplicar permissões em servidores noutros domínios (caso existam).
+>
+> ---
+>
+> ### 🔒 **Group Type: Security**
+>
+> - Usado para **atribuir permissões de acesso** a recursos (como pastas, impressoras, GPOs, etc.).
+> - Também pode servir como grupo de distribuição para emails, mas a função principal é a **gestão de segurança**.
+>
+> ---
+>
+> | Opção                | Descrição                                              |
+> |---------------------|----------------------------------------------------------|
+> | `Group Scope: Global` | Agrupa membros do mesmo domínio e pode ser usado noutros domínios |
+> | `Group Type: Security` | Permite aplicar permissões e políticas de segurança      |
+>
+> ✅ **Recomendação:** Para a maioria dos cenários administrativos, como o deste projeto, usamos grupos com `Scope: Global` e `Type: Security`.
+
+<br/><br/>
+<br/><br/>
+
+<p align="center">  
 <img src="https://github.com/user-attachments/assets/8bf7a81c-8d2b-4cab-8a56-6e2f9dec9ed9" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/1fe93617-0e4d-4929-a2ea-cee472a78fcc" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/57d87f94-0613-46f7-a2f6-6f59f338b032" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/7bfee67f-ba6d-4fce-b5eb-13ad5077d18f" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/0ad69514-52b4-4922-a585-0e23601d1ae8" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/8115c190-3268-44ce-bb3e-93927c4ae97d" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+**Criamos o utilizador João Silva**
+
+Agora adicionamos um utilizador fictício ao domínio. Este utilizador representa um colaborador da equipa de IT em Lisboa.
+
+🔹 Na OU `IT`, clicamos com o botão direito →  **New** → **User**
+
+Preenchemos:
+- **First name:** João  
+- **Last name:** Silva  
+- **User logon name:** `jsilva`
+
+Definimos uma password inicial e marcamos a opção:
+- **User must change password at next logon**
+
+Esta opção obriga o utilizador a definir uma nova password no primeiro login, o que está de acordo com boas práticas de segurança e permite aplicar mais tarde uma **política de palavras-passe** através de uma **GPO** (Group Policy Object).
+
+<br/><br/>
+<br/><br/>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7bfee67f-ba6d-4fce-b5eb-13ad5077d18f" height="60%" width="60%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/0ad69514-52b4-4922-a585-0e23601d1ae8" height="60%" width="60%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/8115c190-3268-44ce-bb3e-93927c4ae97d" height="60%" width="60%"/><br/><br/>
+</p>
+
+
+
+
+
+**Adicionamos o utilizador ao grupo IT_Analysts**
+
+Para associar o utilizador às permissões e políticas atribuídas ao grupo `IT_Analysts`, adicionamo-lo ao grupo.
+
+🔹 Clicamos com o botão direito sobre o utilizador `joao.silva` →  
+**Add to a group...**  
+Escrevemos `IT_Analysts` e clicamos em **Check Names** para confirmar.
+<br/>
+Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` e verificando nas **Properties** os membros do grupo. 
+
+<br/><br/>
+<p align="center">
 <img src="https://github.com/user-attachments/assets/cf2e9ec6-8729-4430-8d30-d72b0785b368" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/7f021329-1f52-4c31-b0dc-c82a7a8c8972" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/a2f9eb20-e7ca-4ee1-b2b6-686e3ce1f953" height="60%" width="60%"/><br/><br/>
