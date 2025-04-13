@@ -34,7 +34,7 @@
 
 ## Objectivo do Projecto
  <br/> <br/>
-Este projeto tem como objetivo principal **simular a implementação completa de uma infraestrutura de rede empresarial baseada em Windows Server**, com foco em serviços essenciais como:
+Este projeto tem como objetivo principal **simular a implementação de uma infraestrutura de rede empresarial baseada em Windows Server**, com foco em serviços essenciais como:
 
 - **Active Directory Domain Services (AD DS)**
 - **DNS (Domain Name System)**
