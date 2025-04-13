@@ -1011,8 +1011,7 @@ Esta opção obriga o utilizador a definir uma nova password no primeiro login, 
 
 Para associar o utilizador às permissões e políticas atribuídas ao grupo `IT_Analysts`, adicionamo-lo ao grupo.
 
-🔹 Clicamos com o botão direito sobre o utilizador `joao.silva` →  
-**Add to a group...**  
+🔹 Clicamos com o botão direito sobre o utilizador `joao.silva` →  **Add to a group...**  
 Escrevemos `IT_Analysts` e clicamos em **Check Names** para confirmar.
 <br/>
 Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` e verificando nas **Properties** os membros do grupo. 
@@ -1039,22 +1038,169 @@ Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` 
 
 ### GPOs Group Policy Objects
 <br/><br/>
+
+As **GPOs (Group Policy Objects)** são políticas aplicadas a utilizadores ou computadores dentro de um domínio Active Directory. Permitem controlar configurações como políticas de password, permissões, scripts de logon, configurações do ambiente de trabalho, entre muitas outras.
+<br/><br/>
+Nesta secção vou criar e aplicar uma **GPO específica para os Domain Controllers**, contendo algumas políticas básicas de segurança como exemplo. <br/>
+Em vez de editar a **Default Domain Controllers Policy**, que já vem por defeito, optei por seguir uma **boa prática** e criar uma **nova GPO dedicada**, esta prática segue as recomendações de separar políticas por função e aplicar apenas o necessário a cada componente da infraestrutura.
+
+<br/><br/>
+Abrimos o **Group Policy Management** através de **Tools**.
+<br/><br/>
+
 <p align="center">
 <img src="https://github.com/user-attachments/assets/66eebab7-287a-4ac2-aeea-62e85ada5780" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+**Criar uma nova GPO para os Domain Controllers**
+
+Através da ferramenta **Group Policy Management**, navegamos até `Group Policy Objects`. Clicamos com o botão direito e selecionamos:
+
+➡️ `New`
+
+Atribuímos um nome claro e descritivo, como:  
+`DC-Segurança`
+
+> Esta GPO irá conter apenas definições aplicáveis aos controladores de domínio.
+
+---
+<br/><br/>
+<br/><br/>
+<p align="center">  
 <img src="https://github.com/user-attachments/assets/b22e42b7-d743-4c84-896c-af46f5fd728d" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/5c7d1cd5-97b3-4c9e-ba6c-5bb9790d1a75" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+**Aplicar Security Filtering**
+
+Por padrão, todas as GPOs têm o grupo `Authenticated Users` no filtro de segurança, o que significa que a GPO se aplica a todos os utilizadores e computadores autenticados.
+
+No nosso caso, queremos restringir a aplicação **apenas aos Domain Controllers**, por isso:
+
+1. Selecionamos a GPO → painel da direita → **Scope**
+2. Em **Security Filtering**, removemos `Authenticated Users`
+3. Clicamos em `Add`, e selecionamos o grupo:  
+   `Domain Controllers`
+
+> ✅ Isto garante que **apenas os controladores de domínio aplicam esta GPO**, evitando impactos noutros sistemas.
+
+---
+<br/><br/><br/><br/>
+
+<p align="center">  
 <img src="https://github.com/user-attachments/assets/4372b027-080a-4a49-b06b-f5f234cae40a" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/a473ebcf-367c-440a-8aec-be8dd1a5c2f1" height="60%" width="60%"/><br/><br/>
+</p>  
+</p>
+
+**Editar a GPO**
+
+Depois de criada, clicamos com o botão direito sobre a nova GPO e escolhemos `Edit`. Isto abre o **Group Policy Management Editor**.
+
+**Navegamos até:**
+
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings`
+
+Aqui é onde vamos aplicar as configurações de segurança pretendidas.
+
+<br/><br/>
+
+🔹 **Política de passwords**
+
+Aplicamos as seguintes configurações recomendadas para controladores de domínio:
+
+- `Enforce password history`: **24 passwords remembered**
+- `Password must meet complexity requirements`: **Enabled**
+- `Minimum password length`: **14**
+- `Maximum password age`: **30 days**
+- `Minimum password age`: **1 day**
+- `Store passwords using reversible encryption`: **Disabled**
+
+📝 Esta política é fundamental para servidores críticos, e define um padrão mais exigente que o habitual.
+
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/5c7d1cd5-97b3-4c9e-ba6c-5bb9790d1a75" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/419b40b9-37bd-4625-bbbf-59ad49d6d392" height="60%" width="60%"/><br/><br/>
+</p> 
+<br/><br/>
+
+🔹 **Audit Policy**
+
+🎯 **Objetivo:**
+
+Ativar auditoria para rastrear acessos e alterações no controlador de domínio.
+
+**Navegar até:**
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `Audit Policy`
+
+**Ativei as seguintes opções:**
+
+- **Audit account logon events:** `Success, Failure`  
+- **Audit logon events:** `Success, Failure`  
+- **Audit object access:** `Success, Failure`  
+- **Audit directory service access:** `Success, Failure`  
+- **Audit policy change:** `Success, Failure`  
+
+📝 **Observações:**
+Permite sabermos **quem acedeu**, **quando** e **o que alterou**, sendo essencial para **segurança** e **compliance**.
+<br/><br/>
+<br/><br/>
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/dd204a76-8fcc-47fe-a9ba-f7dd374f44cc" height="60%" width="60%"/><br/><br/>
+</p>  
+<br/><br/>
+
+🔹 **Remote Access Restriction**
+
+🎯 **Objetivo:**
+Impedir que utilizadores não autorizados façam Remote Desktop ao controlador de domínio.
+
+**Navegar até:**
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Local Policies` → `User Rights Assignment`
+
+- **Deny log on through Remote Desktop Services:**  
+  ➤ Adicionei: `Domain Users`
+
+- **Allow log on through Remote Desktop Services:**  
+  ➤ Adicionei apenas: `Domain Admins`  
+  
+
+### 📝 Observações:
+Esta configuração evita **acessos indevidos ao servidor via RDP**, um dos principais vetores de ataque em redes mal protegidas.
+
+<br/><br/>
+<br/><br/>
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/61436af7-5d7d-4ef0-9e0f-020cef20b475" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/25eb3d14-92f0-4664-8eee-a45f3dbc1328" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+**Ligar a GPO à OU Domain Controllers**
+➡️ Por fim Ligamos a GPO que criei a organizational unit **Domain Controllers**
+
+<br/><br/>
+<br/><br/>
+<p align="center"> 
 <img src="https://github.com/user-attachments/assets/341e8b8a-4a77-406d-9172-69871ffe08fc" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/0e37c19f-4f0c-49e0-9326-be96167ea01c" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/8a95019d-17a8-4caf-ab2f-5ff6f10530df" height="60%" width="60%"/><br/><br/>
 </p>
 
-
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
 
 
