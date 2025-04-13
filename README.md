@@ -1189,6 +1189,19 @@ Esta configuração evita **acessos indevidos ao servidor via RDP**, um dos prin
 <img src="https://github.com/user-attachments/assets/0e37c19f-4f0c-49e0-9326-be96167ea01c" height="60%" width="60%"/><br/><br/>
 <img src="https://github.com/user-attachments/assets/8a95019d-17a8-4caf-ab2f-5ff6f10530df" height="60%" width="60%"/><br/><br/>
 </p>
+<br/><br/>
+
+Podemos verificar correndo o seguinte comando se as Policies foram aplicadas, corretamente.
+
+```
+gpupdate /force
+gpresult /r
+```
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/e9dc4b84-0b85-4d51-9e70-9e43802f21ee" height="60%" width="60%"/><br/><br/>
+</p>
+
+
 
 <br/><br/>
 <p align="center">
