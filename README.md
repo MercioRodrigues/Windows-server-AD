@@ -20,6 +20,8 @@ Em construção!!!!.......
   - [NIC Teaming](#NIC-Teaming)
 
 - [Active Directory](#Active-Directory)
+  - [Criação de OUs Grupos e utilizadores](Criação-de-OUs-Grupos-e-utilizadores)
+  - [GPO (Group Policy Objects)](GPO-(Group-Policy-Objects))   
 <br/>
   <br/>
 
@@ -872,6 +874,9 @@ Nesta simulação e para efeitos apenas demonstrativos a mesma inclui:
   <img src="https://github.com/user-attachments/assets/57150789-b265-48f3-b632-1510c5d65178" height="80%" width="80%"/><br/><br/>
 </p>
 
+
+### Criação de OUs Grupos e utilizadores
+<br/><br/>
 Primeiro, acedemos ao **Server Manager**, clicamos em **Tools** e selecionamos **Active Directory Users and Computers**.  
 Esta ferramenta permite-nos gerir utilizadores, grupos, computadores e OUs no domínio.
 
@@ -1019,7 +1024,35 @@ Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` 
 <img src="https://github.com/user-attachments/assets/a2f9eb20-e7ca-4ee1-b2b6-686e3ce1f953" height="60%" width="60%"/><br/><br/>
 </p>
 
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
+
+### GPO (Group Policy Objects)
+<br/><br/>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/66eebab7-287a-4ac2-aeea-62e85ada5780" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/b22e42b7-d743-4c84-896c-af46f5fd728d" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/5c7d1cd5-97b3-4c9e-ba6c-5bb9790d1a75" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/4372b027-080a-4a49-b06b-f5f234cae40a" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/a473ebcf-367c-440a-8aec-be8dd1a5c2f1" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/419b40b9-37bd-4625-bbbf-59ad49d6d392" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/dd204a76-8fcc-47fe-a9ba-f7dd374f44cc" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/61436af7-5d7d-4ef0-9e0f-020cef20b475" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/25eb3d14-92f0-4664-8eee-a45f3dbc1328" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/341e8b8a-4a77-406d-9172-69871ffe08fc" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/0e37c19f-4f0c-49e0-9326-be96167ea01c" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/8a95019d-17a8-4caf-ab2f-5ff6f10530df" height="60%" width="60%"/><br/><br/>
+</p>
 
 
 
