@@ -20,8 +20,8 @@ Em construção!!!!.......
   - [NIC Teaming](#NIC-Teaming)
 
 - [Active Directory](#Active-Directory)
-  - [Criação de OUs Grupos e utilizadores](Criação-de-OUs-Grupos-e-utilizadores)
-  - [GPO (Group Policy Objects)](GPO-(Group-Policy-Objects))   
+  - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
+  - [GPO (Group Policy Objects)](#GPO-(Group-Policy-Objects))   
 <br/>
   <br/>
 
