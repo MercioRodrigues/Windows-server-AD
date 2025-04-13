@@ -1,6 +1,7 @@
 # Windows Server Active Directory
 
-Em construção!!!!.......
+Em construção!!!!....... Clientes serão Adicionados e GPOs ligadas as OUs e grupos de utilizadores serão configuradas. Para já GPO para os Domain Controllers foi criada e ligada correctamente. Pode ser consultada na secção  **GPOs Group Policy Objects** do projeto.
+<br/><br/>
 
 ## Índice
 [Diagrama da Rede](#Diagrama-da-Rede)
@@ -32,11 +33,65 @@ Em construção!!!!.......
 </p>
 
 ## Objectivo do Projecto
+ <br/> <br/>
+Este projeto tem como objetivo principal **simular a implementação completa de uma infraestrutura de rede empresarial baseada em Windows Server**, com foco em serviços essenciais como:
 
+- **Active Directory Domain Services (AD DS)**
+- **DNS (Domain Name System)**
+- **DHCP (Dynamic Host Configuration Protocol)**
+- **GPOs (Group Policy Objects)**
+- **NIC Teaming** e **RAID 5** por software
 
+Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede.
 
+O projeto foi documentado passo a passo, com imagens explicativas, e simula um cenário real de uma organização com múltiplas delegações e departamentos. A estrutura organizacional foi refletida na criação de OUs e grupos, com aplicação de GPOs direcionadas, reforçando boas práticas de segurança e administração.
 
-### Competências Adquiridas
+---
+<br/> <br/>
+
+## Competências Adquiridas
+<br/> <br/>
+Durante o desenvolvimento deste projeto, foram adquiridas e consolidadas as seguintes competências técnicas:
+
+### 🖥️ Infraestrutura e virtualização
+- Criação de máquinas virtuais no **VirtualBox**
+- Configuração de **placas de rede** (NAT e Interna)
+- Implementação de **RAID 5** por software para redundância
+
+### 🧩 Administração de Windows Server
+- Instalação e promoção do servidor como **Domain Controller**
+- Gestão e configuração de serviços de rede: **DNS**, **DHCP**, **AD DS**
+- Configuração de **NIC Teaming** para redundância de rede
+
+### 📁 Active Directory
+- Criação de **OUs** (Organizational Units) para simular estrutura empresarial
+- Criação e gestão de **utilizadores e grupos de segurança**
+- Atribuição de permissões e associação entre utilizadores e grupos
+
+### 🔒 Group Policy Objects (GPOs)
+- Criação de GPOs específicas para o Controlador de Domínio
+- Aplicação de políticas de segurança, auditoria e restrição de acesso remoto
+- Utilização de **Security Filtering** para limitar o escopo de aplicação das GPOs
+- Compreensão do funcionamento das **Default Policies** e boas práticas de gestão
+
+### 🧑‍💼 Boas práticas de administração
+- Separação de funções por GPO (evitando editar políticas default)
+- Organização lógica de recursos por local e departamento
+
+<br/> <br/>
+Este projeto serviu como uma excelente base prática para aprofundar conhecimentos em administração de sistemas Windows e estruturação de redes empresariais com Active Directory
+
+---
+<br/> <br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/> <br/>
 
 ## Passo a Passo
 
