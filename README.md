@@ -21,7 +21,7 @@ Em construção!!!!.......
 
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
-  - [GPO (Group Policy Objects)](#GPO-(Group-Policy-Objects))   
+  - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)   
 <br/>
   <br/>
 
@@ -1037,7 +1037,7 @@ Depois de adicionado, podemos confirmar clicando em cima do Grupo `IT_Analysts` 
 <br/>
 
 
-### GPO (Group Policy Objects)
+### GPOs Group Policy Objects
 <br/><br/>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/66eebab7-287a-4ac2-aeea-62e85ada5780" height="60%" width="60%"/><br/><br/>
