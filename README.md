@@ -22,7 +22,9 @@
 
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
-  - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)   
+  - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
+    - [GPO para Domain Controller](#Criar-uma-nova-GPO-para-os-Domain-Controllers)
+    - [GPO para Funcionários](#GPO:-Política-para-Funcionários-das-OUs-HR-e-Finance)   
 <br/>
   <br/>
 
@@ -383,10 +385,11 @@ RAID 5 é ideal para servidores que precisam de **alta disponibilidade** e **pro
 <br/>
 <br/>
   
-### Configuração do Servidor
+## Configuração do Servidor
+<br/><br/>
 
 Primeira coisa a fazer é mudar o nome do Servidor, e atribuir um sufixo DNS. No meu caso dei nome ao Servidor Marcio e o sufixo DNS pilao.pt que irá ser o nome da minha rede.
-<br/>
+<br/><br/>
 <p align="center">  
   <img src="https://github.com/user-attachments/assets/72fe12bf-4eea-4d43-ab64-dc7b2c7fe1dd" height="60%" width="60%"/>
   <img src="https://github.com/user-attachments/assets/9028201a-3669-43c1-8c15-f86ddcb06c56" height="60%" width="60%"/>
@@ -594,6 +597,7 @@ Não é obrigatório criar uma **Reverse Lookup Zone**, mas é altamente recomen
 No Server Manager, clicamos em Tools e selecionamos DNS para abrir o DNS Manager.
 
 No painel esquerdo, clicamos com o botão direito em Reverse Lookup Zones e selecionamos New Zone.
+<br/><br/> 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ff537070-47dd-4c8c-8a0b-ce2637bb0d7b" height="20%" width="20%"/>
   <img src="https://github.com/user-attachments/assets/7dd22b88-298a-46ef-80f7-d6046a35d835" height="60%" width="60%"/>
@@ -675,7 +679,7 @@ Por fim testamos tanto o forward lookup bem como o reverse lookup e confirmamos 
 <br/>
 
 
-### 🧭 Instalação e Configuração do DHCP
+### Instalação e Configuração do DHCP
 <br/><br/> 
 Para começar a instalação do serviço DHCP, abrimos o Server Manager, clicamos em Manage no canto superior direito e escolhemos a opção Add Roles and Features.
 <br/><br/>
@@ -730,7 +734,7 @@ Clicamos em **"Close"** para terminar.
   <br/><br/>
 <p/> 
 
-#### 📦 Criar Escopo DHCP  
+#### Criar Escopo DHCP  
 
 No **Server Manager**, clicamos em **Tools** e depois em **DHCP** para abrir a consola de gestão do serviço DHCP.<br/><br/>
 
