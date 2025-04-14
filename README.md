@@ -71,19 +71,24 @@ Durante o desenvolvimento deste projeto, foram adquiridas e consolidadas as segu
 - Atribuição de permissões e associação entre utilizadores e grupos
 
 ### 🔒 Group Policy Objects (GPOs)
-- Criação de GPOs específicas para o Controlador de Domínio
-- Aplicação de políticas de segurança, auditoria e restrição de acesso remoto
+- Criação de **GPOs específicas** para o **Controlador de Domínio** e outra para **Funcionários.**
+- Aplicação de **políticas de segurança**, passwords, auditoria, restrição de acesso remoto, restrição de acesso ao Painel de Controlo e linha de comandos mais powershell.
 - Utilização de **Security Filtering** para limitar o escopo de aplicação das GPOs
+- Ligação de GPOs a múltiplas OUs
+- **Separação entre políticas** para admins e utilizadores comuns
 - Compreensão do funcionamento das **Default Policies** e boas práticas de gestão
 
 ### 🧑‍💼 Boas práticas de administração
-- Separação de funções por GPO (evitando editar políticas default)
-- Organização lógica de recursos por local e departamento
+- Evitar alterações nas GPOs default (`Default Domain Policy`, `Default Domain Controllers Policy`).
+- Separação de funções por GPO.
+- Organização lógica por local, função e responsabilidade.
+- Aplicação de **políticas coerentes com o princípio do menor privilégio**
 
 <br/> <br/>
-Este projeto serviu como uma excelente base prática para aprofundar conhecimentos em administração de sistemas Windows e estruturação de redes empresariais com Active Directory
+Este projeto serviu como uma excelente base prática para aprofundar conhecimentos em administração de sistemas Windows e estruturação de redes empresariais com Active Directory. Permite-me transpor facilmente estes conhecimentos para ambientes reais em contexto profissional.
 
 ---
+
 <br/> <br/>
 <p align="center">
   <a href="#Índice">
