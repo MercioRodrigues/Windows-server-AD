@@ -1,6 +1,6 @@
 # Windows Server Active Directory
 
-**Em construção!!!!**....... Clientes serão Adicionados e GPOs ligadas as OUs e grupos de utilizadores serão configuradas. Para já GPO para os Domain Controllers foi criada e ligada correctamente. Pode ser consultada na secção  **GPOs Group Policy Objects** do projeto.
+**Em construção!!!!**....... Clients serão Adicionados.
 <br/><br/>
 
 ## Índice
