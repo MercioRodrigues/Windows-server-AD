@@ -922,11 +922,11 @@ Nesta simulação e para efeitos apenas demonstrativos a mesma inclui:
 
 - Criação de 2 OUs representando as delegacoes da empresa em Lisboa e Porto.
 - Criação de 3 OUs dentro da delegacao de Lisboa, `IT` `HR` e `Finance`
-- Criação de grupos dentro da OU **IT**
+- Criação de grupos dentro das OUs **IT** **HR** **Finance**
 - Criação de um utilizador pertencente ao grupo `IT_analysts`
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/57150789-b265-48f3-b632-1510c5d65178" height="80%" width="80%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/1189673a-32a6-48a7-b699-3efa0eb5ebb2" height="80%" width="80%"/><br/><br/>
 </p>
 
 
