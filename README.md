@@ -1271,6 +1271,145 @@ gpresult /r
 <br/>
 
 
+### GPO: Política para Funcionários das OUs HR e Finance
+<br/>
+<br/>
+Nesta secção vamos criar e aplicar uma GPO destinada aos funcionários das OUs **Recursos Humanos (HR)** e **Finance**, que se encontram dentro da estrutura `Cinel_Lisboa`.
+<br/><br/>
+O objetivo é reforçar a segurança e o controlo sobre os postos de trabalho destes departamentos, mantendo um equilíbrio entre restrição e usabilidade, adequado ao seu papel na organização.
+
+<br/><br/>
+### 🔹Criar a nova GPO
+
+<br/><br/>
+No **Group Policy Management**, navegamos até à OU `Finance`, clicamos com o botão direito e escolhemos:
+
+➡️ `Create a GPO in this domain, and Link it here...`
+
+Damos um nome à GPO, por exemplo:
+**GPO – Funcionarios**
+
+> Vamos ligar esta GPO tanto à OU `Finance` como à OU `HR`, já que ambas partilham a mesma política. Basta para isso clicar botão direito em cima da OU HR e clicar em **Link an Existing GPO...**, e escolher a GPO que criamos.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/0d3a61b0-ec7b-43e1-8a44-7386d28cbe25" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/4d3557e2-64a2-4a67-a309-215d4c469e72" height="60%" width="60%"/><br/><br/> 
+</p>
+<br/><br/>
 
 
+### 🔹Aplicar Security Filtering
+<br/><br/>
+Queremos que esta GPO se aplique apenas aos funcionários, e não aos administradores destas OUs.
+<br/><br/>
+No separador **Scope** da GPO:
+
+- **Removemos Authenticated Users**  
+- **Adicionamos os seguintes grupos:**
+  - `HR_Funcionarios`  
+  - `Finance_Funcionarios`
+
+> 🔒 Isto garante que a política só se aplica a quem pertence a esses grupos, mesmo estando nas mesmas OUs onde podem existir administradores.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/1eccc1f0-bd06-4685-9fb2-e5c5c3914665" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+
+
+
+### 🔹Editar a GPO
+<br/><br/>
+Clicamos com o botão direito sobre a GPO criada → **Edit**.
+<br/><br/>
+**Vamos aplicar três políticas fundamentais:**
+
+---
+<br/><br/>
+
+#### 🔐 1. Desativar o Painel de Controlo e as Definições do Windows
+
+**Caminho:**  
+`User Configuration` → `Policies` → `Administrative Templates` → `Control Panel`
+
+- **Policy:** Prohibit access to Control Panel and PC settings  
+- **Definição:** `Enabled`
+
+> Esta política impede que os funcionários alterem configurações sensíveis do sistema, como rede, programas ou definições de conta.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/d7294543-9f84-4fee-bea1-a0c3c75b1e94" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+
+
+### 🛡️ 2. Bloquear o acesso ao CMD e PowerShell
+<br/><br/>
+**Caminho:**  
+`User Configuration → `Policies` → `Administrative Templates` → `System`
+
+<br/><br/>
+**Ativamos as seguintes políticas:**
+
+- **Prevent access to the command prompt** → `Enabled` 
+  - **Sub-opção:** `Yes`
+
+- **Don't run specified Windows applications** → `Enabled` 
+  - **Adicionei:**
+    - `powershell.exe`
+    - `powershell_ise.exe`
+    - `cmd.exe`
+
+> Estas configurações evitam que utilizadores executem comandos que possam comprometer a segurança da estação de trabalho ou outros sistemas.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/dffbae16-66b4-4659-a4a6-072a1cdaa01c" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+
+
+### 🔐 3. Política de Password equilibrada para utilizadores não administrativos
+<br/><br/>
+**Caminho:**  
+`Computer Configuration` → `Policies` → `Windows Settings` → `Security Settings` → `Account Policies` → `Password Policy`
+
+<br/><br/>
+**Configurações aplicadas:**
+
+- **Minimum password length:** `10 caracteres`  
+- **Password must meet complexity requirements:** `Enabled`  
+- **Maximum password age:** `60 dias`  
+- **Minimum password age:** `1 dia`  
+- **Enforce password history:** `10 passwords anteriores`
+
+> Estas definições garantem passwords seguras, mas com exigência moderada — **ideal para utilizadores comuns** - comparada à política criada para Domain Controllers que era mais severa.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/2fedd029-f513-4cc1-a1ef-39117ec37ad2" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
+
+
+**Conclusão:**
+Esta GPO foi pensada para proporcionar um ambiente de trabalho seguro e controlado para os departamentos de **Recursos Humanos** e **Financeiros**, impedindo alterações indesejadas no sistema e limitando o uso de ferramentas avançadas. Ao mesmo tempo, mantém uma política de password alinhada com boas práticas, sem ser excessivamente restritiva.
+
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
