@@ -1360,7 +1360,7 @@ Clicamos com o botão direito sobre a GPO criada → **Edit**.
 ### 🛡️ 2. Bloquear o acesso ao CMD e PowerShell
 <br/><br/>
 **Caminho:**  
-`User Configuration → `Policies` → `Administrative Templates` → `System`
+`User Configuration` → `Policies` → `Administrative Templates` → `System`
 
 <br/><br/>
 **Ativamos as seguintes políticas:**
