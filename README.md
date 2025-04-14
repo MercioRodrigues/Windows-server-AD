@@ -1153,8 +1153,8 @@ No nosso caso, queremos restringir a aplicação **apenas aos Domain Controllers
 <br/><br/><br/><br/>
 
 <p align="center">  
-<img src="https://github.com/user-attachments/assets/4372b027-080a-4a49-b06b-f5f234cae40a" height="60%" width="60%"/><br/><br/>
-<img src="https://github.com/user-attachments/assets/a473ebcf-367c-440a-8aec-be8dd1a5c2f1" height="60%" width="60%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/4372b027-080a-4a49-b06b-f5f234cae40a" height="80%" width="80%"/><br/><br/>
+<img src="https://github.com/user-attachments/assets/a473ebcf-367c-440a-8aec-be8dd1a5c2f1" height="80%" width="80%"/><br/><br/>
 </p>  
 </p>
 
