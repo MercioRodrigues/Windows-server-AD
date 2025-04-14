@@ -17,14 +17,14 @@
   
   - [Instalação e Configuração Active Directory](#Instalação-Active-Directory)
   - [Configuração DNS](#Configuração-do-DNS)
-  - [Instalação e Configuração DHCP](#-Instalação-e-Configuração-do-DHCP)
+  - [Instalação e Configuração DHCP](#Instalação-e-Configuração-do-DHCP)
   - [NIC Teaming](#NIC-Teaming)
 
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
   - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
     - [GPO para Domain Controller](#Criar-uma-nova-GPO-para-os-Domain-Controllers)
-    - [GPO para Funcionários](#GPO:-Política-para-Funcionários-das-OUs-HR-e-Finance)   
+    - [GPO para Funcionários](#gpo-política-para-funcionários-das-ous-hr-e-finance)   
 <br/>
   <br/>
 
@@ -1112,7 +1112,7 @@ Abrimos o **Group Policy Management** através de **Tools**.
 </p>
 <br/><br/>
 
-**Criar uma nova GPO para os Domain Controllers**
+### Criar uma nova GPO para os Domain Controllers
 
 Através da ferramenta **Group Policy Management**, navegamos até `Group Policy Objects`. Clicamos com o botão direito e selecionamos:
 
