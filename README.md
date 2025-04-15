@@ -562,9 +562,30 @@ No Server Manager clicamos em AD DS e o servidor tem um alerta que é necessári
    Nos ecrãs seguintes basta seguir as imagens e carregando em **"Next"** até chegar a última janela onde clicamos em instalar.
    
    <br/><br/>
-   <p align="center">
+<p align="center">
     <img src="https://github.com/user-attachments/assets/9755f87a-a125-4474-825c-c5369a46dc6e" height="60%" width="60%"/>
-    <br/><br/>
+    <br/><br/> 
+    <br/><br/> 
+ <p/>
+
+> ⚠️ **Nota de Boas Práticas – Localização das Pastas (NTDS, Logs, SYSVOL)**
+>
+> Durante a promoção do servidor a **Controlador de Domínio (Domain Controller)**, é possível definir os caminhos para os ficheiros da base de dados do Active Directory:
+>
+> - **NTDS (Database folder)**: contém a base de dados principal do AD.
+> - **Log files folder**: guarda os logs de transações do AD.
+> - **SYSVOL folder**: partilha ficheiros e políticas com outros DCs.
+>
+> Em ambientes de produção, **recomenda-se separar estas pastas em discos diferentes**, por motivos de **performance, segurança e recuperação de falhas**. Por exemplo:
+>
+> - `D:\AD\DB` para NTDS
+> - `E:\AD\Logs` para logs
+> - `F:\SYSVOL` para a pasta SYSVOL (ou mantida em `C:\` para ambientes pequenos)
+>
+> Embora neste projeto de laboratório se tenha usado os caminhos por defeito, é importante seguir estas práticas em ambientes reais.
+
+<br/><br/>
+ <p align="center">
     <img src="https://github.com/user-attachments/assets/2a4460f4-74c9-4fcd-88fa-b6524db0f4ef" height="60%" width="60%"/>
     <br/><br/>
     <img src="https://github.com/user-attachments/assets/51d9df26-b9a0-4fbf-89e9-096e7da9e689" height="60%" width="60%"/>
