@@ -1,4 +1,4 @@
-# Windows Server Active Directory
+# Windows Server com Active Directory
 
 **Em construção!!!!**....... Clients serão Adicionados.
 <br/><br/>
@@ -36,6 +36,7 @@
 
 ## Objectivo do Projecto
  <br/> <br/>
+Faz parte do projecto final que realizei na disciplina de Sistemas operativos Servidor/Cliente (plataforma proprietária). 
 Este projeto tem como objetivo principal **simular a implementação de uma infraestrutura de rede empresarial baseada em Windows Server**, com foco em serviços essenciais como:
 
 - **Active Directory Domain Services (AD DS)**
@@ -43,8 +44,9 @@ Este projeto tem como objetivo principal **simular a implementação de uma infr
 - **DHCP (Dynamic Host Configuration Protocol)**
 - **GPOs (Group Policy Objects)**
 - **NIC Teaming** e **RAID 5** por software
+- **Backup Servidor**
 
-Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede.
+Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede. Foi ainda utilizada uma abordagem com o objetivo de tornar o servidor e todo o seu conteúdo resilientes a falhas. 
 
 O projeto foi documentado passo a passo, com imagens explicativas, e simula um cenário real de uma organização com múltiplas delegações e departamentos. A estrutura organizacional foi refletida na criação de OUs e grupos, com aplicação de GPOs direcionadas, reforçando boas práticas de segurança e administração.
 
