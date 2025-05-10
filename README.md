@@ -944,6 +944,148 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 <br/>
 <br/>
 
+### Server Backup
+<br/><br/>
+
+Neste cenário simulamos a criação de um **backup agendado** usando a ferramenta nativa **Windows Server Backup**, garantindo a recuperação do servidor em caso de falha, ataque ou corrupção de dados. A escolha por backups automáticos permite proteger os dados do controlador de domínio e manter a continuidade dos serviços.
+
+**1. Instalar o Windows Server Backup**<br/>
+Acedemos ao **Server Manager** e instalamos a funcionalidade:
+- `Manage` → `Add Roles and Features`
+- Avançamos até ao menu `Features`
+- Selecionamos **Windows Server Backup** e clicamos em **Install**
+
+Outra forma de instalar é através do Powershell com o comando:
+
+`Install-WindowsFeature Windows-Server-Backup`
+
+> 💡 *Boas práticas:* Esta funcionalidade deve estar sempre instalada em servidores que gerem funções críticas como Active Directory.
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d38b57e4-3ea3-421d-8a59-52e6aaba717e" height="60%" width="60%"/><br/><br/>
+</p>
+
+**2. Criar Agendamento de Backup**<br/>
+Acedemos a:
+- `Tools` → `Windows Server Backup`
+- No painel esquerdo clicamos em **Local Backup**
+
+<br/><br/>
+
+No painel direito encontramos várias opções:
+- **Backup Schedule...** → Inicia o assistente de agendamento de backups automáticos recorrentes.
+- **Backup Once...** → Executa um backup manual imediato, útil para testes ou situações pontuais, ou primeiro backup.
+- **Recover...** → Inicia o processo de recuperação/restauro de ficheiros, volumes ou sistema completo a partir de um backup existente.
+
+<br/><br/>
+No painel direito clicamos em **Backup Schedule...** para iniciar o assistente.
+<br/><br/>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6c0916f8-e58a-4327-8e55-270703b9c02a" height="60%" width="60%"/><br/><br/>
+</p>
+
+**3. Escolher o tipo de backup**<br/>
+Selecionamos:
+- `Full server (recommended)` → Faz backup completo do sistema operativo, aplicações e configuração do AD
+
+Alternativa:
+- `Custom` → Permite escolher volumes, pastas ou ficheiros específicos a incluir no backup. Ideal se houver necessidade de backups parciais ou de áreas muito específicas do sistema.
+
+
+> 💡 *Boas práticas:* Para servidores críticos, optamos por backup total (bare-metal recovery), garantindo recuperação completa mesmo após falha total do disco.
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7cf4f489-493c-4ca1-8965-6baa173eca3d" height="60%" width="60%"/><br/><br/>
+</p>
+
+**4. Definir a frequência do backup**<br/>
+Selecionamos:
+- `Once a day` → Indicamos a hora (por exemplo, 02:00 AM)
+
+> 💡 *Boas práticas:* Backups devem ser realizados fora do horário de expediente para evitar impacto no desempenho. Backups frequentes aumentam a resiliência.
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/40ada34c-61ef-4ae8-8318-339e053a08a2" height="60%" width="60%"/><br/><br/>
+</p>
+
+**5. Escolher o destino**<br/>
+
+Nota: Previamente instalei um novo disco de 20gb so para esta simulação.
+
+Selecionamos onde guardar o backup. O assistente apresenta três opções principais:
+
+**Backup to a dedicated hard disk**
+Utiliza um disco exclusivamente para backups. O disco é formatado e não aparece no File Explorer.
+✅ Seguro – ideal para ambientes reais onde se pretende isolamento total do backup.
+
+**Backup to a volume**
+Permite escolher um volume existente (ex: D:\Backups). O backup é feito para uma pasta acessível no sistema.
+⚠️ Menos seguro – se o volume estiver no mesmo disco físico do sistema, uma falha nesse disco pode inutilizar o backup.
+
+**Backup to a shared network folder**
+Permite enviar o backup para uma partilha de rede (ex: \\backup-server\backups).
+✅ Seguro e resiliente – se a partilha estiver alojada em storage redundante (NAS, RAID), protege contra falhas locais.
+⚠️ Apenas o backup mais recente é mantido, o que limita a capacidade de manter versões históricas sem soluções adicionais.
+
+
+Selecionamos a opção:
+- `Backup to a dedicated hard disk` → Neste exemplo: `Z:\Backups`
+
+> ⚠️ *Nota:* Embora permitido, **não é recomendado** usar o mesmo disco do sistema para guardar o backup.
+
+> 💡 *Boas práticas:*
+> Utilizar **discos ou volumes físicos separados do sistema**, ou destinos **remotos** garante que o backup sobrevive mesmo que o sistema principal falhe.
+> Usar partilhas de rede com autenticação segura e redundância.
+> Monitorizar regularmente a acessibilidade da partilha.
+> **Nunca armazenar o backup no mesmo volume do sistema operativo**
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/81e06d2c-ff15-44c8-9a81-aa5eb1e20e83" height="60%" width="60%"/><br/><br/>
+  <img src="https://github.com/user-attachments/assets/6e58bf56-be23-4b91-abb2-cfdb9f506550" height="60%" width="60%"/><br/><br/>
+</p>
+
+**6. Confirmar e concluir**<br/>
+O assistente mostra um resumo com as configurações escolhidas.
+- Clicamos em **Finish** para concluir
+
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0b7c3ea8-0c4c-4032-a232-55983f2143bb" height="60%" width="60%"/><br/><br/>
+</p>
+<br/>
+ 
+**E pronto o agendamento do backup foi criado para ocorrrer todos os dias às 2am.**
+ 
+<br/><br/>
+
+**7. Primeiro Backup**<br/>
+De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando as mesmas oções do agendamento. Como mostra a imagem.
+
+> 💡 Também é possível realizar backups manuais através da opção **Backup Once** para testes pontuais ou antes de mudanças críticas.
+
+<br/><br/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/87a53e22-9558-4b95-8ac4-eefd9b658a9f" height="60%" width="60%"/><br/><br/>
+</p>
+
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
+
+
 ## Active Directory
 
 Nesta secção vamos simular um cenário de administração de domínio com Active Directory. Iremos criar uma hierarquia organizada de **Organizational Units (OUs)**, **grupos** e **utilizadores**, conforme representado no diagrama abaixo. Este tipo de estrutura permite uma gestão mais eficiente, aplicação de políticas direcionadas (GPOs) e controlo de permissões de forma granular.
