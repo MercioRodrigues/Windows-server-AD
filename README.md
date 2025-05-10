@@ -19,7 +19,7 @@
   - [Configuração DNS](#Configuração-do-DNS)
   - [Instalação e Configuração DHCP](#Instalação-e-Configuração-do-DHCP)
   - [NIC Teaming](#NIC-Teaming)
-- [Agendamento de Server Backup](#Server-Backup)
+- [Server Backup](#Server-Backup)
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
   - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
@@ -1074,6 +1074,7 @@ De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando
   <img src="https://github.com/user-attachments/assets/87a53e22-9558-4b95-8ac4-eefd9b658a9f" height="60%" width="60%"/><br/><br/>
 </p>
 
+<br/><br/>
 <p align="center">
   <a href="#Índice">
     <span>
