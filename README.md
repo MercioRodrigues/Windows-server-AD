@@ -19,7 +19,7 @@
   - [Configuração DNS](#Configuração-do-DNS)
   - [Instalação e Configuração DHCP](#Instalação-e-Configuração-do-DHCP)
   - [NIC Teaming](#NIC-Teaming)
-
+- [Agendamento de Server Backup](#Server-Backup)
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
   - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
@@ -944,7 +944,7 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 <br/>
 <br/>
 
-### Server Backup
+## Server Backup
 <br/><br/>
 
 Neste cenário simulamos a criação de um **backup agendado** usando a ferramenta nativa **Windows Server Backup**, garantindo a recuperação do servidor em caso de falha, ataque ou corrupção de dados. A escolha por backups automáticos permite proteger os dados do controlador de domínio e manter a continuidade dos serviços.
@@ -1014,9 +1014,9 @@ Selecionamos:
 
 **5. Escolher o destino**<br/>
 
-Nota: Previamente instalei um novo disco de 20gb so para esta simulação.
+**Nota:** Previamente instalei um novo disco de 20gb so para esta simulação, poderia ter utilizado o RAID 5 criado mas por motivos de gestão de espaco na altura o raid foi criado com 4 discos de apenas 1gb cada que não são suficientes para a simulação de backup completo do servidor.
 
-Selecionamos onde guardar o backup. O assistente apresenta três opções principais:
+Começamos por selecionar onde guardar o backup. O assistente apresenta três opções principais:
 
 **Backup to a dedicated hard disk**
 Utiliza um disco exclusivamente para backups. O disco é formatado e não aparece no File Explorer.
