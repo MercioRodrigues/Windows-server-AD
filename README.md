@@ -949,7 +949,7 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 
 Neste cenário simulamos a criação de um **backup agendado** usando a ferramenta nativa **Windows Server Backup**, garantindo a recuperação do servidor em caso de falha, ataque ou corrupção de dados. A escolha por backups automáticos permite proteger os dados do controlador de domínio e manter a continuidade dos serviços.
 
-**1. Instalar o Windows Server Backup**<br/>
+### 1. Instalar o Windows Server Backup
 Acedemos ao **Server Manager** e instalamos a funcionalidade:
 - `Manage` → `Add Roles and Features`
 - Avançamos até ao menu `Features`
@@ -966,7 +966,7 @@ Outra forma de instalar é através do Powershell com o comando:
   <img src="https://github.com/user-attachments/assets/d38b57e4-3ea3-421d-8a59-52e6aaba717e" height="60%" width="60%"/><br/><br/>
 </p>
 
-**2. Criar Agendamento de Backup**<br/>
+### 2. Criar Agendamento de Backup
 Acedemos a:
 - `Tools` → `Windows Server Backup`
 - No painel esquerdo clicamos em **Local Backup**
@@ -986,7 +986,7 @@ No painel direito clicamos em **Backup Schedule...** para iniciar o assistente.
   <img src="https://github.com/user-attachments/assets/6c0916f8-e58a-4327-8e55-270703b9c02a" height="60%" width="60%"/><br/><br/>
 </p>
 
-**3. Escolher o tipo de backup**<br/>
+### 3. Escolher o tipo de backup
 Selecionamos:
 - `Full server (recommended)` → Faz backup completo do sistema operativo, aplicações e configuração do AD
 
@@ -1001,7 +1001,7 @@ Alternativa:
   <img src="https://github.com/user-attachments/assets/7cf4f489-493c-4ca1-8965-6baa173eca3d" height="60%" width="60%"/><br/><br/>
 </p>
 
-**4. Definir a frequência do backup**<br/>
+### 4. Definir a frequência do backup
 Selecionamos:
 - `Once a day` → Indicamos a hora (por exemplo, 02:00 AM)
 
@@ -1012,7 +1012,7 @@ Selecionamos:
   <img src="https://github.com/user-attachments/assets/40ada34c-61ef-4ae8-8318-339e053a08a2" height="60%" width="60%"/><br/><br/>
 </p>
 
-**5. Escolher o destino**<br/>
+### 5. Escolher o destino
 
 **Nota:** Previamente instalei um novo disco de 20gb so para esta simulação, poderia ter utilizado o RAID 5 criado mas por motivos de gestão de espaco na altura o raid foi criado com 4 discos de apenas 1gb cada que não são suficientes para a simulação de backup completo do servidor.
 
@@ -1049,7 +1049,7 @@ Selecionamos a opção:
   <img src="https://github.com/user-attachments/assets/6e58bf56-be23-4b91-abb2-cfdb9f506550" height="60%" width="60%"/><br/><br/>
 </p>
 
-**6. Confirmar e concluir**<br/>
+### 6. Confirmar e concluir
 O assistente mostra um resumo com as configurações escolhidas.
 - Clicamos em **Finish** para concluir
 
@@ -1064,7 +1064,7 @@ O assistente mostra um resumo com as configurações escolhidas.
  
 <br/><br/>
 
-**7. Primeiro Backup**<br/>
+### 7. Primeiro Backup
 De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando as mesmas oções do agendamento. Como mostra a imagem.
 
 > 💡 Também é possível realizar backups manuais através da opção **Backup Once** para testes pontuais ou antes de mudanças críticas.
@@ -1073,6 +1073,16 @@ De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando
 <p align="center">
   <img src="https://github.com/user-attachments/assets/87a53e22-9558-4b95-8ac4-eefd9b658a9f" height="60%" width="60%"/><br/><br/>
 </p>
+
+### 🔒 Boas Práticas de Backup
+
+- 🪫 **Evitar o mesmo disco físico** onde está o sistema operativo
+- 🔁 **Agendar backups regulares**, preferencialmente diários
+- 🔄 **Validar a integridade** dos backups com testes periódicos de recuperação
+- 🔐 **Proteger a pasta de backup** contra alterações e acessos não autorizados
+- 📤 **Guardar cópias offsite ou em rede** sempre que possível
+- 🧪 **Realizar backups antes de alterações importantes no sistema** (ex: atualizações, instalação de serviços, etc.)
+
 
 <br/><br/>
 <p align="center">
