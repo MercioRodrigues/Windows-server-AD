@@ -20,6 +20,7 @@
   - [Instalação e Configuração DHCP](#Instalação-e-Configuração-do-DHCP)
   - [NIC Teaming](#NIC-Teaming)
 - [Server Backup](#Server-Backup)
+- [Adicionar Segundo DC](#Adicionar-um-novo-DC-ao-Dominio)
 - [Active Directory](#Active-Directory)
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
   - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
@@ -1098,6 +1099,112 @@ De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando
 <br/>
 <br/>
 
+
+## Adicionar um novo DC ao Dominio
+
+Criei um video explicativo de como adcicionar um novo DC ao domínio. Foi criado para ajudar os colegas da minha turma a perceber e visualizar como proceder. Podem ver o video em baixo, e depois também podem encontrar uma explicacao passo a passo escrita. 
+
+<p align="center">
+https://github.com/user-attachments/assets/7ec7ed01-937f-4bdb-bd00-5be13a90f479
+</p>
+
+
+### Objetivo
+
+Adicionar um segundo **Domain Controller (DC)** melhora a **disponibilidade, redundância e segurança** da infraestrutura do Active Directory.  
+Com dois DCs, mesmo que um falhe ou precise de manutenção, os utilizadores continuam a poder autenticar-se e os serviços essenciais do domínio continuam a funcionar.
+
+### Por que adicionar mais um DC?
+
+- **Alta disponibilidade**: Se um DC falhar, o outro continua a fornecer autenticação e serviços de diretório
+- **Redundância**: Todos os objetos do Active Directory são replicados entre DCs
+- **Segurança**: Reduz o risco de perda de dados do AD em caso de falha física ou ataque
+- **Melhor performance**: Distribui a carga de autenticação e login entre servidores
+
+### 🛠️ Passo a Passo — Promover um segundo DC
+
+### 1. Juntar o novo servidor ao domínio
+
+- Em **System Properties** do novo servidor Windows:
+  - Alteramos o nome para algo como `WIN-DC02`
+  - Juntamos ao domínio já existente (ex: `pilao.pt`)
+  - Reiniciamos o servidor após junção ao domínio
+
+
+
+### 2. Instalar a role “Active Directory Domain Services”
+
+- Abrimos o **Server Manager**
+- Vamos a `Manage` → `Add Roles and Features`
+- Selecionamos:
+  - Role: **Active Directory Domain Services**
+  - Também serão adicionadas automaticamente: **DNS Server** e ferramentas de gestão do AD
+- Concluímos com **Install**
+
+
+
+### 3. Promover o servidor a Domain Controller
+
+- No **Server Manager**, após a instalação, clicamos em:
+  - Notificação amarela no topo → `Promote this server to a domain controller`
+- Selecionamos:
+  - **Add a domain controller to an existing domain**
+  - Introduzimos as credenciais de administrador do domínio
+
+
+
+### 4. Configurar opções de domínio
+
+- Dominio: `pilao.pt`
+- Selecionamos funções a instalar:
+  -  **Domain Name System (DNS) Server**
+  -  **Global Catalog (GC)** (deve estar ativo para permitir logins e pesquisas no AD)
+
+- Criamos uma password de restauração do DSRM (Directory Services Restore Mode)
+
+
+
+### 5. Confirmar caminhos de instalação
+
+- Paths padrão:
+  - Database folder: `C:\Windows\NTDS`
+  - Log files: `C:\Windows\NTDS`
+  - SYSVOL folder: `C:\Windows\SYSVOL`
+
+> 💡 *Boas práticas:* Mantemos os caminhos padrão, exceto em ambientes com discos separados para dados e logs.
+
+
+
+### 6. Rever e instalar
+
+- Revemos todas as definições
+- Iniciamos a instalação
+- O servidor será reiniciado automaticamente após a promoção
+
+
+
+## 🔄 Resultado
+
+Após reinício, o novo servidor está a funcionar como **Controlador de Domínio redundante**, participando na replicação do AD. Agora a infraestrutura está mais resiliente e pronta para escalar.
+
+
+
+### 🧠 Verificação extra:
+
+- Usamos `Active Directory Sites and Services` para verificar replicação
+- Usamos `Repadmin /replsummary` via PowerShell para confirmar o estado da replicação
+
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
 
 ## Active Directory
 
