@@ -946,6 +946,8 @@ O mesmo pode ser feito com os adaptadores da rede interna, oferecendo uma redund
 </p>
 <br/>
 <br/>
+<br/>
+<br/>
 
 ## Server Backup
 <br/><br/>
@@ -1087,6 +1089,8 @@ De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando
 - 🧪 **Realizar backups antes de alterações importantes no sistema** (ex: atualizações, instalação de serviços, etc.)
 
 
+<br/>
+<br/>
 <br/><br/>
 <p align="center">
   <a href="#Índice">
@@ -1117,7 +1121,7 @@ https://github.com/user-attachments/assets/7ec7ed01-937f-4bdb-bd00-5be13a90f479
 Adicionar um segundo **Domain Controller (DC)** melhora a **disponibilidade, redundância e segurança** da infraestrutura do Active Directory.  
 Com dois DCs, mesmo que um falhe ou precise de manutenção, os utilizadores continuam a poder autenticar-se e os serviços essenciais do domínio continuam a funcionar.
 
-### Por que adicionar mais um DC?
+### Porque adicionar mais um DC?
 
 - **Alta disponibilidade**: Se um DC falhar, o outro continua a fornecer autenticação e serviços de diretório
 - **Redundância**: Todos os objetos do Active Directory são replicados entre DCs
@@ -1197,6 +1201,8 @@ Após reinício, o novo servidor está a funcionar como **Controlador de Domíni
 - Usamos `Active Directory Sites and Services` para verificar replicação
 - Usamos `Repadmin /replsummary` via PowerShell para confirmar o estado da replicação
 
+<br/>
+<br/>
 <br/><br/>
 <p align="center">
   <a href="#Índice">
@@ -1206,6 +1212,8 @@ Após reinício, o novo servidor está a funcionar como **Controlador de Domíni
     </span>
   </a>
 </p>
+<br/>
+<br/>
 <br/>
 <br/>
 
