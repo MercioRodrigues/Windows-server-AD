@@ -1103,10 +1103,13 @@ De seguida fiz o primeiro backup manualmente usando a opcao `Backup Once` usando
 ## Adicionar um novo DC ao Dominio
 
 Criei um video explicativo de como adcicionar um novo DC ao domínio. Foi criado para ajudar os colegas da minha turma a perceber e visualizar como proceder. Podem ver o video em baixo, e depois também podem encontrar uma explicacao passo a passo escrita. 
+<br/>
+<br/>
 
-<p align="center">
 https://github.com/user-attachments/assets/7ec7ed01-937f-4bdb-bd00-5be13a90f479
-</p>
+
+<br/>
+<br/>
 
 
 ### Objetivo
