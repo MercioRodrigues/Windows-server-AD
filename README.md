@@ -1716,3 +1716,95 @@ Esta GPO foi pensada para proporcionar um ambiente de trabalho seguro e controla
 <br/>
 <br/>
 
+
+## 🖥️ Adição de Computador ao Domínio com Pre-Staging
+
+Neste cenário, vamos adicionar uma máquina cliente ao domínio `pilao.pt` de forma controlada, utilizando o método **pre-staged** no Active Directory.  
+Este método é ideal para ambientes empresariais com políticas de delegação, GPOs específicas e controlo rigoroso sobre quais máquinas se juntam ao domínio.
+
+### 🔍 Vantagens do método Pre-Staged:
+
+- ✅ **Posicionamento directo na OU correta**, garantindo aplicação imediata de GPOs
+- ✅ **Permite delegar quem pode unir a máquina ao domínio**
+- ✅ **Facilita gestão em ambientes com múltiplos técnicos ou políticas de segurança**
+- ✅ **Melhora a rastreabilidade e controlo de dispositivos no AD**
+
+
+### 1. Criar o objeto de computador no AD
+
+No servidor Controlador de Domínio:
+
+- Abrimos o **Active Directory Users and Computers**
+- Navegamos até à OU `IT` (local onde queremos colocar o novo computador)
+- Botão direito → **New** → **Computer**
+- Nome: `Client1` (por exemplo)
+- Opcional: clicamos em **Change...** para especificar que apenas um utilizador ou grupo pode unir este computador ao domínio, no meu caso selecionei que apenas o **Administrator** pode adicionar este computador ao Domínio.
+
+> 💡 *Boas práticas:* Criar o objeto antecipadamente garante que o computador já está posicionado na OU certa, permitindo que GPOs específicas sejam aplicadas logo após a junção.
+
+
+### 2. Confirmar que o objeto foi criado corretamente
+
+- O objeto aparece dentro da OU `IT`
+- No separador **Member Of**, o computador é automaticamente membro de `Domain Computers` (deve ser mantido)
+- Neste exemplo, **adicionamos também o computador ao grupo `IT_analysts`**, pois é este grupo que tem GPOs aplicadas à função
+
+
+### 3. No cliente Windows — preparar a junção ao domínio
+
+1. Iniciamos o sistema
+2. Antes de unir o computador ao domínio, é fundamental:
+
+- Atribuir ao cliente um endereço IP fixo ou obtido por DHCP interno que é o nosso caso visto que configuramos o DHCP no meu servidor. 
+- Configurar como **servidor DNS principal o IP do DC** (`192.168.1.200`)
+- Verificar a conectividade:
+
+```powershell
+ping pilao.pt
+nslookup pilao.pt
+```
+
+3. De seguida através das **System Properties** (`sysdm.cpl`):
+   - Mudamos o nome da máquina para: `Client1` (igual ao nome criado no AD)
+   - Reiniciamos a máquina.
+   - Depois de reiniciado, voltamos ao **System Properties** Selecionamos a opção **Domínio**, e introduzimos: `pilao.pt`
+4. Quando solicitado, fornecemos credenciais:
+   - Nome de utilizador: `Administrator`  
+   - `Administrator` tem permissão para unir a máquina ao domínio tal como configurado previamente.
+
+
+### 4. Confirmação e reinício
+
+- A máquina confirma a junção ao domínio com uma mensagem de sucesso
+- Reiniciamos o sistema para aplicar as alterações
+
+
+### 5. Verificação pós-junção
+
+**De volta ao AD:**
+
+- Verificamos que o objeto da máquina continua na OU `IT`
+- Confirmamos que:
+  - O nome está correto
+  - O computador está nos grupos esperados (`Domain Computers`, `IT_analysts`)
+
+**No cliente:**
+
+- Podemos iniciar sessão com qualquer utilizador do domínio (ex: João Silva)
+- A GPO associada a `IT_analysts` será aplicada automaticamente
+
+
+### 💡 Boas práticas:
+
+- Nunca remover computadores do grupo `Domain Computers` — é utilizado internamente pelo AD
+- Pre-staging de objetos permite maior controlo e organização
+- Garantir que o nome da máquina no cliente corresponde exatamente ao nome do objeto criado no AD
+- Aplicar GPOs com base em **OUs e grupos de segurança**, para maior flexibilidade
+
+
+
+
+
+
+
+
