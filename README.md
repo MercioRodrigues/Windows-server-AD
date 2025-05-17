@@ -25,7 +25,8 @@
   - [Criação de OUs Grupos e utilizadores](#Criação-de-OUs-Grupos-e-utilizadores)
   - [GPOs (Group Policy Objects)](#GPOs-Group-Policy-Objects)
     - [GPO para Domain Controller](#Criar-uma-nova-GPO-para-os-Domain-Controllers)
-    - [GPO para Funcionários](#gpo-política-para-funcionários-das-ous-hr-e-finance)   
+    - [GPO para Funcionários](#gpo-política-para-funcionários-das-ous-hr-e-finance)
+ - [Adição de Client ao Domínio](#%EF%B8%8F-adição-de-computador-ao-domínio-com-pre-staging)
 <br/>
   <br/>
 
