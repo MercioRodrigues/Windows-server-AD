@@ -33,8 +33,9 @@
 ## Diagrama da Rede
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/26b1c7e3-a83e-4676-b7d7-92dcb07bcf9a" width="700"/>
+  <img src="https://github.com/user-attachments/assets/2fa590e4-0909-47b2-8035-255fbfa42519" width="700"/>
 </p>
+
 
 ## Objectivo do Projecto
  <br/> <br/>
