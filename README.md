@@ -1730,6 +1730,7 @@ Este método é ideal para ambientes empresariais com políticas de delegação,
 - ✅ **Facilita gestão em ambientes com múltiplos técnicos ou políticas de segurança**
 - ✅ **Melhora a rastreabilidade e controlo de dispositivos no AD**
 
+<br/><br/>
 
 ### 1. Criar o objeto de computador no AD
 
@@ -1741,14 +1742,29 @@ No servidor Controlador de Domínio:
 - Nome: `Client1` (por exemplo)
 - Opcional: clicamos em **Change...** para especificar que apenas um utilizador ou grupo pode unir este computador ao domínio, no meu caso selecionei que apenas o **Administrator** pode adicionar este computador ao Domínio.
 
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/27787cbc-4dd4-45d5-926e-9d53b6b0e906" height="60%" width="60%"/><br/><br/>
+  <br/><br/>
+<img src="https://github.com/user-attachments/assets/7795b9f3-5c0c-4d43-9cb0-9c896fb32d7e" height="60%" width="60%"/><br/><br/>  
+</p>
+<br/><br/>
+
 > 💡 *Boas práticas:* Criar o objeto antecipadamente garante que o computador já está posicionado na OU certa, permitindo que GPOs específicas sejam aplicadas logo após a junção.
 
+<br/><br/>
 
 ### 2. Confirmar que o objeto foi criado corretamente
 
 - O objeto aparece dentro da OU `IT`
 - No separador **Member Of**, o computador é automaticamente membro de `Domain Computers` (deve ser mantido)
-- Neste exemplo, **adicionamos também o computador ao grupo `IT_analysts`**, pois é este grupo que tem GPOs aplicadas à função
+- Neste exemplo, **adicionamos também o computador ao grupo `IT_analysts`**, pois é este grupo que tem GPOs aplicadas à função.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/020933c2-a846-4c3a-8781-06329152c9c4" height="60%" width="60%"/><br/><br/>
+</p>
+<br/><br/>
 
 
 ### 3. No cliente Windows — preparar a junção ao domínio
@@ -1764,14 +1780,32 @@ No servidor Controlador de Domínio:
 ping pilao.pt
 nslookup pilao.pt
 ```
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/df105431-82bf-45fa-9c38-77963431a078" height="60%" width="60%"/><br/><br/>
+  <br/><br/>
+<img src="https://github.com/user-attachments/assets/a7041b24-bf50-4e90-96c2-cb15f943ca7c" height="60%" width="60%"/><br/><br/>  
+</p>
+<br/><br/>
 
 3. De seguida através das **System Properties** (`sysdm.cpl`):
    - Mudamos o nome da máquina para: `Client1` (igual ao nome criado no AD)
    - Reiniciamos a máquina.
    - Depois de reiniciado, voltamos ao **System Properties** Selecionamos a opção **Domínio**, e introduzimos: `pilao.pt`
+<br/><br/>   
+
 4. Quando solicitado, fornecemos credenciais:
    - Nome de utilizador: `Administrator`  
    - `Administrator` tem permissão para unir a máquina ao domínio tal como configurado previamente.
+
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/a9c39717-e8bd-4138-8d00-2a1b8c6ba8d1" height="60%" width="60%"/><br/><br/>
+  <br/><br/>
+<img src="https://github.com/user-attachments/assets/a8a3aeba-f37e-451c-b6ce-91f57dfc3c45" height="60%" width="60%"/><br/><br/>  
+</p>
+<br/><br/>
+
 
 
 ### 4. Confirmação e reinício
@@ -1779,6 +1813,11 @@ nslookup pilao.pt
 - A máquina confirma a junção ao domínio com uma mensagem de sucesso
 - Reiniciamos o sistema para aplicar as alterações
 
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/3fac6b9f-182e-4038-b937-80f3f1f39158" height="60%" width="60%"/><br/><br/>  
+</p>
+<br/><br/>
 
 ### 5. Verificação pós-junção
 
@@ -1794,13 +1833,28 @@ nslookup pilao.pt
 - Podemos iniciar sessão com qualquer utilizador do domínio (ex: João Silva)
 - A GPO associada a `IT_analysts` será aplicada automaticamente
 
+<br/><br/>
+<p align="center"> 
+<img src="https://github.com/user-attachments/assets/338eca97-14e8-4ac3-b108-bd8ffe12e6b9" height="60%" width="60%"/><br/><br/>
+<br/><br/>   
+<img src="https://github.com/user-attachments/assets/7525ca46-01ba-483c-bb6b-ee8147079ef2" height="60%" width="60%"/><br/><br/>   
+</p>
+<br/><br/>
 
-### 💡 Boas práticas:
 
-- Nunca remover computadores do grupo `Domain Computers` — é utilizado internamente pelo AD
-- Pre-staging de objetos permite maior controlo e organização
-- Garantir que o nome da máquina no cliente corresponde exatamente ao nome do objeto criado no AD
-- Aplicar GPOs com base em **OUs e grupos de segurança**, para maior flexibilidade
+<br/><br/>
+<p align="center">
+  <a href="#Índice">
+    <span>
+      <img src="https://i.imgur.com/l7YsCsM.png" alt="Ícone Início" height="28" style="vertical-align: middle;">
+      <img src="https://img.shields.io/badge/Início-4CAF50?style=for-the-badge&logoColor=white" alt="Início" style="vertical-align: middle;">
+    </span>
+  </a>
+</p>
+<br/>
+<br/>
+
+
 
 
 
