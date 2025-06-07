@@ -2,7 +2,7 @@
 <br>
 <br>
 
-## 🎯 Objetivo
+## Objetivo
 
 Este projeto tem como objetivo simular uma cadeia de ataque realista em um ambiente de domínio Windows e sem deteção por parte do Windows Defender, explorando diferentes etapas de comprometimento típicas de atacantes reais. A simulação foi conduzida em um laboratório controlado, permitindo a análise detalhada de cada fase da intrusão.
 
