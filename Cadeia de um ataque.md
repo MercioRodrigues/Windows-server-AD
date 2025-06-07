@@ -89,11 +89,11 @@ rlwrap nc -lvnp 443
 
 O código PowerShell embutido na macro estabelece uma conexão TCP reversa para o endereço do atacante (192.168.1.205) na porta 443. Após a conexão, o script entra num loop que:
 
-1. Recebe comandos enviados pelo atacante
+**1.** Recebe comandos enviados pelo atacante
 
-2. Executa os comandos localmente com Invoke-Expression (iex)
+**2.** Executa os comandos localmente com Invoke-Expression (iex)
 
-3. Envia a saída da execução de volta através do canal TCP
+**3.** Envia a saída da execução de volta através do canal TCP
 
 Este tipo de técnica é comum em ataques fileless, pois evita gravações em disco e contorna políticas de execução do PowerShell.
 
