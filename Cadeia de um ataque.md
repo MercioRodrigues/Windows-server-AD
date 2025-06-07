@@ -76,6 +76,7 @@ Enquanto o documento era aberto pela vítima, o atacante encontrava-se à escuta
 
 ```bash
 rlwrap nc -lvnp 443
+```
 
 <br/>
   <br/>
