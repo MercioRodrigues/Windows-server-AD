@@ -27,6 +27,8 @@
     - [GPO para Domain Controller](#Criar-uma-nova-GPO-para-os-Domain-Controllers)
     - [GPO para Funcionários](#gpo-política-para-funcionários-das-ous-hr-e-finance)
  - [Adição de Client ao Domínio](#%EF%B8%8F-adição-de-computador-ao-domínio-com-pre-staging)
+<br/><br/>
+-[Cadeia de um ataque](#https://github.com/MercioRodrigues/Windows-server-AD/blob/main/Cadeia%20de%20um%20ataque.md)
 <br/>
   <br/>
 
