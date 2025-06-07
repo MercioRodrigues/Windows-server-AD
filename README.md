@@ -1,6 +1,6 @@
 # Windows Server com Active Directory
 
-**Em construção!!!!**....... Clients serão Adicionados.
+**Em construção!!!!**.......
 <br/><br/>
 
 ## Índice
