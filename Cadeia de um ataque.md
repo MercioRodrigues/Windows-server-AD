@@ -190,7 +190,7 @@ grep -Ei "ps1|bat|cmd|exe" $(cat SYSTEM_tasks.txt) | grep -i "task to run"
 <p/>
 
 
-Foi identificado o seguinte comando crítico:
+Foi identificado a seguinte tarefa crítica:
 
 ```text
 task_012.txt:Task To Run: powershell.exe -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -File C:\TempTask\svc_launcher.ps1
