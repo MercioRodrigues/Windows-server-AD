@@ -4,7 +4,10 @@
 
 ## Objetivo
 
-Esta parte do projeto é a continuação do projecto anterior Windows Server AD em que foi construido em laboratório um ambiente Active Directory, foram também usadas ferramentas que ja tinham sido preparadas num outro projecto que realizei anteriormente, SOC SOAR Project. <br> Esta parte tem como objetivo simular uma cadeia de ataque realista em um ambiente de domínio Windows e sem deteção por parte do Windows Defender, explorando diferentes etapas de comprometimento típicas de atacantes reais. A simulação foi conduzida em um laboratório controlado, permitindo a análise detalhada de cada fase da intrusão.
+Esta parte do projeto é a continuação do projeto anterior [Windows Server AD](https://github.com/MercioRodrigues/Windows-server-AD/blob/main/README.md), no qual foi construído, em laboratório, um ambiente Active Directory. Foram também utilizadas ferramentas que já tinham sido preparadas em outro projeto que realizei anteriormente, o [SOC SOAR Project](https://github.com/MercioRodrigues/SOC-SOAR-Project), nomeadamente o **Wazuh**.  
+<br>  
+Esta fase tem como objetivo simular uma cadeia de ataque realista em um ambiente de domínio Windows, sem detecção por parte do Windows Defender, explorando diferentes etapas de comprometimento típicas de atacantes reais. A simulação foi conduzida em um laboratório controlado, permitindo, posteriormente, a análise detalhada de cada fase da intrusão.
+
 
 A cadeia de ataque envolve as seguintes etapas:
 
