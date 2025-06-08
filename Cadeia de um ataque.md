@@ -42,7 +42,7 @@ Obter uma **shell reversa PowerShell** no sistema da vítima sem levantar suspei
 
 ---
 
-### 📄 Conteúdo da Macro
+### Conteúdo da Macro
 
 A macro maliciosa foi inserida no Editor do Visual Basic para Aplicações, dentro do módulo `NewMacros`. O código é dividido em duas partes:
 
@@ -297,7 +297,7 @@ A utilização do `winPEAS` permitiu descobrir a vulnerabilidade, a análise de 
 <br/>
 <br/>
 
-## Fase 3 – Enumeração Pós-Escalação
+## 🧪 Fase 3 – Enumeração Pós-Escalação
 
 Após escalar privilégios locais até `NT AUTHORITY\SYSTEM`, o objetivo passou a ser:
 
