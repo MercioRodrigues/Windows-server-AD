@@ -14,9 +14,9 @@ Esta fase tem como objetivo simular uma cadeia de ataque realista em um ambiente
 
 A cadeia de ataque envolve as seguintes etapas:
 
-1. **Acesso inicial**: comprometimento de uma estação de trabalho através da execução de uma macro maliciosa em um documento do Word.
-2. **Escalada de privilégios local**: obtenção de privilégios SYSTEM explorando uma tarefa agendada mal configurada.
-3. **Enumeração do dominio**: Enumerar o ambiente local e de domínio e avaliar a viabilidade de extrair as credenciais da memória (lsass.exe).
+1. [Acesso inicial:](#-fase-1---acesso-inicial-via-macro-em-documento-word-phishing) comprometimento de uma estação de trabalho através da execução de uma macro maliciosa em um documento do Word.
+2. [Escalada de privilégios local:](#-fase-2--escalada-de-privil%C3%A9gios-local) obtenção de privilégios SYSTEM explorando uma tarefa agendada mal configurada.
+3. [Enumeração do dominio:](#-fase-3--enumera%C3%A7%C3%A3o-p%C3%B3s-escala%C3%A7%C3%A3o) Enumerar o ambiente local e de domínio e avaliar a viabilidade de extrair as credenciais da memória (lsass.exe).
 4. **Exfiltração de credenciais e Movimentação lateral**: extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
  
 
