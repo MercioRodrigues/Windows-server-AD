@@ -538,3 +538,5 @@ Com privilégios de `NT AUTHORITY\SYSTEM` e verificação de que estamos como **
 
 
 
+
+
