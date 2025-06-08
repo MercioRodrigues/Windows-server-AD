@@ -16,8 +16,9 @@ A cadeia de ataque envolve as seguintes etapas:
 
 1. **Acesso inicial**: comprometimento de uma estação de trabalho através da execução de uma macro maliciosa em um documento do Word.
 2. **Escalada de privilégios local**: obtenção de privilégios SYSTEM explorando uma tarefa agendada mal configurada.
-3. **Exfiltração de credenciais**: extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM.
-4. **Movimentação lateral**: acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
+3. **Enumeração do dominio**: Enumerar o ambiente local e de domínio e avaliar a viabilidade de extrair as credenciais da memória (lsass.exe).
+4. **Exfiltração de credenciais e Movimentação lateral**: extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
+ 
 
 **Análise pós-ataque**: utilização de ferramentas de monitorização e deteção como **Wazuh** e **Wireshark** para investigar a intrusão e compreender os rastros deixados nos logs do sistema e na rede.
 
@@ -292,4 +293,248 @@ A escalada foi bem-sucedida! O atacante obteve **acesso completo com privilégio
 A má configuração de permissões num script chamado por uma tarefa agendada como SYSTEM foi explorada com sucesso para **escalar privilégios localmente**.
 
 A utilização do `winPEAS` permitiu descobrir a vulnerabilidade, a análise de permissões confirmou a possibilidade de exploração, e a substituição do script permitiu ganhar **controlo total do sistema**, com acesso **persistente**.
+
+<br/>
+<br/>
+
+## Fase 3 – Enumeração Pós-Escalação
+
+Após escalar privilégios locais até `NT AUTHORITY\SYSTEM`, o objetivo passou a ser:
+
+- **Enumerar o ambiente local e de domínio**  
+- **Avaliar a viabilidade de extrair credenciais da memória (`lsass.exe`)**
+
+---
+
+### 1. Verificar se a máquina está num domínio
+
+```powershell
+systeminfo | findstr /B /C:"Domain"
+```
+
+**Resultado:**
+
+```
+Domain: pilao.pt
+```
+
+✅ Isto confirma que a máquina está unida ao domínio `pilao.pt`. Esse facto é importante porque credenciais de **utilizadores do domínio** podem estar armazenadas em memória, especialmente se fizeram login interativo recentemente.
+
+---
+
+### 2. Obter o hostname da máquina comprometida
+
+```powershell
+hostname
+```
+
+**Resultado:**
+
+```
+Client1
+```
+
+Esta informação ajuda a identificar o endpoint dentro da infraestrutura.
+
+---
+
+### 3. Listar utilizadores locais e de domínio
+
+```powershell
+wmic useraccount get name,sid
+```
+
+🔍 Procura por utilizadores olhando para o `RID`:
+
+- `500` → Administrator  
+- `502` → krbtgt (conta usada pelo Kerberos)  
+- `1000+` → contas personalizadas  
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/b1e32638-eeb0-4172-b39f-899b302a4ac4" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+```powershell
+net group "Domain Admins" /domain
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/4a37c0e3-06c1-47da-bbc6-865846bea87b" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+**Resultado:**
+
+```
+Group name     Domain Admins
+Members:
+  Administrator
+```
+
+✅ A presença do utilizador `Administrator` no grupo `Domain Admins` confirma que este tem **controle total** sobre o domínio.
+
+---
+
+### 4. Ver permissões
+
+```powershell
+whoami /all
+```
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/023e075c-27b1-4029-a32c-29dceddff2b9" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+**Resultados importantes:**
+
+User: NT AUTHORITY\SYSTEM
+
+Groups:
+- BUILTIN\Administrators
+- NT AUTHORITY\SERVICE
+- NT AUTHORITY\Authenticated Users
+- NT AUTHORITY\This Organization
+- LOCAL
+- NT SERVICE\Schedule
+
+Previlégios:
+**SeDebugPrivilege:** ✅ Enabled
+
+✅ Isto confirma:
+- Estamos como NT **AUTHORITY\SYSTEM**
+- Com **privilégios máximos no domínio**
+- E com o privilégio **SeDebugPrivilege**, necessário para ler a memória de lsass.exe
+
+
+
+
+🚨 O privilégio `SeDebugPrivilege` permite ler a memória de processos de outros utilizadores, inclusive do `lsass.exe`.
+
+---
+
+### 5. Enumerar os Controladores de Domínio (Domain Controllers)
+
+```powershell
+nltest /dclist:pilao.pt
+```
+
+**Resultado:**
+
+```
+Marcio.pilao.pt [PDC]
+```
+<br/>
+<br/>
+
+**Comando**
+
+```powershell
+nslookup -type=SRV _ldap._tcp.dc._msdcs.pilao.pt
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/fa036c25-c1b6-4673-98c9-df17860bed9d" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+**Resultado:**
+
+```
+_ldap._tcp.dc._msdcs.pilao.pt   SRV service location:
+    svr hostname = marcio.pilao.pt
+    svr hostname = server2.pilao.pt
+
+marcio.pilao.pt -> 192.168.1.200  
+server2.pilao.pt -> 192.168.1.201
+```
+
+✅ Identificar os Domain Controllers é essencial para **movimento lateral**.
+
+---
+
+### 6. Verificar partilhas administrativas no domínio
+
+```powershell
+net view \\pilao.pt
+```
+
+**Resultado:**
+
+```
+NETLOGON    Disk    Logon server share
+SYSVOL      Disk    Logon server share
+```
+
+**Estes são diretórios críticos do AD, usados para scripts de login e políticas de grupo (GPOs).** 
+
+---
+
+### 7. Testar acesso ao C$ (Admin Share) no DC
+
+```powershell
+Start-Process cmd -ArgumentList '/c net use \\pilao.pt\C$' -WindowStyle Hidden
+```
+
+```powershell
+Get-SmbConnection | Select-Object -Property ShareName, ServerName, UserName
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/d0b0f854-9e95-483a-97ec-383e0e512ea7" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+**Resultado:**
+
+```
+ShareName ServerName       UserName
+--------- -----------      --------
+IPC$      Marcio.pilao.pt  PILAO\CLIENT1$
+C$        pilao.pt         PILAO\Administrator
+```
+
+✅ Isto confirma que a shell atual tem acesso **total** ao sistema de ficheiros do DC via `C$` — partilha administrativa para administradores.
+
+---
+
+### Implicações para o Atacante
+
+Com estes dados confirmados:
+
+- ✅ Shell com privilégios de **Domain Admin**  
+- ✅ Acesso SMB autenticado ao Domain Controller  
+- ✅ Capacidade para:   
+  - Exfiltrar credenciais  
+  - Iniciar **movimento lateral** (pivoting) ou **persistência em domínio**
+
+---
+
+### ✅ Conclusão da Fase 3
+
+Com privilégios de `NT AUTHORITY\SYSTEM` e verificação de que estamos como **Domain Admin**, foi possível confirmar que o sistema comprometido é uma excelente base para:
+
+- Extração de credenciais da memória (`lsass.exe`).
+- Acesso irrestrito ao domínio.  
+
+
+
 
