@@ -41,19 +41,34 @@
 
 ## Objectivo do Projecto
  <br/> <br/>
-Faz parte do projecto final que realizei na disciplina de Sistemas operativos Servidor/Cliente (plataforma proprietária). 
-Este projeto tem como objetivo principal **simular a implementação de uma infraestrutura de rede empresarial baseada em Windows Server**, com foco em serviços essenciais como:
+Este projeto foi desenvolvido como parte da disciplina de Sistemas Operativos Servidor/Cliente, com o objetivo de construir e explorar uma infraestrutura corporativa baseada em **Windows Server 2019**. A iniciativa dividiu-se em duas grandes fases:
 
-- **Active Directory Domain Services (AD DS)**
-- **DNS (Domain Name System)**
-- **DHCP (Dynamic Host Configuration Protocol)**
-- **GPOs (Group Policy Objects)**
-- **NIC Teaming** e **RAID 5** por software
-- **Backup Servidor**
+1. **Implementação e administração da infraestrutura empresarial:**
+   - Instalação e configuração de um **Domain Controller** com serviços essenciais como:
+     - Active Directory Domain Services (AD DS)
+     - DNS (Domain Name System)
+     - DHCP (Dynamic Host Configuration Protocol)
+     - Group Policy Objects (GPOs)
+     - RAID 5 e NIC Teaming por software
+     - Rotinas de Backup
+   - Simulação de uma empresa com múltiplos departamentos, utilizadores e políticas de segurança.
+
+2. **Simulação de um Ataque Cibernético Realista:**
+   - Execução de uma **cadeia de ataque**, simulando as ações de um adversário em ambiente de laboratório.
+   - Técnicas utilizadas:
+     - Acesso inicial a um client via macro maliciosa (phishing)
+     - Escalada de privilégios local via tarefa agendada mal configurada
+     - Enumeração de domínio e verificação de controlo
+     - Dump do processo `lsass.exe` com **NativeDump**
+     - Análise offline com **Mimikatz**
+     - Execução de Pass-the-Hash com **wmiexec (Impacket)**
+
 
 Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede. Foi ainda utilizada uma abordagem com o objetivo de tornar o servidor e todo o seu conteúdo resilientes a falhas. 
-
+<br/> <br/>
 O projeto foi documentado passo a passo, com imagens explicativas, e simula um cenário real de uma organização com múltiplas delegações e departamentos. A estrutura organizacional foi refletida na criação de OUs e grupos, com aplicação de GPOs direcionadas, reforçando boas práticas de segurança e administração.
+<br/> <br/>
+A integração entre o ambiente corporativo legítimo e a simulação ofensiva permitiu visualizar a superfície de ataque e os riscos reais associados a configurações frágeis, culminando numa shell com privilégios **Domain Admin**.
 
 ---
 <br/> <br/>
@@ -66,11 +81,12 @@ Durante o desenvolvimento deste projeto, foram adquiridas e consolidadas as segu
 - Criação de máquinas virtuais no **VirtualBox**
 - Configuração de **placas de rede** (NAT e Interna)
 - Implementação de **RAID 5** por software para redundância
+- Implementação de **NIC Teaming** para redundância
+- Backup programado do servidor
 
 ### 🧩 Administração de Windows Server
 - Instalação e promoção do servidor como **Domain Controller**
 - Gestão e configuração de serviços de rede: **DNS**, **DHCP**, **AD DS**
-- Configuração de **NIC Teaming** para redundância de rede
 
 ### 📁 Active Directory
 - Criação de **OUs** (Organizational Units) para simular estrutura empresarial
@@ -91,8 +107,30 @@ Durante o desenvolvimento deste projeto, foram adquiridas e consolidadas as segu
 - Organização lógica por local, função e responsabilidade.
 - Aplicação de **políticas coerentes com o princípio do menor privilégio**
 
+### 🔐 Segurança e Análise Pós-Comprometimento
+
+- Execução de **simulações de intrusão** em ambiente de domínio
+- Enumeração de Domínio
+- Identificação de tarefas vulneráveis com **winPEAS**
+- Exploração de **tarefa agendada mal configurada**
+- Uso de PowerShell para **fileless persistence** e evasão
+- Dump furtivo da memória com **NativeDump (Golang flavour)**
+- Análise offline com **Mimikatz** para extração de credenciais
+- Execução remota com **Pass-The-Hash** usando **wmiexec.py**
+
+### 🛡️ Red Team vs Blue Team (Análise de Logs e Deteção)
+
+- Recolha e visualização de eventos com o **Wazuh**
+- Monitorização de tráfego com **Wireshark**
+- Identificação de **Indicadores de Comprometimento (IoCs)**
+- Simulação de resposta a incidente pós-intrusão
+
 <br/> <br/>
 Este projeto serviu como uma excelente base prática para aprofundar conhecimentos em administração de sistemas Windows e estruturação de redes empresariais com Active Directory. Permite-me transpor facilmente estes conhecimentos para ambientes reais em contexto profissional.
+<br/> <br/>
+Este projeto não só consolidou conhecimentos em administração de sistemas Windows e infraestruturas empresariais, como também introduziu práticas de segurança ofensiva e deteção de intrusão.
+
+⚠️ **Importante:** Todas as simulações ofensivas foram conduzidas em laboratório isolado para fins estritamente educativos.
 
 ---
 
@@ -1858,8 +1896,10 @@ nslookup pilao.pt
 <br/>
 
 
-
-
+#### Com o ambiente Active directory operacional passei a execução de uma simulação de ataque em que posteriormente foi efectuada uma análise pós-intrusão com ferramentas Blue Team. Pode continuar a seguir o meu projecto através do link em baixo:
+<br/>
+<br/>
+[Cadeia de um ataque e Análise Pós-intrusão](https://github.com/MercioRodrigues/Windows-server-AD/blob/main/Cadeia%20de%20um%20ataque.md)
 
 
 
