@@ -41,7 +41,7 @@
 
 ## Objectivo do Projecto
  <br/> <br/>
-Este projeto foi desenvolvido como parte da disciplina de Sistemas Operativos Servidor/Cliente, com o objetivo de construir e explorar uma infraestrutura corporativa baseada em **Windows Server 2019**. A iniciativa dividiu-se em duas grandes fases:
+Este projeto foi desenvolvido como parte do curso CET em Cibersegurança, disciplina Sistemas Operativos Servidor/Cliente, com o objetivo de construir e explorar uma infraestrutura corporativa baseada em **Windows Server 2019**. A iniciativa dividiu-se em duas grandes fases:
 
 1. **Implementação e administração da infraestrutura empresarial:**
    - Instalação e configuração de um **Domain Controller** com serviços essenciais como:
