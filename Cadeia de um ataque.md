@@ -17,7 +17,7 @@ A cadeia de ataque envolve as seguintes etapas:
 1. [Acesso inicial:](#-fase-1---acesso-inicial-via-macro-em-documento-word-phishing) comprometimento de uma estação de trabalho através da execução de uma macro maliciosa em um documento do Word.
 2. [Escalada de privilégios local:](#-fase-2--escalada-de-privil%C3%A9gios-local) obtenção de privilégios SYSTEM explorando uma tarefa agendada mal configurada.
 3. [Enumeração do dominio:](#-fase-3--enumera%C3%A7%C3%A3o-p%C3%B3s-escala%C3%A7%C3%A3o) Enumerar o ambiente local e de domínio e avaliar a viabilidade de extrair as credenciais da memória (lsass.exe).
-4. [Exfiltração de credenciais e Acesso ao DC:](#fase-4--extra%C3%A7%C3%A3o-de-credenciais-via-dump-de-lsass-com-nativedump) extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
+4. [Exfiltração de credenciais e Acesso ao DC:](#fase-4--extra%C3%A7%C3%A3o-de-credenciais-e-acesso-ao-dc) extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
  
 
 **Análise pós-ataque**: utilização de ferramentas de monitorização e deteção como **Wazuh** e **Wireshark** para investigar a intrusão e compreender os rastros deixados nos logs do sistema e na rede.
@@ -540,7 +540,7 @@ Com privilégios de `NT AUTHORITY\SYSTEM` e verificação de que estamos como **
 <br/>
     <br/>
 
-## 🧪Fase 4 — Extração de Credenciais via Dump de LSASS com NativeDump
+## 🧪Fase 4 — Extração de Credenciais e Acesso ao DC
 
 Após a obtenção de privilégios SYSTEM, o objetivo passou a ser capturar credenciais da memória do processo `lsass.exe`, de forma furtiva e sem acionar antivírus. Isso permitiu acesso a contas privilegiadas de domínio para movimentações laterais.
 
