@@ -1899,6 +1899,7 @@ nslookup pilao.pt
 #### Com o ambiente Active directory operacional passei a execução de uma simulação de ataque em que posteriormente foi efectuada uma análise pós-intrusão com ferramentas Blue Team. Pode continuar a seguir o meu projecto através do link em baixo:
 <br/>
 <br/>
+
 [Cadeia de um ataque e Análise Pós-intrusão](https://github.com/MercioRodrigues/Windows-server-AD/blob/main/Cadeia%20de%20um%20ataque.md)
 
 
