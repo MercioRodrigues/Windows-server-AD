@@ -692,7 +692,7 @@ python3 ~/impacket/examples/wmiexec.py PILAO/Administrator@192.168.1.200 -hashes
 <p align="center">
 <br/>
   <br/>
-  <img src="https://github.com/user-attachments/assets/b990afa8-37c4-4eca-9e0f-9f8b189664e5" height="60%" width="60%"/>
+  <img src="https://github.com/user-attachments/assets/b990afa8-37c4-4eca-9e0f-9f8b189664e5" height="100%" width="100%"/>
     <br/>
     <br/>
   <p/>
