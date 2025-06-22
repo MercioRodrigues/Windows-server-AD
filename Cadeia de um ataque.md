@@ -738,7 +738,6 @@ O atacante agora detém controlo completo sobre o domínio:
 
 Detectar tentativas de execução remota sem ficheiros (fileless), explorando macros em documentos do Office e invocação de comandos PowerShell com técnicas de evasão.
 
----
 <br/>
 <br/>
 
