@@ -32,6 +32,142 @@ O objetivo final é obter não apenas uma shell no controlador de domínio, mas 
 <br>
 <br>
 
+## Preparação do Wazuh
+
+Antes de começar o ataque e para e para que o próprio Wazuh consiga gerar os alertas pretendidos é necessário criar regras customizadas. 
+Criei as seguintes regras no ficheiro `local_rules.xml` do wazuh.
+
+```
+<group name="windows,powershell,">
+
+<rule id="100206" level="5">
+    <if_sid>60009</if_sid>
+    <field name="win.eventdata.contextInfo" type="pcre2">(?i)Invoke-WebRequest|IWR.*-url|IWR.*-InFile</field>
+    <description>Invoke Webrequest executed, possible download cradle detected.</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+
+<rule id="115001" level="10">
+  <if_group>windows</if_group>
+  <field name="win.eventdata.ruleName" type="pcre2" >technique_id=T1053,technique_name=Scheduled Task</field>
+  <description>A Newly Scheduled Task has been Detected on $(win.system.computer)</description>
+  <mitre>
+    <id>T1053</id>
+  </mitre>
+</rule>
+
+ <rule id="100504" level="13">
+    <if_group>windows</if_group>
+    <field name="win.eventdata.scriptBlockText" type="pcre2">(?i)tcpclient</field>
+    <description>Powershell created a new TCPClient – possible reverse shell.</description>
+  </rule>
+
+<rule id="100510" level="1">
+  <if_sid>60009</if_sid>
+  <field name="win.system.eventID">^4103$</field>
+  <field name="win.eventdata.contextInfo" type="pcre2">(?i)TcpClient</field>
+  <description>PowerShell TcpClient activity detected (Event ID 4103)</description>
+  <mitre>
+    <id>T1059.001</id>
+    <id>T1105</id>
+  </mitre>
+</rule>
+
+<rule id="100520" level="1">
+  <if_sid>91801</if_sid>
+  <field name="win.system.eventID">^4100$</field>
+  <field name="win.eventdata.contextInfo" type="pcre2">(?i)TcpClient</field>
+  <description>PowerShell engine restart with TcpClient — possible loop</description>
+  <mitre>
+    <id>T1059.001</id>
+  </mitre>
+</rule>
+
+
+<rule id="100530" level="13" frequency="4" timeframe="60">
+  <if_matched_sid>100510</if_matched_sid>
+  <description>Repeated PowerShell TcpClient activity loop — possible reverse shell</description>
+  <mitre>
+    <id>T1059.001</id>
+    <id>T1105</id>
+  </mitre>
+</rule>
+
+<rule id="100540" level="13" frequency="4" timeframe="60">
+  <if_matched_sid>100520</if_matched_sid>
+  <description>Repeated PowerShell engine restart with TcpClient — possible reverse shell</description>
+  <mitre>
+    <id>T1059.001</id>
+    <id>T1105</id>
+  </mitre>
+</rule>
+
+</group>
+
+<group name="win-sysmon">
+  <rule id="100502" level="10">
+    <if_sid>92101</if_sid>
+    <field name="win.system.eventID" type="pcre2">^3$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)^C:\\\\Windows\\\\(System32|SysWOW64)\\\\WindowsPowerShell\\\\v1\.0\\\\powershell\.exe$</field>
+    <description>Network connection initiated by PowerShell to "$(win.eventdata.destinationIp)" on port "$(win.eventdata.destinationPort)"</description>
+     <mitre>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+
+<rule id="100503" level="13" frequency="3" timeframe="60">
+    <if_matched_sid>100502</if_matched_sid>
+    <description>Multiple network connections initiated by PowerShell to "$(win.eventdata.destinationIp)" on port "$(win.eventdata.destinationPort)"</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+</group>
+
+<group name="lotl,powershell,">
+ <rule id="100019" level="9">
+    <if_sid>60009</if_sid>
+    <field name="win.eventdata.contextInfo" type="pcre2">(?i)Invoke-WebRequest</field>
+    <field name="win.eventdata.payload" type="pcre2">(?i)(Uri|http|Post|InFile|C:\\)</field>
+    <description>Possible Powershell data exfiltration detected .</description>
+    <mitre>
+      <id>T1059.001</id>
+      <id>T1567.002</id>
+    </mitre>
+  </rule>
+
+<rule id="100021" level="9">
+  <if_sid>60009</if_sid>
+  <field name="win.eventdata.contextInfo" type="pcre2">(?i)\bInvoke-RestMethod\b</field>
+  <field name="win.eventdata.contextInfo" type="pcre2">(?i)(Uri|http|PUT|InFile|C:\\)</field>
+  <description>Possible PowerShell data exfiltration using Invoke-RestMethod detected.</description>
+  <mitre>
+    <id>T1059.001</id>
+    <id>T1567.002</id>
+  </mitre>
+</rule>
+
+</group>
+
+<group name="windows,attack">
+
+  <rule id="100011" level="10">
+    <if_sid>61613</if_sid>
+    <field name="win.eventdata.targetFilename" type="pcre2">(?i)\\[^\\]*\.dmp$</field>
+    <field name="win.eventdata.image" negate="yes" type="pcre2">(?i)\\lsass.*</field>
+    <description>Possible adversary activity - LSASS memory dump: $(win.eventdata.image) created a new file on $(win.system.computer) endpoint.</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+  </rule>
+
+</group>
+```
+ <br/>
+  <br/>
+
 ## 🧪 Fase 1 - Acesso Inicial via Macro em Documento Word (Phishing)
 
 Nesta fase inicial, o atacante utilizou **engenharia social (phishing)** para induzir um colaborador da organização a abrir um documento Word malicioso. O documento continha uma macro em VBA (Visual Basic for Applications) configurada para executar automaticamente ao abrir o ficheiro.
