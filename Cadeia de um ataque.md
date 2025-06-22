@@ -20,7 +20,7 @@ A cadeia de ataque envolve as seguintes etapas:
 4. [Exfiltração de credenciais e Acesso ao DC:](#fase-4--extra%C3%A7%C3%A3o-de-credenciais-e-acesso-ao-dc) extração da memória do processo LSASS para capturar credenciais em texto claro e hashes NTLM e acesso ao controlador de domínio (Domain Controller) utilizando técnicas de Pass-the-Hash.
  
 
-**Análise pós-ataque**: utilização de ferramentas de monitorização e deteção como **Wazuh** para investigar a intrusão e compreender os rastros deixados nos logs do sistema e na rede.
+[Análise pós-ataque:](#A1lise-p%C3%B3s-ataque) utilização de ferramentas de monitorização e deteção como **Wazuh** para investigar a intrusão e compreender os rastros deixados nos logs do sistema e na rede.
 
 O objetivo final é obter não apenas uma shell no controlador de domínio, mas também documentar detalhadamente os indicadores de comprometimento (IoCs), comportamentos suspeitos e evidências forenses que podem ser usadas por equipes de defesa para deteção precoce e resposta a incidentes.
 
