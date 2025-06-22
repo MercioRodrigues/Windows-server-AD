@@ -721,6 +721,181 @@ O atacante agora detém controlo completo sobre o domínio:
 
 ---
 
+<br/><br/>
+<br/><br/>
+
+# Análise pós-Ataque
+
+<br/>
+<br/>
+
+##  Fase 1 — Deteção de Acesso Inicial via Macro Maliciosa (Phishing)
+<br/>
+<br/>
+
+###  Objetivo da Monitorização
+<br/>
+
+Detectar tentativas de execução remota sem ficheiros (fileless), explorando macros em documentos do Office e invocação de comandos PowerShell com técnicas de evasão.
+
+---
+<br/>
+<br/>
+
+###  Detalhes da Deteção com Wazuh
+
+Durante esta fase, o agente Wazuh configurado na máquina da vítima reportou diversos eventos críticos que ajudam a reconstruir o vetor de intrusão.
+<br/>
+<br/>
+![Screenshot 2025-06-22 002321](https://github.com/user-attachments/assets/04d864fb-a471-46c2-b14f-3e421998afe9)
+<br/>
+<br/>
+*Resumo cronológico dos alertas gerados nesta fase, fornecendo contexto de execução e correlação entre regras.*
+
+---
+<br/>
+<br/>
+
+###  1. Criação de ficheiro `.LNK` via WINWORD.EXE
+
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/b19d84b0-be06-44eb-9600-c98fd7207921" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+> Este alerta mostra que a aplicação Microsoft Word (`WINWORD.EXE`) criou um ficheiro `.LNK` suspeito em `AppData\Roaming\Microsoft\Office\Recent`.
+
+**Detalhes relevantes:**
+- **Técnica detetada**: `T1187` — *Forced Authentication*
+- **Ficheiro gerado**: `test.LNK`
+- **Canal**: `Microsoft-Windows-Sysmon/Operational`
+- **User**: `PILAO\\jsilva`
+
+> ⚠️ Este tipo de evento é frequentemente associado a métodos iniciais de persistência ou spear phishing, onde o `.LNK` serve de ponte para execução remota ou carga maliciosa adicional.
+
+---
+<br/>
+<br/>
+
+###  2. Execução de Script PowerShell com TcpClient
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/cf846f9c-3b4d-4198-b14f-6ef0ee7eabda" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+> Foi registada a criação de um script PowerShell que estabelece uma ligação TCP à máquina de controlo (`192.168.1.205:443`).
+
+**Comportamento detetado:**
+- **Canal**: `Microsoft-Windows-PowerShell/Operational`
+- **Técnica usada**: `TcpClient` (System.Net.Sockets)
+- **Severidade**: `WARNING`
+- **Indicadores de Evasão**:
+  - `-NoProfile`
+  - `-ExecutionPolicy Bypass`
+  - `-WindowStyle Hidden`
+- **Evento ID**: `4104` — Execução de blocos de script PowerShell
+
+> ⚠️ Estes padrões são comuns em **reverse shells** fileless, onde o código malicioso não reside no disco, dificultando deteção baseada em assinaturas.
+
+---
+
+<br/>
+<br/>
+
+###  3. Ligação de Rede por PowerShell
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/f9f16950-3598-4981-8742-58f1d1c51148" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+> Foi detetada uma ligação de rede iniciada por PowerShell para o endereço `192.168.1.205`, porta `443`.
+
+**Pontos chave do alerta:**
+- **Regra Wazuh**: `technique_id=T1059.001` (PowerShell Execution)
+- **Processo ativo**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+- **Origem do utilizador**: `PILAO\\jsilva`
+- **Canal de deteção**: Sysmon
+
+> ⚠️ Comunicação na porta 443 com comportamento PowerShell é altamente suspeita de canal C2 (Command and Control).
+
+---
+
+<br/>
+<br/>
+
+###  4. Execução de whoami.exe em contexto malicioso
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/0b8cb22d-4066-4b3e-915c-94980031f3a8" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+
+
+> O sistema detetou a execução de `whoami.exe` iniciada a partir de `powershell.exe`, com o parent command sendo o script malicioso executado que originou a reverse shell. Corroborando a ideia que o comando whoami foi executado na reverse shell.
+
+**Cadeia de processo:**
+- **Parent**: `powershell.exe` com `TcpClient`
+- **Child**: `C:\Windows\SysWOW64\whoami.exe`
+- **Propósito**: confirmação de permissões no sistema
+
+> ⚠️ É comum em ataques pós-exploração para validar se o acesso obtido tem privilégios adequados para continuar o ataque.
+
+---
+<br/><br/>
+
+### ✅ Conclusão da Fase 1
+<br/><br/>
+A Wazuh demonstrou capacidades eficazes na deteção de comportamentos **fileless**, utilizando análise de processo, criação de ficheiros, execução de comandos PowerShell, e atividades de rede.
+
+**Resumo dos indicadores detetados:**
+- Execução remota via `WINWORD.EXE`
+- `.LNK` drop suspeito
+- Script PowerShell com ligações TCP e bypass de políticas
+- whoami executado sob contexto malicioso
+
+🔐 **Recomendações:**
+- Usar políticas de grupo (GPO) para bloquear completamente macros em ficheiros provenientes da internet.
+- Configurar o Office para apenas permitir macros assinadas digitalmente por entidades confiáveis.
+- Criar regras para bloquear execução de PowerShell em contextos não administrativos.
+- Bloquear escrita de .lnk em diretórios sensíveis por parte de aplicações como WINWORD.EXE
+- Usar AMSI (Antimalware Scan Interface) para bloquear scripts ofuscados ou suspeitos em tempo real.
+- Usar EDR para bloquear execuções suspeitas com base em heurística e MITRE ATT&CK TTPs.
+- Usar alerta de correlação para deteção multi-evento (chain-based).
+- Realizar campanhas regulares de simulação de phishing e Treinar colaboradores para não ativar conteúdo (ex: macros) de fontes desconhecidas
+
+---
+
+<br/><br/>
+#### Resultado
+
+A fase de acesso inicial foi plenamente detetada pelo Wazuh com base em:
+- Relacionamento de processos (Office → PowerShell)
+- Comportamento de rede anómalo
+- Comando PowerShell suspeito
+- Execução fileless in-memory
+
+Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte de um SOC ou EDR automatizado.
+
+---
+
 
 
 
