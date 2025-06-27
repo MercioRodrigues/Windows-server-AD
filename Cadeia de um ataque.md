@@ -1256,7 +1256,7 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 
 - **Monitorizar e bloquear o uso de PowerShell com parâmetros suspeitos** (`Bypass`, `Hidden`, `NoProfile`) através de regras em EDR/SIEM.
 - **Restringir comunicações para IPs internos em portas incomuns** (ex: `8080`) e inspecionar atividades de rede não autorizadas.
-- **Aplicar permissões rigorosas em diretórios sensíveis**, como `C:\TempTask\`, impedindo escrita por utilizadores sem privilégios elevados.
+- **Aplicar permissões rigorosas em diretórios sensíveis**, impedindo escrita por utilizadores sem privilégios elevados.
 - **Auditar e validar tarefas agendadas** que executam scripts PowerShell no arranque.
 - **Implementar AppLocker ou WDAC** para limitar a execução de scripts não assinados e ferramentas de pós-exploração
 
