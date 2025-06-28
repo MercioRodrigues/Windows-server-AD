@@ -1254,6 +1254,8 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
     
 #### 🔐 **Recomendações:**
 
+- **Configurar IDS/IPS (como Suricata)** para detenção e prevenção.
+- **Integrar YARA rules ou assinaturas com EDR** para bloquear scripts .ps1 suspeitos.
 - **Monitorizar e bloquear o uso de PowerShell com parâmetros suspeitos** (`Bypass`, `Hidden`, `NoProfile`) através de regras em EDR/SIEM.
 - **Restringir comunicações para IPs internos em portas incomuns** (ex: `8080`) e inspecionar atividades de rede não autorizadas.
 - **Aplicar permissões rigorosas em diretórios sensíveis**, impedindo escrita por utilizadores sem privilégios elevados.
