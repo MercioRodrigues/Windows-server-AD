@@ -61,14 +61,21 @@ Este projeto foi desenvolvido como parte do curso CET em Cibersegurança, discip
      - Enumeração de domínio e verificação de controlo
      - Dump do processo `lsass.exe` com **NativeDump**
      - Análise offline com **Mimikatz**
-     - Execução de Pass-the-Hash com **wmiexec (Impacket)**
+     - Acesso ao DC através da execução de Pass-the-Hash com **wmiexec (Impacket)**
 
+3. **Integração e Customização do Sistema de Deteção Wazuh**
+   - Implementação de regras personalizadas no `local_rules.xml` para detetar TTPs específicas do MITRE ATT&CK
+   - Recolha de logs via Sysmon e eventos do Windows para correlacionar comportamentos maliciosos
+   - Deteção de execuções fileless, exfiltração de dados, criação de shells reversas, e escalada de privilégios
+   - Correlação de múltiplos eventos para deteção de padrões persistentes de ataque
 
-Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede. Foi ainda utilizada uma abordagem com o objetivo de tornar o servidor e todo o seu conteúdo resilientes a falhas. 
+Através da criação de uma máquina virtual no VirtualBox, procedeu-se à instalação e configuração de um servidor Windows Server 2019, promovido a **Controlador de Domínio (Domain Controller)**, que centraliza a gestão de utilizadores, grupos, políticas e serviços da rede. Foi ainda utilizada uma abordagem com o objetivo de tornar o servidor e todo o seu conteúdo resiliente. 
 <br/> <br/>
 O projeto foi documentado passo a passo, com imagens explicativas, e simula um cenário real de uma organização com múltiplas delegações e departamentos. A estrutura organizacional foi refletida na criação de OUs e grupos, com aplicação de GPOs direcionadas, reforçando boas práticas de segurança e administração.
 <br/> <br/>
 A integração entre o ambiente corporativo legítimo e a simulação ofensiva permitiu visualizar a superfície de ataque e os riscos reais associados a configurações frágeis, culminando numa shell com privilégios **Domain Admin**.
+O projeto foi documentado com capturas reais, focando tanto os aspetos técnicos como os comportamentais. O uso combinado de ataque e deteção fornece uma perspetiva abrangente da segurança defensiva e ofensiva em ambientes Windows.
+
 
 ---
 <br/> <br/>
@@ -118,17 +125,28 @@ Durante o desenvolvimento deste projeto, foram adquiridas e consolidadas as segu
 - Análise offline com **Mimikatz** para extração de credenciais
 - Execução remota com **Pass-The-Hash** usando **wmiexec.py**
 
-### 🛡️ Red Team vs Blue Team (Análise de Logs e Deteção)
+### 🛡️ Segurança Defensiva com Wazuh (Blue Team)
+- Integração com **Wazuh** para deteção e análise pós-comprometimento
+- Criação de regras personalizadas em `local_rules.xml` para detetar:
+  - Execução de `Invoke-WebRequest`, `TcpClient`, `Invoke-RestMethod`
+  - Reverse shells, loops persistentes e fileless scripts
+  - Dump de memória LSASS (T1003.001)
+  - Execuções automáticas de tarefas mal configuradas
+- **Correlação de eventos Wazuh + Sysmon** para deteção de ataques avançados
+- **Mapeamento com MITRE ATT&CK Framework** (T1059.001, T1567.002, T1053, T1003.001, T1021.002, T1105, etc.)
+- Recolha e triagem de **Indicadores de Comprometimento (IoCs)** em tempo real
 
-- Recolha e visualização de eventos com o **Wazuh**
-- Monitorização de tráfego com **Wireshark**
-- Identificação de **Indicadores de Comprometimento (IoCs)**
-- Simulação de resposta a incidente pós-intrusão
+### 🧠 Análise Pós-Ataque e Resposta a Incidentes
+- Identificação detalhada de cada fase da intrusão através de alertas
+- Produção de relatórios com base em eventos reais capturados pelo Wazuh
+- Recomendação e medidas defensivas para aumentar a **Postura de segurança da Empresa** (hardening):
+
+---
+
 
 <br/> <br/>
-Este projeto serviu como uma excelente base prática para aprofundar conhecimentos em administração de sistemas Windows e estruturação de redes empresariais com Active Directory. Permite-me transpor facilmente estes conhecimentos para ambientes reais em contexto profissional.
-<br/> <br/>
-Este projeto não só consolidou conhecimentos em administração de sistemas Windows e infraestruturas empresariais, como também introduziu práticas de segurança ofensiva e deteção de intrusão.
+
+Este projeto não só consolidou conhecimentos em administração de sistemas Windows e infraestruturas empresariais, como também introduziu práticas de segurança ofensiva, defensiva e deteção de intrusão e elaboração de medidas a tomar para fortalecer a postura da empresa.
 
 ⚠️ **Importante:** Todas as simulações ofensivas foram conduzidas em laboratório isolado para fins estritamente educativos.
 
