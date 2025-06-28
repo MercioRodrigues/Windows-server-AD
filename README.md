@@ -35,7 +35,7 @@
 ## Diagrama da Rede
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2fa590e4-0909-47b2-8035-255fbfa42519" width="700"/>
+  <img src="https://github.com/user-attachments/assets/19eb5b98-2a26-4428-a2e3-eaeab421d524" width="700"/>
 </p>
 
 
