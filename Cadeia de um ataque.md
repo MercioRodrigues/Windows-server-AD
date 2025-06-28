@@ -1314,6 +1314,7 @@ Durante esta fase, o atacante já com privilégios elevados iniciou uma sequênc
 ### Atividades de Enumeração Detetadas
 <br/>
 <br/>
+
 #### 1. Enumeração de Contas de Utilizador via WMIC
 
 <p align="center">
@@ -1359,6 +1360,9 @@ A execução foi feita através do binário **net.exe**, dentro de um contexto d
 
 ---
 
+<br/>
+   <br/>
+
 #### 3. Enumeração de Partilhas Remotas com “net use”
 
 <br/>
@@ -1383,6 +1387,9 @@ Este comando tenta montar a partilha administrativa do volume C: de um sistema r
 Isto pode indicar a intenção de testar conectividade e acessos entre máquinas, ou até mesmo preparar movimentação lateral para outras hosts da rede.
 
 ---
+
+<br/>
+   <br/>
 
 #### **Conclusão**
 Estas ações são típicas de uma fase pós-exploração onde o atacante, já com privilégios elevados (**SYSTEM**), procura ganhar visibilidade sobre o domínio e identificar potenciais alvos para movimentos posteriores, como **lateral movement** ou **escalada de privilégios adicionais**.
@@ -1419,6 +1426,10 @@ Durante esta fase final da intrusão, o atacante ja com o **controlo total sobre
 - **Criação e execução do binário `nativedump.exe`** diretamente no diretório `C:\Windows\Temp\`, com objetivo explícito de realizar um *dump* da memória do processo LSASS — técnica comum para extrair credenciais armazenadas.
 - Ação realizada **através do PowerShell**, indicando persistência no uso desta ferramenta.
 - **Atividade de exfiltração através da porta 8080**, repetindo o padrão identificado em fases anteriores, utilizando o servidor remoto `192.168.1.205`, para extrair o ficheiro *dump*.
+
+<br/>
+   <br/>
+
 
 ### 1. Upload e Execução da Ferramenta nativedump
 
@@ -1487,6 +1498,9 @@ SHA256: 863DC80643267CAC0414B40972B4B61C2674E2AC9F25A8B53738E1DAB17109D
 IMPhash: D42D559B5C9F08AEF25C56AABDEFD6BE
 ```
 
+<br/>
+   <br/>
+
 #### **Acções que poderiam ser realizadas com estes dados:**
 
 <br/>
@@ -1520,6 +1534,9 @@ O atacante visava capturar **credenciais em texto claro ou hashes** diretamente 
 
 
 ### 2. Exfiltração de ficheiro Dump
+
+<br/>
+   <br/>
 
 #### Evidência: Transmissão do ficheiro de memória dump para servidor remoto
 
@@ -1557,6 +1574,8 @@ Esta ação sugere a tentativa de análise do conteúdo da memória (incluindo h
 
 ---
 
+<br/>
+   <br/>
 
 ### 3. Acesso ao Controlador de Domínio
 
@@ -1572,8 +1591,11 @@ Esta ação sugere a tentativa de análise do conteúdo da memória (incluindo h
 
 Este ponto documenta o acesso final ao **Controlador de Domínio (DC1)** após as etapas anteriores de execução de dump LSASS e exfiltração de credenciais. A sequência de eventos aponta para um acesso privilegiado, com **credenciais roubadas** ou uso de **pass-the-hash (PtH)**.
 
-Jun 22, 2025 @ 11:41:55
-Agent: DC1
+<br/>
+   <br/>
+
+**Jun 22, 2025 @ 11:41:55
+Agent: DC1**
 
 - Acesso a partilhas de rede detectado repetidamente.
 - Logon remoto detectado com o utilizador: Administrator
@@ -1582,6 +1604,10 @@ Agent: DC1
 - Privilegios elevados foram atribuídos a uma nova sessão.
 
 ---
+
+<br/>
+   <br/>
+
 
 #### 📸 Evidência 1 - Autenticação com NTLM (Pass-the-Hash)
 
@@ -1604,6 +1630,9 @@ A primeira evidência indica **um processo de autenticação com recurso ao prot
 
 **Interpretação**: Este tipo de autenticação é comum em movimentos laterais ou fases pós-exploração onde o atacante procura aceder a recursos protegidos após obter hashes de contas com privilégios elevados.
 
+<br/>
+   <br/>
+
 #### 📸 Evidência 2 - Acesso à partilha ADMIN$
 
 <p align="center">
@@ -1623,9 +1652,16 @@ A segunda evidência revela que, **após a autenticação bem-sucedida**, o atac
 - **Host**: `Marcio.pilao.pt`
 - **EventID**: `5140`
 
+<br/>
+   <br/>
+
 **Interpretação**: O acesso à `ADMIN$` é típico de **atividades de administração remota**, sendo frequentemente utilizado por ferramentas de ataque para **entrega de payloads, execução de comandos, ou recolha de dados confidenciais** como parte de um ataque de tipo lateral ou de domínio.
 
 ---
+
+<br/>
+   <br/>
+
 #### Conclusão Técnica
 
 Estas evidências em conjunto apontam para um **comprometimento do domínio via autenticação remota com credenciais privilegiadas**, possivelmente através de **Pass-the-Hash**. A sequência de eventos sugere:
@@ -1668,11 +1704,17 @@ Estas evidências em conjunto apontam para um **comprometimento do domínio via 
 
 ---
 
+<br/>
+   <br/>
+
 ## Conclusão Final da Análise Pós-Ataque
 
 O exercício de análise realizado permitiu uma reconstrução detalhada de todas as fases da intrusão, desde o acesso inicial até ao comprometimento total do domínio. Através da integração de alertas gerados pelo Wazuh, observações dos canais do Windows Event Log e correlação com a framework MITRE ATT&CK, foi possível identificar técnicas, táticas e procedimentos (TTPs) usados pelo atacante de forma eficaz.
 
 ---
+
+<br/>
+   <br/>
 
 ###  Principais Conclusões
 
@@ -1683,6 +1725,9 @@ O exercício de análise realizado permitiu uma reconstrução detalhada de toda
 - O **acesso ao controlador de domínio (DC)**, com evidências de autenticação NTLM e acesso à partilha ADMIN$, validou o sucesso do atacante na obtenção de controlo total sobre o ambiente.
 
 ---
+
+<br/>
+   <br/>
 
 ###  Considerações Finais
 
@@ -1696,11 +1741,18 @@ A resposta a incidentes deve ser orientada por dados precisos e contextuais, e e
 
 ---
 
+<br/>
+   <br/>
+
 ###  Relevância do Projeto
 
 A análise demonstrou um cenário realista de ataque, e reforçou competências técnicas essenciais na área de **cibersegurança defensiva e forense**. A adoção de boas práticas a seguir descritas permitirá aumentar substancialmente a resiliência da organização perante ameaças avançadas.
 
 ---
+
+<br/>
+   <br/>
+
 
 ### ⚠️ Recomendações para Fortalecer a Postura de Segurança da Empresa
 
@@ -1745,6 +1797,9 @@ A análise demonstrou um cenário realista de ataque, e reforçou competências 
     - Validar deteções, tempos de resposta e procedimentos de contenção.
 
 ---
+
+<br/>
+   <br/>
 
 Estas recomendações, quando aplicadas em conjunto com uma abordagem proativa de cibersegurança, permitirão aumentar significativamente a capacidade de prevenção, deteção e resposta a incidentes.
 
