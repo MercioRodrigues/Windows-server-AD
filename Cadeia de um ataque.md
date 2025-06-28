@@ -1,6 +1,3 @@
-### **Em construção...... Analise pos ataque em construção**
-
-
 # Simulação de Cadeia de Ataque - Laboratório de Segurança Ofensiva
 <br>
 <br>
