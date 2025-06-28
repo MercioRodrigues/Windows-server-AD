@@ -1285,7 +1285,7 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 <p align="center">
 <br/>
   <br/>
-   <img src="https://github.com/user-attachments/assets/d424ce05-b00b-48fc-87b5-9683380f7656" height="80%" width="80%"/>   
+   <img src="https://github.com/user-attachments/assets/d424ce05-b00b-48fc-87b5-9683380f7656" height="100%" width="100%"/>   
    <br/>
    <br/>
  <p/>
@@ -1315,7 +1315,7 @@ Durante esta fase, o atacante já com privilégios elevados iniciou uma sequênc
 <br/>
 <br/>
 
-#### 1. Enumeração de Contas de Utilizador via WMIC
+### 1. Enumeração de Contas de Utilizador via WMIC
 
 <p align="center">
 <br/>
@@ -1338,7 +1338,10 @@ O comando foi executado com privilégios de **NT AUTHORITY\SYSTEM**, está ligad
 
 ---
 
-#### 2. Enumeração de Grupos de Domínio com “net group”
+<br/>
+   <br/>
+
+### 2. Enumeração de Grupos de Domínio com “net group”
 
 <p align="center">
 <br/>
@@ -1363,7 +1366,7 @@ A execução foi feita através do binário **net.exe**, dentro de um contexto d
 <br/>
    <br/>
 
-#### 3. Enumeração de Partilhas Remotas com “net use”
+### 3. Enumeração de Partilhas Remotas com “net use”
 
 <br/>
 <br/>
@@ -1391,7 +1394,7 @@ Isto pode indicar a intenção de testar conectividade e acessos entre máquinas
 <br/>
    <br/>
 
-#### **Conclusão**
+### **Conclusão**
 Estas ações são típicas de uma fase pós-exploração onde o atacante, já com privilégios elevados (**SYSTEM**), procura ganhar visibilidade sobre o domínio e identificar potenciais alvos para movimentos posteriores, como **lateral movement** ou **escalada de privilégios adicionais**.
 
 ### Recomendações
@@ -1412,7 +1415,7 @@ Estas ações são típicas de uma fase pós-exploração onde o atacante, já c
 <p align="center">
 <br/>
   <br/>
-   <img src="https://github.com/user-attachments/assets/12b396cc-7f98-4ca6-a466-1fb662bcec55" height="80%" width="80%"/>   
+   <img src="https://github.com/user-attachments/assets/12b396cc-7f98-4ca6-a466-1fb662bcec55" height="100%" width="100%"/>   
    <br/>
    <br/>
  <p/>
@@ -1521,7 +1524,7 @@ IMPhash: D42D559B5C9F08AEF25C56AABDEFD6BE
 <br/>
 <br/>
 
-#### **Intenção do atacante**
+### **Intenção do atacante**
 O atacante visava capturar **credenciais em texto claro ou hashes** diretamente da memória do processo LSASS. Isso sugere:
 - Potencial uso posterior em **movimentações laterais**.
 - Possível exfiltração para IP externo via HTTP (porta 8080).
@@ -1578,6 +1581,9 @@ Esta ação sugere a tentativa de análise do conteúdo da memória (incluindo h
    <br/>
 
 ### 3. Acesso ao Controlador de Domínio
+
+<br/>
+   <br/>
 
 #### Evidências
 
@@ -1662,7 +1668,7 @@ A segunda evidência revela que, **após a autenticação bem-sucedida**, o atac
 <br/>
    <br/>
 
-#### Conclusão Técnica
+### Conclusão Técnica
 
 Estas evidências em conjunto apontam para um **comprometimento do domínio via autenticação remota com credenciais privilegiadas**, possivelmente através de **Pass-the-Hash**. A sequência de eventos sugere:
 
@@ -1670,7 +1676,11 @@ Estas evidências em conjunto apontam para um **comprometimento do domínio via 
 2. Utilização de NTLM para autenticação remota sem necessidade da senha em claro
 3. Acesso a partilhas administrativas no DC como preparação para execução remota ou exfiltração.
 
-#### 🔎 Resumo dos Indicadores Detetados:
+<br/>
+   <br/>
+
+
+### 🔎 Resumo dos Indicadores Detetados:
 - **Ferramenta de Cred Dumping**: Upload e execução de `nativedump.exe` no diretório `C:\Windows\Temp\`.
 - **Hashing Evidence**: Dump da memória LSASS contendo hashes e credenciais (T1003.001 – MITRE ATT&CK).
 - **Exfiltração de Dados Sensíveis**: Envio do ficheiro `proc_696.dmp` para o IP `192.168.1.205` via `Invoke-RestMethod`.
@@ -1680,7 +1690,7 @@ Estas evidências em conjunto apontam para um **comprometimento do domínio via 
 
 ---
 
-####  Recomendações Técnicas:
+###  Recomendações Técnicas:
 
 1. **Isolamento Imediato dos Hosts Afetados**:
    - `Client1.pilao.pt` e `DC1.pilao.pt` devem ser removidos da rede para análise forense.
