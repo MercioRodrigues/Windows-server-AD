@@ -1320,7 +1320,7 @@ Durante esta fase, o atacante já com privilégios elevados iniciou uma sequênc
 <p align="center">
 <br/>
   <br/>
-   <img src="https://github.com/user-attachments/assets/7164fec1-b147-491c-ac08-c889c21f4d7e" height="80%" width="80%"/>   
+   <img src="https://github.com/user-attachments/assets/7164fec1-b147-491c-ac08-c889c21f4d7e" height="100%" width="100%"/>   
    <br/>
    <br/>
  <p/>
