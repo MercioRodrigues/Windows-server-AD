@@ -1,4 +1,4 @@
-# Simulação de Cadeia de Ataque - Laboratório de Segurança Ofensiva
+# Simulação de Cadeia de Ataque - Laboratório de Segurança Ofensiva e Defensiva
 <br>
 <br>
 
