@@ -165,7 +165,7 @@ Criei as seguintes regras no ficheiro `local_rules.xml` do wazuh.
  <br/>
   <br/>
 
-## 🧪 Fase 1 - Acesso Inicial via Macro em Documento Word (Phishing)
+##  Fase 1 - Acesso Inicial via Macro em Documento Word (Phishing)
 
 Nesta fase inicial, o atacante utilizou **engenharia social (phishing)** para induzir um colaborador da organização a abrir um documento Word malicioso. O documento continha uma macro em VBA (Visual Basic for Applications) configurada para executar automaticamente ao abrir o ficheiro.
 
@@ -237,7 +237,7 @@ Este tipo de técnica é comum em ataques fileless, pois evita gravações em di
  <br/>
     <br/>
 
-## 🧪 Fase 2 — Escalada de Privilégios Local
+##  Fase 2 — Escalada de Privilégios Local
 
 Após o acesso inicial, o próximo objetivo foi escalar privilégios para obter controlo total do sistema como **NT AUTHORITY\SYSTEM**.  
 Esta fase consistiu na **descoberta e exploração de uma tarefa agendada mal configurada**, permitindo a execução de código com permissões elevadas.
@@ -430,7 +430,7 @@ A utilização do `winPEAS` permitiu descobrir a vulnerabilidade, a análise de 
 <br/>
 <br/>
 
-## 🧪 Fase 3 – Enumeração Pós-Escalação
+##  Fase 3 – Enumeração Pós-Escalação
 
 Após escalar privilégios locais até `NT AUTHORITY\SYSTEM`, o objetivo passou a ser:
 
@@ -553,7 +553,7 @@ Previlégios:
 
 
 
-🚨 O privilégio `SeDebugPrivilege` permite ler a memória de processos de outros utilizadores, inclusive do `lsass.exe`.
+ O privilégio `SeDebugPrivilege` permite ler a memória de processos de outros utilizadores, inclusive do `lsass.exe`.
 
 ---
 
