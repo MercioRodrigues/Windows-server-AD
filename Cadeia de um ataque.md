@@ -862,7 +862,7 @@ O atacante agora detém controlo completo sobre o domínio:
 <br/>
 <br/>
 
-##  🧩 Fase 1 — Deteção de Acesso Inicial via Macro Maliciosa (Phishing)
+##   Fase 1 — Deteção de Acesso Inicial via Macro Maliciosa (Phishing)
 <br/>
 <br/>
 
@@ -1030,7 +1030,7 @@ Estes dados permitiriam uma **ação de resposta imediata e eficaz** por parte d
 <br/>
 <br/>
 
-## 🧩 Fase 2 — Escalada de Privilégios
+##  Fase 2 — Escalada de Privilégios
 
 <br/>
 <br/>
@@ -1273,7 +1273,7 @@ O atacante validou permissões com `icacls` e, ao confirmar fragilidades, usou `
 <br/>
 <br/>
 
-## 🧩 Fase 3 – Enumeração do Domínio
+##  Fase 3 – Enumeração do Domínio
 <br/>
 <br/>
 
@@ -1402,7 +1402,7 @@ Estas ações são típicas de uma fase pós-exploração onde o atacante, já c
 <br/>
 
 
-## 🧩 Fase 4 – Dump de credenciais e acesso ao DC
+##  Fase 4 – Dump de credenciais e acesso ao DC
 
 <br/>
 <br/>
